@@ -34,3 +34,5 @@ Transifex/translations/*
 BuildSetup/.tx/*
 BuildSetup/translations/*
 BuildSetup/Builds/*
+packages/
+.vs/
