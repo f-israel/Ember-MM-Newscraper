@@ -297,8 +297,9 @@ Public Class dlgIMDBSearchResults_TV
                         bwDownloadPic.CancelAsync()
                     End If
                     pnlPicStatus.Visible = True
-                    bwDownloadPic = New System.ComponentModel.BackgroundWorker
-                    bwDownloadPic.WorkerSupportsCancellation = True
+                    bwDownloadPic = New System.ComponentModel.BackgroundWorker With {
+                        .WorkerSupportsCancellation = True
+                    }
                     bwDownloadPic.RunWorkerAsync(New Arguments With {.pURL = sPoster, .IMDBId = _tmpTVShow.IMDB})
                 End If
 
@@ -339,11 +340,12 @@ Public Class dlgIMDBSearchResults_TV
     End Sub
 
     Private Function SetPreviewOptions() As Structures.ScrapeOptions
-        Dim aOpt As New Structures.ScrapeOptions
-        aOpt.bMainCreators = True
-        aOpt.bMainGenres = True
-        aOpt.bMainPlot = True
-        aOpt.bMainTitle = True
+        Dim aOpt As New Structures.ScrapeOptions With {
+            .bMainCreators = True,
+            .bMainGenres = True,
+            .bMainPlot = True,
+            .bMainTitle = True
+        }
 
         Return aOpt
     End Function

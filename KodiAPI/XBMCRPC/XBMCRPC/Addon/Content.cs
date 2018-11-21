@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
 namespace XBMCRPC.Addon
 {
    public enum Content
@@ -11,6 +6,6 @@ namespace XBMCRPC.Addon
        video,
        audio,
        image,
-       executable,
+       executable
    }
 }

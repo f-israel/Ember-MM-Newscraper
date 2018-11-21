@@ -815,8 +815,9 @@ Public Class Theming
                     cName = xIP.@name
                     Dim xControl = From xCons As Controls In _availablecontrols Where xCons.Control = cName
                     If xControl.Count > 0 Then
-                        cControl = New Controls
-                        cControl.Control = cName
+                        cControl = New Controls With {
+                            .Control = cName
+                        }
                         If Not String.IsNullOrEmpty(xIP.<width>.Value) Then cControl.Width = xIP.<width>.Value
                         If Not String.IsNullOrEmpty(xIP.<height>.Value) Then cControl.Height = xIP.<height>.Value
                         If Not String.IsNullOrEmpty(xIP.<left>.Value) Then cControl.Left = xIP.<left>.Value

@@ -125,8 +125,9 @@ Public Class dlgEditMovie
             ReDim Preserve pnlExtrafanartsImage(iIndex)
             ReDim Preserve pbExtrafanartsImage(iIndex)
             pnlExtrafanartsImage(iIndex) = New Panel()
-            pbExtrafanartsImage(iIndex) = New PictureBox()
-            pbExtrafanartsImage(iIndex).Name = iIndex.ToString
+            pbExtrafanartsImage(iIndex) = New PictureBox With {
+                .Name = iIndex.ToString
+            }
             pnlExtrafanartsImage(iIndex).Name = iIndex.ToString
             pnlExtrafanartsImage(iIndex).Size = New Size(128, 72)
             pbExtrafanartsImage(iIndex).Size = New Size(128, 72)
@@ -162,8 +163,9 @@ Public Class dlgEditMovie
             ReDim Preserve pnlExtrathumbsImage(iIndex)
             ReDim Preserve pbExtrathumbsImage(iIndex)
             pnlExtrathumbsImage(iIndex) = New Panel()
-            pbExtrathumbsImage(iIndex) = New PictureBox()
-            pbExtrathumbsImage(iIndex).Name = iIndex.ToString
+            pbExtrathumbsImage(iIndex) = New PictureBox With {
+                .Name = iIndex.ToString
+            }
             pnlExtrathumbsImage(iIndex).Name = iIndex.ToString
             pnlExtrathumbsImage(iIndex).Size = New Size(128, 72)
             pbExtrathumbsImage(iIndex).Size = New Size(128, 72)
@@ -1464,10 +1466,11 @@ Public Class dlgEditMovie
             pnlTop.BackgroundImage = iBackground
         End Using
 
-        Dim dFileInfoEdit As New dlgFileInfo(tmpDBElement, False)
-        dFileInfoEdit.TopLevel = False
-        dFileInfoEdit.FormBorderStyle = FormBorderStyle.None
-        dFileInfoEdit.BackColor = Color.White
+        Dim dFileInfoEdit As New dlgFileInfo(tmpDBElement, False) With {
+            .TopLevel = False,
+            .FormBorderStyle = FormBorderStyle.None,
+            .BackColor = Color.White
+        }
         dFileInfoEdit.btnClose.Visible = False
         pnlFileInfo.Controls.Add(dFileInfoEdit)
         Dim oldwidth As Integer = dFileInfoEdit.Width
@@ -2667,16 +2670,18 @@ Public Class dlgEditMovie
         lvSubtitles.Items.Clear()
 
         If tmpDBElement.Subtitles.Count > 0 Then
-            g = New ListViewGroup
-            g.Header = Master.eLang.GetString(597, "Subtitle Stream")
+            g = New ListViewGroup With {
+                .Header = Master.eLang.GetString(597, "Subtitle Stream")
+            }
             lvSubtitles.Groups.Add(g)
             c = 1
             ' Fake Group Header
-            i = New ListViewItem
             'i.UseItemStyleForSubItems = False
-            i.ForeColor = Color.DarkBlue
-            i.Tag = "Header"
-            i.Text = String.Empty
+            i = New ListViewItem With {
+                .ForeColor = Color.DarkBlue,
+                .Tag = "Header",
+                .Text = String.Empty
+            }
             i.SubItems.Add(Master.eLang.GetString(60, "File Path"))
             i.SubItems.Add(Master.eLang.GetString(610, "Language"))
             i.SubItems.Add(Master.eLang.GetString(1288, "Type"))
@@ -2688,9 +2693,10 @@ Public Class dlgEditMovie
             For c = 0 To tmpDBElement.Subtitles.Count - 1
                 s = tmpDBElement.Subtitles(c)
                 If Not s Is Nothing Then
-                    i = New ListViewItem
-                    i.Tag = Master.eLang.GetString(597, "Subtitle Stream")
-                    i.Text = c.ToString
+                    i = New ListViewItem With {
+                        .Tag = Master.eLang.GetString(597, "Subtitle Stream"),
+                        .Text = c.ToString
+                    }
                     i.SubItems.Add(s.SubsPath)
                     i.SubItems.Add(s.LongLanguage)
                     i.SubItems.Add(s.SubsType)

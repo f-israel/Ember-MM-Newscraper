@@ -1,13 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
 namespace XBMCRPC
 {
    public class Configuration
    {
-       public XBMCRPC.Configuration.Notifications notifications { get; set; }
+       public Notifications notifications { get; set; }
    public class Notifications
    {
        public bool application { get; set; }

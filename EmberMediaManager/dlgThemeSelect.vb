@@ -152,9 +152,10 @@ Public Class dlgThemeSelect
             Dim SelectedTheme As New MediaContainers.Theme With {
                 .URLAudioStream = lvThemes.SelectedItems(0).SubItems(1).Text.ToString,
                 .URLWebsite = lvThemes.SelectedItems(0).SubItems(2).Text.ToString}
-            bwDownloadTheme = New System.ComponentModel.BackgroundWorker
-            bwDownloadTheme.WorkerReportsProgress = True
-            bwDownloadTheme.WorkerSupportsCancellation = True
+            bwDownloadTheme = New System.ComponentModel.BackgroundWorker With {
+                .WorkerReportsProgress = True,
+                .WorkerSupportsCancellation = True
+            }
             bwDownloadTheme.RunWorkerAsync(New Arguments With {.Parameter = SelectedTheme, .bType = True})
         Else
             DialogResult = DialogResult.Cancel

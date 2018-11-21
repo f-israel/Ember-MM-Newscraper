@@ -23,6 +23,8 @@ Imports generic.Interface.Kodi.KodiInterface
 Imports NLog
 Imports XBMCRPC
 Imports System.IO
+Imports System.Net
+Imports System.Net.Sockets
 Imports System.Text.RegularExpressions
 Imports System.Web
 
@@ -32,13 +34,13 @@ Namespace Kodi
 
 #Region "Fields"
 
-        Shared logger As Logger = LogManager.GetCurrentClassLogger()
+        Dim Shared ReadOnly logger As Logger = LogManager.GetCurrentClassLogger()
         'current selected host, Kodi Host type already declared in EmberAPI (XML serialization) -> no MySettings declaration needed here
-        Private _currenthost As New Host
+        Private ReadOnly _currenthost As New Host
         'current selected client
         Private _kodi As Client
         'helper object, needed for communication client (notification, eventhandler support)
-        Private platformServices As IPlatformServices = New PlatformServices
+        Private ReadOnly platformServices As IPlatformServices = New PlatformServices
         'Private NotificationsEnabled As Boolean
 
 
@@ -476,9 +478,10 @@ Namespace Kodi
                 If KodiElement IsNot Nothing Then
                     'check if we have to retrieve the PlayCount from Kodi
                     If Not mDBElement.Movie.PlayCount = KodiElement.playcount OrElse Not mDBElement.Movie.LastPlayed = KodiElement.lastplayed Then
-                        Dim WatchedState As New WatchedState
-                        WatchedState.PlayCount = KodiElement.playcount
-                        WatchedState.LastPlayed = KodiElement.lastplayed
+                        Dim WatchedState As New WatchedState With {
+                            .PlayCount = KodiElement.playcount,
+                            .LastPlayed = KodiElement.lastplayed
+                        }
                         logger.Trace(String.Format("[APIKodi] [{0}] GetPlaycount_Movie: ""{1}"" | Synced to Ember", _currenthost.Label, mDBElement.Movie.Title))
                         Return WatchedState
                     Else
@@ -517,9 +520,10 @@ Namespace Kodi
                 If KodiElement IsNot Nothing Then
                     'check if we have to retrieve the PlayCount from Kodi
                     If Not mDBElement.TVEpisode.Playcount = KodiElement.playcount OrElse Not mDBElement.TVEpisode.LastPlayed = KodiElement.lastplayed Then
-                        Dim WatchedState As New WatchedState
-                        WatchedState.PlayCount = KodiElement.playcount
-                        WatchedState.LastPlayed = KodiElement.lastplayed
+                        Dim WatchedState As New WatchedState With {
+                            .PlayCount = KodiElement.playcount,
+                            .LastPlayed = KodiElement.lastplayed
+                        }
                         logger.Trace(String.Format("[APIKodi] [{0}] GetPlaycount_TVEpisode: ""{1}"" | Synced to Ember", _currenthost.Label, mDBElement.TVEpisode.Title))
                         Return WatchedState
                     Else
@@ -733,10 +737,11 @@ Namespace Kodi
                             'i.e multipath://nfs%3a%2f%2f192.168.2.200%2fMedia_1%2fMovie%2f/nfs%3a%2f%2f192.168.2.200%2fMedia_2%2fMovie%2f/
                             For Each path As String In remotesource.file.Remove(0, MultiPath.Length).Split("/"c)
                                 If Not String.IsNullOrEmpty(path) Then
-                                    newsource = New List.Items.SourcesItem
                                     'URL decode each item
-                                    newsource.file = Web.HttpUtility.UrlDecode(path)
-                                    newsource.label = remotesource.label
+                                    newsource = New List.Items.SourcesItem With {
+                                        .file = Web.HttpUtility.UrlDecode(path),
+                                        .label = remotesource.label
+                                    }
                                     lstremotesources.Add(newsource)
                                     logger.Trace(String.Format("[APIKodi] [{0}] [GetSources] Added Source: {1}", _currenthost.Label, newsource.file))
                                 End If
@@ -795,10 +800,11 @@ Namespace Kodi
                 Try
                     Dim filter As New List.Filter.TexturesOr With {.or = New List(Of Object)}
                     For Each tURL As String In lImagesToRemove
-                        Dim filterRule As New List.Filter.Rule.Textures
-                        filterRule.field = List.Filter.Fields.Textures.url
-                        filterRule.Operator = List.Filter.Operators.Is
-                        filterRule.value = If(tDBElement.ContentType = Enums.ContentType.MovieSet, GetRemotePath_MovieSet(tURL), GetRemotePath(tURL))
+                        Dim filterRule As New List.Filter.Rule.Textures With {
+                            .field = List.Filter.Fields.Textures.url,
+                            .Operator = List.Filter.Operators.Is,
+                            .value = If(tDBElement.ContentType = Enums.ContentType.MovieSet, GetRemotePath_MovieSet(tURL), GetRemotePath(tURL))
+                        }
                         filter.or.Add(filterRule)
                     Next
 
@@ -828,15 +834,17 @@ Namespace Kodi
             If Not String.IsNullOrEmpty(strRemotePath) Then
                 Try
                     Dim filter As New List.Filter.MoviesAnd With {.and = New List(Of Object)}
-                    Dim filterRule_Path As New List.Filter.Rule.Movies
-                    filterRule_Path.field = List.Filter.Fields.Movies.path
-                    filterRule_Path.Operator = List.Filter.Operators.Is
-                    filterRule_Path.value = strRemotePath
+                    Dim filterRule_Path As New List.Filter.Rule.Movies With {
+                        .field = List.Filter.Fields.Movies.path,
+                        .Operator = List.Filter.Operators.Is,
+                        .value = strRemotePath
+                    }
                     filter.and.Add(filterRule_Path)
-                    Dim filterRule_Filename As New List.Filter.Rule.Movies
-                    filterRule_Filename.field = List.Filter.Fields.Movies.filename
-                    filterRule_Filename.Operator = If(tPathAndFilename.bSpecialHandling, List.Filter.Operators.contains, List.Filter.Operators.Is)
-                    filterRule_Filename.value = strFilename
+                    Dim filterRule_Filename As New List.Filter.Rule.Movies With {
+                        .field = List.Filter.Fields.Movies.filename,
+                        .Operator = If(tPathAndFilename.bSpecialHandling, List.Filter.Operators.contains, List.Filter.Operators.Is),
+                        .value = strFilename
+                    }
                     filter.and.Add(filterRule_Filename)
 
                     kMovies = Await _kodi.VideoLibrary.GetMovies(filter).ConfigureAwait(False)
@@ -944,15 +952,17 @@ Namespace Kodi
             If Not String.IsNullOrEmpty(strRemotePath) Then
                 Try
                     Dim filter As New List.Filter.EpisodesAnd With {.and = New List(Of Object)}
-                    Dim filterRule_Path As New List.Filter.Rule.Episodes
-                    filterRule_Path.field = List.Filter.Fields.Episodes.path
-                    filterRule_Path.Operator = List.Filter.Operators.Is
-                    filterRule_Path.value = strRemotePath
+                    Dim filterRule_Path As New List.Filter.Rule.Episodes With {
+                        .field = List.Filter.Fields.Episodes.path,
+                        .Operator = List.Filter.Operators.Is,
+                        .value = strRemotePath
+                    }
                     filter.and.Add(filterRule_Path)
-                    Dim filterRule_Filename As New List.Filter.Rule.Episodes
-                    filterRule_Filename.field = List.Filter.Fields.Episodes.filename
-                    filterRule_Filename.Operator = List.Filter.Operators.Is
-                    filterRule_Filename.value = Path.GetFileName(strFilename)
+                    Dim filterRule_Filename As New List.Filter.Rule.Episodes With {
+                        .field = List.Filter.Fields.Episodes.filename,
+                        .Operator = List.Filter.Operators.Is,
+                        .value = Path.GetFileName(strFilename)
+                    }
                     filter.and.Add(filterRule_Filename)
 
                     kTVEpisodes = Await _kodi.VideoLibrary.GetEpisodes(filter, ShowID, tDBElement.TVEpisode.Season, Video.Fields.Episode.AllFields).ConfigureAwait(False)
@@ -1049,10 +1059,11 @@ Namespace Kodi
             If Not String.IsNullOrEmpty(strRemotePath) Then
                 Try
                     Dim filter As New List.Filter.TVShowsOr With {.or = New List(Of Object)}
-                    Dim filterRule As New List.Filter.Rule.TVShows
-                    filterRule.field = List.Filter.Fields.TVShows.path
-                    filterRule.Operator = List.Filter.Operators.Is
-                    filterRule.value = strRemotePath
+                    Dim filterRule As New List.Filter.Rule.TVShows With {
+                        .field = List.Filter.Fields.TVShows.path,
+                        .Operator = List.Filter.Operators.Is,
+                        .value = strRemotePath
+                    }
                     filter.or.Add(filterRule)
 
                     kTVShows = Await _kodi.VideoLibrary.GetTVShows(filter).ConfigureAwait(False)
@@ -1228,19 +1239,21 @@ Namespace Kodi
                     Dim mTMDB As String = If(mDBElement.Movie.TMDBSpecified, mDBElement.Movie.TMDB, Nothing)
 
                     'all image paths will be set in artwork object
-                    Dim mArtwork As New Media.Artwork.Set
-                    mArtwork.banner = mBanner
-                    mArtwork.clearart = mClearArt
-                    mArtwork.clearlogo = mClearLogo
-                    mArtwork.discart = mDiscArt
-                    mArtwork.fanart = mFanart
-                    mArtwork.landscape = mLandscape
-                    mArtwork.poster = mPoster
-                    'artwork.thumb = mPoster ' not supported in Ember?!
+                    Dim mArtwork As New Media.Artwork.Set With {
+                        .banner = mBanner,
+                        .clearart = mClearArt,
+                        .clearlogo = mClearLogo,
+                        .discart = mDiscArt,
+                        .fanart = mFanart,
+                        .landscape = mLandscape,
+                        .poster = mPoster
+                    }
+                        'artwork.thumb = mPoster ' not supported in Ember?!
 
-                    Dim mUniqueID As New Media.UniqueID.Set
-                    mUniqueID.imdb = mIMDB
-                    mUniqueID.tmdb = mTMDB
+                    Dim mUniqueID As New Media.UniqueID.Set With {
+                        .imdb = mIMDB,
+                        .tmdb = mTMDB
+                    }
 
                     Dim response As String = String.Empty
 
@@ -1391,14 +1404,15 @@ Namespace Kodi
                                                   GetRemotePath_MovieSet(mDBElement.ImagesContainer.Poster.LocalFilePath), Nothing)
 
                     'all image paths will be set in artwork object
-                    Dim artwork As New Media.Artwork.Set
-                    artwork.banner = mBanner
-                    artwork.clearart = mClearArt
-                    artwork.clearlogo = mClearLogo
-                    artwork.discart = mDiscArt
-                    artwork.fanart = mFanart
-                    artwork.landscape = mLandscape
-                    artwork.poster = mPoster
+                    Dim artwork As New Media.Artwork.Set With {
+                        .banner = mBanner,
+                        .clearart = mClearArt,
+                        .clearlogo = mClearLogo,
+                        .discart = mDiscArt,
+                        .fanart = mFanart,
+                        .landscape = mLandscape,
+                        .poster = mPoster
+                    }
 
                     Dim response As String = Await _kodi.VideoLibrary.SetMovieSetDetails(
                         KodiElement.setid,
@@ -1515,14 +1529,16 @@ Namespace Kodi
                     Dim mTVDB As String = If(mDBElement.TVEpisode.TVDBSpecified, mDBElement.TVEpisode.TVDB, Nothing)
 
                     'all image paths will be set in artwork object
-                    Dim artwork As New Media.Artwork.Set
-                    artwork.fanart = mFanart
-                    artwork.thumb = mPoster
+                    Dim artwork As New Media.Artwork.Set With {
+                        .fanart = mFanart,
+                        .thumb = mPoster
+                    }
 
-                    Dim mUniqueID As New Media.UniqueID.Set
-                    mUniqueID.imdb = mIMDB
-                    mUniqueID.tmdb = mTMDB
-                    mUniqueID.tvdb = mTVDB
+                    Dim mUniqueID As New Media.UniqueID.Set With {
+                        .imdb = mIMDB,
+                        .tmdb = mTMDB,
+                        .tvdb = mTVDB
+                    }
 
                     Dim response As String = String.Empty
 
@@ -1647,11 +1663,12 @@ Namespace Kodi
                                                   GetRemotePath(mDBElement.ImagesContainer.Poster.LocalFilePath), Nothing)
 
                     'all image paths will be set in artwork object
-                    Dim artwork As New Media.Artwork.Set
-                    artwork.banner = mBanner
-                    artwork.fanart = mFanart
-                    artwork.landscape = mLandscape
-                    artwork.poster = mPoster
+                    Dim artwork As New Media.Artwork.Set With {
+                        .banner = mBanner,
+                        .fanart = mFanart,
+                        .landscape = mLandscape,
+                        .poster = mPoster
+                    }
 
                     Dim response = Await _kodi.VideoLibrary.SetSeasonDetails(
                         KodiElement.seasonid,
@@ -1793,19 +1810,21 @@ Namespace Kodi
                     Dim mTVDB As String = If(mDBElement.TVShow.TVDBSpecified, mDBElement.TVShow.TVDB, Nothing)
 
                     'all image paths will be set in artwork object
-                    Dim artwork As New Media.Artwork.Set
-                    artwork.banner = mBanner
-                    artwork.characterart = mCharacterArt
-                    artwork.clearart = mClearArt
-                    artwork.clearlogo = mClearLogo
-                    artwork.fanart = mFanart
-                    artwork.landscape = mLandscape
-                    artwork.poster = mPoster
+                    Dim artwork As New Media.Artwork.Set With {
+                        .banner = mBanner,
+                        .characterart = mCharacterArt,
+                        .clearart = mClearArt,
+                        .clearlogo = mClearLogo,
+                        .fanart = mFanart,
+                        .landscape = mLandscape,
+                        .poster = mPoster
+                    }
 
-                    Dim mUniqueID As New Media.UniqueID.Set
-                    mUniqueID.imdb = mIMDB
-                    mUniqueID.tmdb = mTMDB
-                    mUniqueID.tvdb = mTVDB
+                    Dim mUniqueID As New Media.UniqueID.Set With {
+                        .imdb = mIMDB,
+                        .tmdb = mTMDB,
+                        .tvdb = mTVDB
+                    }
 
                     Dim response As String = String.Empty
 
@@ -2653,7 +2672,10 @@ Namespace Kodi
 
         Public Async Function ConnectAsync(hostName As String, port As Integer) As Task Implements ISocket.ConnectAsync
             _socket = New Net.Sockets.Socket(Net.Sockets.AddressFamily.InterNetwork, Net.Sockets.SocketType.Stream, Net.Sockets.ProtocolType.Tcp)
-            _socket.Connect(hostName, port)
+            Dim _socketAsyncEventArgs As SocketAsyncEventArgs = New SocketAsyncEventArgs With {
+                .RemoteEndPoint = New DnsEndPoint(hostName, port)
+            }
+            Await Task.Factory.StartNew(Function() _socket.ConnectAsync(_socketAsyncEventArgs))
         End Function
 
         Public Function GetInputStream() As Stream Implements ISocket.GetInputStream

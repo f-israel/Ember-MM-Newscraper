@@ -1,6 +1,7 @@
 using System;
 using System.Linq;
 using Newtonsoft.Json;
+using XBMCRPC.List.Filter;
 
 namespace XBMCRPC.List.Filter
 {
@@ -21,7 +22,7 @@ namespace XBMCRPC.List.Filter
        notinthelast,
        True,
        False,
-       between,
+       between
    }
 }
 
@@ -29,14 +30,14 @@ public class OperatorEnumConverter : JsonConverter
 {
     public override void WriteJson(JsonWriter writer, object value, JsonSerializer serializer)
     {
-        XBMCRPC.List.Filter.Operators op = (XBMCRPC.List.Filter.Operators)value;
+        Operators op = (Operators)value;
         writer.WriteValue(op.ToString().ToLower());
     }
     public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
     {
-        var values = Enum.GetNames(typeof(XBMCRPC.List.Filter.Operators));
+        var values = Enum.GetNames(typeof(Operators));
         var enumValue = values.FirstOrDefault(v => v.ToLower().Equals(reader.Value.ToString()));
-        XBMCRPC.List.Filter.Operators op;
+        Operators op;
         if (Enum.TryParse(enumValue, out op))
         {
             return op;

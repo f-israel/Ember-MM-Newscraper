@@ -530,12 +530,12 @@ Public Class FileFolderRenamer
     End Function
 
     Public Shared Function GetInfo_Movie(ByVal _DBElement As Database.DBElement) As FileRename
-        Dim MovieFile As New FileRename
-
         'ID
-        MovieFile.ID = _DBElement.ID
+        Dim MovieFile As New FileRename With {
+            .ID = _DBElement.ID
+        }
 
-        'Countries
+            'Countries
         If _DBElement.Movie.CountriesSpecified Then
             MovieFile.Country = String.Join(" / ", _DBElement.Movie.Countries.ToArray)
         End If
@@ -728,9 +728,10 @@ Public Class FileFolderRenamer
                     SQLNewcommand.CommandText = String.Concat("SELECT idEpisode, Episode, Title, SubEpisode FROM episode WHERE idFile = ", _DBElement.FilenameID, " AND Season = ", aSeason, ";")
                     Using SQLReader As SQLite.SQLiteDataReader = SQLNewcommand.ExecuteReader()
                         While SQLReader.Read
-                            Dim aEpisode As New Episode
-                            aEpisode.ID = Convert.ToInt32(SQLReader("idEpisode"))
-                            aEpisode.Episode = Convert.ToInt32(SQLReader("Episode"))
+                            Dim aEpisode As New Episode With {
+                                .ID = Convert.ToInt32(SQLReader("idEpisode")),
+                                .Episode = Convert.ToInt32(SQLReader("Episode"))
+                            }
                             If Not DBNull.Value.Equals(SQLReader("SubEpisode")) Then aEpisode.SubEpisode = Convert.ToInt32(SQLReader("SubEpisode"))
 
                             'Title check
@@ -932,12 +933,12 @@ Public Class FileFolderRenamer
     End Function
 
     Public Shared Function GetInfo_TVShow(ByVal _DBElement As Database.DBElement) As FileRename
-        Dim ShowFile As New FileRename
-
         'ID
-        ShowFile.ID = _DBElement.ShowID
+        Dim ShowFile As New FileRename With {
+            .ID = _DBElement.ShowID
+        }
 
-        'Genres
+            'Genres
         If _DBElement.TVShow.GenresSpecified Then
             ShowFile.Genre = String.Join(" / ", _DBElement.TVShow.Genres.ToArray)
         End If

@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
+
 namespace XBMCRPC.Addon
 {
    public enum FieldsItem
@@ -20,7 +19,7 @@ namespace XBMCRPC.Addon
        broken,
        extrainfo,
        rating,
-       enabled,
+       enabled
    }
    public class Fields : List<FieldsItem>
    {

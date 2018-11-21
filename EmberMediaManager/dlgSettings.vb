@@ -904,9 +904,10 @@ Public Class dlgSettings
                     fi = dEditMeta.ShowDialog(x.MetaData, False)
                     If Not fi Is Nothing Then
                         MovieMeta.Remove(x)
-                        Dim m As New Settings.MetadataPerType
-                        m.FileType = x.FileType
-                        m.MetaData = New MediaContainers.Fileinfo
+                        Dim m As New Settings.MetadataPerType With {
+                            .FileType = x.FileType,
+                            .MetaData = New MediaContainers.Fileinfo
+                        }
                         m.MetaData = fi
                         MovieMeta.Add(m)
                         LoadMovieMetadata()
@@ -942,9 +943,10 @@ Public Class dlgSettings
                     fi = dEditMeta.ShowDialog(x.MetaData, True)
                     If Not fi Is Nothing Then
                         TVMeta.Remove(x)
-                        Dim m As New Settings.MetadataPerType
-                        m.FileType = x.FileType
-                        m.MetaData = New MediaContainers.Fileinfo
+                        Dim m As New Settings.MetadataPerType With {
+                            .FileType = x.FileType,
+                            .MetaData = New MediaContainers.Fileinfo
+                        }
                         m.MetaData = fi
                         TVMeta.Add(m)
                         LoadTVMetadata()
@@ -1020,9 +1022,10 @@ Public Class dlgSettings
             Dim fi As New MediaContainers.Fileinfo
             fi = dEditMeta.ShowDialog(fi, False)
             If Not fi Is Nothing Then
-                Dim m As New Settings.MetadataPerType
-                m.FileType = txtMovieScraperDefFIExt.Text
-                m.MetaData = New MediaContainers.Fileinfo
+                Dim m As New Settings.MetadataPerType With {
+                    .FileType = txtMovieScraperDefFIExt.Text,
+                    .MetaData = New MediaContainers.Fileinfo
+                }
                 m.MetaData = fi
                 MovieMeta.Add(m)
                 LoadMovieMetadata()
@@ -1039,9 +1042,10 @@ Public Class dlgSettings
             Dim fi As New MediaContainers.Fileinfo
             fi = dEditMeta.ShowDialog(fi, True)
             If Not fi Is Nothing Then
-                Dim m As New Settings.MetadataPerType
-                m.FileType = txtTVScraperDefFIExt.Text
-                m.MetaData = New MediaContainers.Fileinfo
+                Dim m As New Settings.MetadataPerType With {
+                    .FileType = txtTVScraperDefFIExt.Text,
+                    .MetaData = New MediaContainers.Fileinfo
+                }
                 m.MetaData = fi
                 TVMeta.Add(m)
                 LoadTVMetadata()
@@ -2819,11 +2823,13 @@ Public Class dlgSettings
         RemoveCurrPanel()
 
         For Each pPanel As Containers.SettingsPanel In SettingsPanels.Where(Function(s) s.Type = sType AndAlso String.IsNullOrEmpty(s.Parent)).OrderBy(Function(s) s.Order)
-            pNode = New TreeNode(pPanel.Text, pPanel.ImageIndex, pPanel.ImageIndex)
-            pNode.Name = pPanel.Name
+            pNode = New TreeNode(pPanel.Text, pPanel.ImageIndex, pPanel.ImageIndex) With {
+                .Name = pPanel.Name
+            }
             For Each cPanel As Containers.SettingsPanel In SettingsPanels.Where(Function(p) p.Type = sType AndAlso p.Parent = pNode.Name).OrderBy(Function(s) s.Order)
-                cNode = New TreeNode(cPanel.Text, cPanel.ImageIndex, cPanel.ImageIndex)
-                cNode.Name = cPanel.Name
+                cNode = New TreeNode(cPanel.Text, cPanel.ImageIndex, cPanel.ImageIndex) With {
+                    .Name = cPanel.Name
+                }
                 pNode.Nodes.Add(cNode)
             Next
             tvSettingsList.Nodes.Add(pNode)
@@ -4431,9 +4437,10 @@ Public Class dlgSettings
                         fi = dEditMeta.ShowDialog(x.MetaData, False)
                         If Not fi Is Nothing Then
                             MovieMeta.Remove(x)
-                            Dim m As New Settings.MetadataPerType
-                            m.FileType = x.FileType
-                            m.MetaData = New MediaContainers.Fileinfo
+                            Dim m As New Settings.MetadataPerType With {
+                                .FileType = x.FileType,
+                                .MetaData = New MediaContainers.Fileinfo
+                            }
                             m.MetaData = fi
                             MovieMeta.Add(m)
                             LoadMovieMetadata()
@@ -4502,9 +4509,10 @@ Public Class dlgSettings
                         fi = dEditMeta.ShowDialog(x.MetaData, True)
                         If Not fi Is Nothing Then
                             TVMeta.Remove(x)
-                            Dim m As New Settings.MetadataPerType
-                            m.FileType = x.FileType
-                            m.MetaData = New MediaContainers.Fileinfo
+                            Dim m As New Settings.MetadataPerType With {
+                                .FileType = x.FileType,
+                                .MetaData = New MediaContainers.Fileinfo
+                            }
                             m.MetaData = fi
                             TVMeta.Add(m)
                             LoadTVMetadata()

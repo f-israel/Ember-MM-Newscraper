@@ -902,8 +902,9 @@ Public Class NFO
         'create the "* All Seasons" entry if needed
         Dim tmpAllSeasons As Database.DBElement = DBTV.Seasons.FirstOrDefault(Function(f) f.TVSeason.IsAllSeasons)
         If tmpAllSeasons Is Nothing OrElse tmpAllSeasons.TVSeason Is Nothing Then
-            tmpAllSeasons = New Database.DBElement(Enums.ContentType.TVSeason)
-            tmpAllSeasons.TVSeason = New MediaContainers.SeasonDetails With {.Season = -1}
+            tmpAllSeasons = New Database.DBElement(Enums.ContentType.TVSeason) With {
+                .TVSeason = New MediaContainers.SeasonDetails With {.Season = -1}
+            }
             tmpAllSeasons = Master.DB.AddTVShowInfoToDBElement(tmpAllSeasons, DBTV)
             DBTV.Seasons.Add(tmpAllSeasons)
         End If

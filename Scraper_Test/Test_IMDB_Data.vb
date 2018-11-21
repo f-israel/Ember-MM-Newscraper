@@ -231,10 +231,11 @@ Namespace EmberTests
         <TestMethod()>
         Public Sub Test_IMDB_Data_GetMovieStudio_EmptyMovieID()
             'Arrange
-            Dim movie As Database.DBElement = New Database.DBElement()
-            movie.Movie = New MediaContainers.Movie()
-            ' In this test, the Movie object is created, but no ID is assigned
-            '            movie.Movie.IMDBID = 91949    'This is ShortCircuit from http://www.imdb.com/title/tt0091949/
+            Dim movie As Database.DBElement = New Database.DBElement With {
+                .Movie = New MediaContainers.Movie()
+            }
+                ' In this test, the Movie object is created, but no ID is assigned
+                '            movie.Movie.IMDBID = 91949    'This is ShortCircuit from http://www.imdb.com/title/tt0091949/
             Dim studio As List(Of String) = New List(Of String)
 
             Dim provider As ScraperModule_Data_Movie = GetProvider()
@@ -256,9 +257,11 @@ Namespace EmberTests
         <TestMethod()>
         Public Sub Test_IMDB_Data_GetMovieStudio_NothingStudio()
             'Arrange
-            Dim movie As Database.DBElement = New Database.DBElement()
-            movie.Movie = New MediaContainers.Movie()
-            movie.Movie.IMDBID = 91949    'This is ShortCircuit from http://www.imdb.com/title/tt0091949/
+            Dim movie As Database.DBElement = New Database.DBElement With {
+                .Movie = New MediaContainers.Movie With {
+                    .IMDBID = 91949    'This is ShortCircuit from http://www.imdb.com/title/tt0091949/
+                    }
+            }
             Dim studio As List(Of String) = Nothing
 
             Dim provider As ScraperModule_Data_Movie = GetProvider()
@@ -284,9 +287,11 @@ Namespace EmberTests
         <TestMethod()>
         Public Sub Test_IMDB_Data_GetMovieStudio_FullStudio()
             'Arrange
-            Dim movie As Database.DBElement = New Database.DBElement()
-            movie.Movie = New MediaContainers.Movie()
-            movie.Movie.IMDBID = 91949    'This is ShortCircuit from http://www.imdb.com/title/tt0091949/
+            Dim movie As Database.DBElement = New Database.DBElement With {
+                .Movie = New MediaContainers.Movie With {
+                    .IMDBID = 91949    'This is ShortCircuit from http://www.imdb.com/title/tt0091949/
+                    }
+            }
             Dim studio As List(Of String) = New List(Of String)
             With studio
                 .Add("Test 1")
@@ -322,9 +327,11 @@ Namespace EmberTests
         Public Sub Test_IMDB_Data_GetMovieStudio_MovieDoesNotExist()
             'TODO 2013/12/19 Dekker500 - This test should be changed. Wouldn't you expect a non-exsistant movie to generate a "Cancelled"?
             'Arrange
-            Dim movie As Database.DBElement = New Database.DBElement()
-            movie.Movie = New MediaContainers.Movie()
-            movie.Movie.IMDBID = 9194884    'This movie does not exist at IMDB
+            Dim movie As Database.DBElement = New Database.DBElement With {
+                .Movie = New MediaContainers.Movie With {
+                    .IMDBID = 9194884    'This movie does not exist at IMDB
+                    }
+            }
             Dim studio As List(Of String) = New List(Of String)
 
             Dim provider As ScraperModule_Data_Movie = GetProvider()
@@ -346,9 +353,11 @@ Namespace EmberTests
         <TestMethod()>
         Public Sub Test_IMDB_Data_Scraper_HappyDay()
             'Arrange
-            Dim movie As Database.DBElement = New Database.DBElement()
-            movie.Movie = New MediaContainers.Movie()
-            movie.Movie.IMDBID = 91949    'This is ShortCircuit from http://www.imdb.com/title/tt0091949/
+            Dim movie As Database.DBElement = New Database.DBElement With {
+                .Movie = New MediaContainers.Movie With {
+                    .IMDBID = 91949    'This is ShortCircuit from http://www.imdb.com/title/tt0091949/
+                    }
+            }
             Dim scrapeType As ScrapeType = Enums.ScrapeType.SingleScrape
             Dim options As ScrapeOptions_Movie = scrapeOptions_All
             options.bTrailer = False

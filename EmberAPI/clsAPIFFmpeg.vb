@@ -197,10 +197,11 @@ Namespace FFmpeg
                 For i = 1 To sortedThumbs.Count
                     'need no more than thumbcount images
                     If lstThumbContainer.Count < ThumbCount Then
-                        Dim eImg As New MediaContainers.Image
                         'not needed to load it here, just set localpath
                         'eImg.ImageOriginal.FromFile(sortedThumbs(i - 1), True)
-                        eImg.LocalFilePath = sortedThumbs(i - 1)
+                        Dim eImg As New MediaContainers.Image With {
+                            .LocalFilePath = sortedThumbs(i - 1)
+                        }
                         lstThumbContainer.Add(eImg)
                     Else
                         Exit For
@@ -418,43 +419,44 @@ Namespace FFmpeg
 
                 ElseIf stream.codec_type.Trim().ToLower() = "audio" Then
                     ' Create a new Audio object for each stream we find
-                    AudioInfo = New MediaContainers.Audio
-
                     ' Audio codec name
-                    AudioInfo.Codec = stream.codec_name
                     ' Audio Bitrate
-                    AudioInfo.Bitrate = stream.bit_rate
                     ' Store the channel information
-                    AudioInfo.Channels = CStr((If(stream.channels Is Nothing, 0, CInt(stream.channels))))
                     'Language
-                    AudioInfo.Language = (If(stream.tags Is Nothing, "", stream.tags.language))
+                    AudioInfo = New MediaContainers.Audio With {
+                        .Codec = stream.codec_name,
+                        .Bitrate = stream.bit_rate,
+                        .Channels = CStr((If(stream.channels Is Nothing, 0, CInt(stream.channels)))),
+                        .Language = (If(stream.tags Is Nothing, "", stream.tags.language))
+                    }
 
-                    'Currently not supported in existingn MEDIAINFO-structure of Ember:
-                    'PID
-                    'AudioInfo.PID = (If(String.IsNullOrWhiteSpace(stream.id), -1, Convert.ToInt32(stream.id.Replace("0x", ""), 16)))
-                    'Hz
-                    'Integer.TryParse(stream.sample_rate, AudioInfo.Rate)
-                    'Bits per sample
-                    'AudioInfo.SamplingBits = (If(stream.bits_per_sample Is Nothing, -1, CInt(stream.bits_per_sample)))
+                        'Currently not supported in existingn MEDIAINFO-structure of Ember:
+                        'PID
+                        'AudioInfo.PID = (If(String.IsNullOrWhiteSpace(stream.id), -1, Convert.ToInt32(stream.id.Replace("0x", ""), 16)))
+                        'Hz
+                        'Integer.TryParse(stream.sample_rate, AudioInfo.Rate)
+                        'Bits per sample
+                        'AudioInfo.SamplingBits = (If(stream.bits_per_sample Is Nothing, -1, CInt(stream.bits_per_sample)))
 
 
-                    'Finally add Videoinformation to Ember MediaInfo object
+                        'Finally add Videoinformation to Ember MediaInfo object
                     MediaInfo.StreamDetails.Audio.Add(AudioInfo)
 
                 ElseIf stream.codec_type.Trim().ToLower() = "subtitle" Then
                     ' Create a new Subtitle object for each stream we find
-                    SubtitleInfo = New MediaContainers.Subtitle
                     'Language
-                    SubtitleInfo.Language = (If(stream.tags Is Nothing, "", stream.tags.language))
+                    SubtitleInfo = New MediaContainers.Subtitle With {
+                        .Language = (If(stream.tags Is Nothing, "", stream.tags.language))
+                    }
 
-                    'Currently not supported in existingn MEDIAINFO-structure of Ember:
-                    ' Subtitle Codec name
-                    'SubtitleInfo.Name = stream.codec_name
-                    ' PId
-                    'SubtitleInfo.PID = (If(String.IsNullOrWhiteSpace(stream.id), -1, Convert.ToInt32(stream.id.Replace("0x", ""), 16)))
+                        'Currently not supported in existingn MEDIAINFO-structure of Ember:
+                        ' Subtitle Codec name
+                        'SubtitleInfo.Name = stream.codec_name
+                        ' PId
+                        'SubtitleInfo.PID = (If(String.IsNullOrWhiteSpace(stream.id), -1, Convert.ToInt32(stream.id.Replace("0x", ""), 16)))
 
 
-                    'Finally add Videoinformation to Ember MediaInfo object
+                        'Finally add Videoinformation to Ember MediaInfo object
                     MediaInfo.StreamDetails.Subtitle.Add(SubtitleInfo)
                 End If
             Next
@@ -511,17 +513,18 @@ Namespace FFmpeg
         Private Sub Execute()
             Dim processCompletedSuccessfully As Boolean = False
 
-            Dim ffmpeg As New ProcessStartInfo
-            ffmpeg.FileName = CurrentFFmpegTask.FFmpegPath
-            ffmpeg.Arguments = CurrentFFmpegTask.FFmpegArgs
-            ffmpeg.UseShellExecute = False
-            ffmpeg.CreateNoWindow = True
-            ffmpeg.RedirectStandardError = True
-            ffmpeg.RedirectStandardOutput = True
+            Dim ffmpeg As New ProcessStartInfo With {
+                .FileName = CurrentFFmpegTask.FFmpegPath,
+                .Arguments = CurrentFFmpegTask.FFmpegArgs,
+                .UseShellExecute = False,
+                .CreateNoWindow = True,
+                .RedirectStandardError = True,
+                .RedirectStandardOutput = True
+            }
 
-            'log the arguments/input
-            '_output.AppendLine("Argument String:")
-            '_output.AppendLine(CurrentFFmpegTask.FFmpegArgs)
+                'log the arguments/input
+                '_output.AppendLine("Argument String:")
+                '_output.AppendLine(CurrentFFmpegTask.FFmpegArgs)
 
             Using p As New Process()
                 Try

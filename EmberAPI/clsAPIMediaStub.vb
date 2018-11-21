@@ -74,10 +74,10 @@ Public Class MediaStub
         Dim fAttWritable As Boolean = True
         Dim StubFile As String = sPath
         Dim StubPath As String = Directory.GetParent(StubFile).FullName
-        Dim DiscStub As New DiscStub
-
-        DiscStub.Title = sTitle
-        DiscStub.Message = sMessage
+        Dim DiscStub As New DiscStub With {
+            .Title = sTitle,
+            .Message = sMessage
+        }
 
         Try
             doesExist = File.Exists(StubFile)

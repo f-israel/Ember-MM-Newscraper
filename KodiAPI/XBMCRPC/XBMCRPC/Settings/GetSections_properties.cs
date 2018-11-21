@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
+
 namespace XBMCRPC.Settings
 {
    public enum GetSections_propertiesItem
    {
-       categories,
+       categories
    }
    public class GetSections_properties : List<GetSections_propertiesItem>
    {

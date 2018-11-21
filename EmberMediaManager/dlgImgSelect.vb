@@ -975,10 +975,10 @@ Public Class dlgImgSelect
     End Sub
 
     Private Function CreateImageTag(ByRef tImage As MediaContainers.Image, ByVal ModifierType As Enums.ModifierType, Optional ByVal iSeason As Integer = -2, Optional ByVal iIndex As Integer = -1) As iTag
-        Dim nTag As New iTag
-
-        nTag.Image = tImage
-        nTag.ImageType = ModifierType
+        Dim nTag As New iTag With {
+            .Image = tImage,
+            .ImageType = ModifierType
+        }
 
         tImage.LoadAndCache(tContentType, False, True)
 

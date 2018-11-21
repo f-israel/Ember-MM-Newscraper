@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
+using XBMCRPC.Item.Details;
+
 namespace XBMCRPC.List.Items
 {
-   public class SourcesItem : XBMCRPC.Item.Details.Base
+   public class SourcesItem : Base
    {
        public string file { get; set; }
     }

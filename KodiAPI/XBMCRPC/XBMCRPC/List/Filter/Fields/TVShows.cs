@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
 namespace XBMCRPC.List.Filter.Fields
 {
    public enum TVShows
@@ -27,6 +22,6 @@ namespace XBMCRPC.List.Filter.Fields
        inprogress,
        tag,
        playlist,
-       virtualfolder,
+       virtualfolder
    }
 }

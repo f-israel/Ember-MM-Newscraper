@@ -84,9 +84,10 @@ Namespace TeraCopy
 
                         Dim p As New Process()
                         Dim Arguments As String = String.Concat("""""", If(_doMove, "move", "copy"), " *""", BatchListPath, """ """, _destination, """""")
-                        p.StartInfo = New ProcessStartInfo(_apppath, Arguments)
-                        p.StartInfo.CreateNoWindow = True
-                        p.StartInfo.WindowStyle = ProcessWindowStyle.Hidden
+                        p.StartInfo = New ProcessStartInfo(_apppath, Arguments) With {
+                            .CreateNoWindow = True,
+                            .WindowStyle = ProcessWindowStyle.Hidden
+                        }
                         p.Start()
                     End If
                 End If

@@ -1,12 +1,10 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
+using XBMCRPC.GUI.Stereoscopy;
+
 namespace XBMCRPC.GUI
 {
    public class GetStereoscopicModesResponse
    {
-       public global::System.Collections.Generic.List<XBMCRPC.GUI.Stereoscopy.Mode> stereoscopicmodes { get; set; }
+       public List<Mode> stereoscopicmodes { get; set; }
     }
 }

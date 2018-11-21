@@ -1472,17 +1472,18 @@ Public Class Database
             SQLcommand.CommandText = "SELECT * FROM moviesource ORDER BY strName;"
             Using SQLreader As SQLiteDataReader = SQLcommand.ExecuteReader()
                 While SQLreader.Read
-                    Dim msource As New DBSource
-                    msource.ID = Convert.ToInt64(SQLreader("idSource"))
-                    msource.Name = SQLreader("strName").ToString
-                    msource.Path = SQLreader("strPath").ToString
-                    msource.Recursive = Convert.ToBoolean(SQLreader("bRecursive"))
-                    msource.UseFolderName = Convert.ToBoolean(SQLreader("bFoldername"))
-                    msource.IsSingle = Convert.ToBoolean(SQLreader("bSingle"))
-                    msource.Exclude = Convert.ToBoolean(SQLreader("bExclude"))
-                    msource.GetYear = Convert.ToBoolean(SQLreader("bGetYear"))
-                    msource.Language = SQLreader("strLanguage").ToString
-                    msource.LastScan = SQLreader("strLastScan").ToString
+                    Dim msource As New DBSource With {
+                        .ID = Convert.ToInt64(SQLreader("idSource")),
+                        .Name = SQLreader("strName").ToString,
+                        .Path = SQLreader("strPath").ToString,
+                        .Recursive = Convert.ToBoolean(SQLreader("bRecursive")),
+                        .UseFolderName = Convert.ToBoolean(SQLreader("bFoldername")),
+                        .IsSingle = Convert.ToBoolean(SQLreader("bSingle")),
+                        .Exclude = Convert.ToBoolean(SQLreader("bExclude")),
+                        .GetYear = Convert.ToBoolean(SQLreader("bGetYear")),
+                        .Language = SQLreader("strLanguage").ToString,
+                        .LastScan = SQLreader("strLastScan").ToString
+                    }
                     lstSources.Add(msource)
                 End While
             End Using
@@ -1499,16 +1500,17 @@ Public Class Database
             SQLcommand.CommandText = "SELECT * FROM tvshowsource ORDER BY strName;"
             Using SQLreader As SQLiteDataReader = SQLcommand.ExecuteReader()
                 While SQLreader.Read
-                    Dim tvsource As New DBSource
-                    tvsource.ID = Convert.ToInt64(SQLreader("idSource"))
-                    tvsource.Name = SQLreader("strName").ToString
-                    tvsource.Path = SQLreader("strPath").ToString
-                    tvsource.Language = SQLreader("strLanguage").ToString
-                    tvsource.Ordering = DirectCast(Convert.ToInt32(SQLreader("iOrdering")), Enums.EpisodeOrdering)
-                    tvsource.Exclude = Convert.ToBoolean(SQLreader("bExclude"))
-                    tvsource.EpisodeSorting = DirectCast(Convert.ToInt32(SQLreader("iEpisodeSorting")), Enums.EpisodeSorting)
-                    tvsource.LastScan = SQLreader("strLastScan").ToString
-                    tvsource.IsSingle = Convert.ToBoolean(SQLreader("bSingle"))
+                    Dim tvsource As New DBSource With {
+                        .ID = Convert.ToInt64(SQLreader("idSource")),
+                        .Name = SQLreader("strName").ToString,
+                        .Path = SQLreader("strPath").ToString,
+                        .Language = SQLreader("strLanguage").ToString,
+                        .Ordering = DirectCast(Convert.ToInt32(SQLreader("iOrdering")), Enums.EpisodeOrdering),
+                        .Exclude = Convert.ToBoolean(SQLreader("bExclude")),
+                        .EpisodeSorting = DirectCast(Convert.ToInt32(SQLreader("iEpisodeSorting")), Enums.EpisodeSorting),
+                        .LastScan = SQLreader("strLastScan").ToString,
+                        .IsSingle = Convert.ToBoolean(SQLreader("bSingle"))
+                    }
                     lstSources.Add(tvsource)
                 End While
             End Using
@@ -1726,10 +1728,10 @@ Public Class Database
     ''' <param name="MovieID">ID of the movie to load, as stored in the database</param>
     ''' <returns>Database.DBElement object</returns>
     Public Function Load_Movie(ByVal MovieID As Long) As DBElement
-        Dim _movieDB As New DBElement(Enums.ContentType.Movie)
-        _movieDB.Movie = New MediaContainers.Movie
-
-        _movieDB.ID = MovieID
+        Dim _movieDB As New DBElement(Enums.ContentType.Movie) With {
+            .Movie = New MediaContainers.Movie,
+            .ID = MovieID
+        }
         Using SQLcommand As SQLiteCommand = _myvideosDBConn.CreateCommand()
             SQLcommand.CommandText = String.Concat("SELECT * FROM movie WHERE idMovie = ", _movieDB.ID, ";")
             Using SQLreader As SQLiteDataReader = SQLcommand.ExecuteReader()
@@ -1814,12 +1816,13 @@ Public Class Database
             Using SQLreader As SQLiteDataReader = SQLcommand.ExecuteReader()
                 Dim person As MediaContainers.Person
                 While SQLreader.Read
-                    person = New MediaContainers.Person
-                    person.ID = Convert.ToInt64(SQLreader("idActor"))
-                    person.Name = SQLreader("strActor").ToString
-                    person.Role = SQLreader("strRole").ToString
-                    person.LocalFilePath = SQLreader("url").ToString
-                    person.URLOriginal = SQLreader("strThumb").ToString
+                    person = New MediaContainers.Person With {
+                        .ID = Convert.ToInt64(SQLreader("idActor")),
+                        .Name = SQLreader("strActor").ToString,
+                        .Role = SQLreader("strRole").ToString,
+                        .LocalFilePath = SQLreader("url").ToString,
+                        .URLOriginal = SQLreader("strThumb").ToString
+                    }
                     _movieDB.Movie.Actors.Add(person)
                 End While
             End Using
@@ -2036,10 +2039,10 @@ Public Class Database
     ''' <param name="MovieSetID">ID of the movieset to load, as stored in the database</param>
     ''' <returns>Database.DBElement object</returns>
     Public Function Load_MovieSet(ByVal MovieSetID As Long) As DBElement
-        Dim _moviesetDB As New DBElement(Enums.ContentType.MovieSet)
-        _moviesetDB.MovieSet = New MediaContainers.MovieSet
-
-        _moviesetDB.ID = MovieSetID
+        Dim _moviesetDB As New DBElement(Enums.ContentType.MovieSet) With {
+            .MovieSet = New MediaContainers.MovieSet,
+            .ID = MovieSetID
+        }
         Using SQLcommand As SQLiteCommand = _myvideosDBConn.CreateCommand()
             SQLcommand.CommandText = String.Concat("SELECT * FROM sets WHERE idSet = ", MovieSetID, ";")
             Using SQLreader As SQLiteDataReader = SQLcommand.ExecuteReader()
@@ -2102,9 +2105,9 @@ Public Class Database
     End Function
 
     Public Function Load_Source_Movie(ByVal SourceID As Long) As DBSource
-        Dim _source As New DBSource
-
-        _source.ID = SourceID
+        Dim _source As New DBSource With {
+            .ID = SourceID
+        }
         Using SQLcommand As SQLiteCommand = _myvideosDBConn.CreateCommand()
             SQLcommand.CommandText = String.Concat("SELECT * FROM moviesource WHERE idSource = ", _source.ID, ";")
             Using SQLreader As SQLiteDataReader = SQLcommand.ExecuteReader()
@@ -2132,8 +2135,9 @@ Public Class Database
     ''' <param name="TagID">ID of the movietag to load, as stored in the database</param>
     ''' <returns>Database.DBElementTag object</returns>
     Public Function Load_Tag_Movie(ByVal TagID As Integer) As Structures.DBMovieTag
-        Dim _tagDB As New Structures.DBMovieTag
-        _tagDB.ID = TagID
+        Dim _tagDB As New Structures.DBMovieTag With {
+            .ID = TagID
+        }
         Using SQLcommand As SQLiteCommand = _myvideosDBConn.CreateCommand()
             SQLcommand.CommandText = String.Concat("SELECT * FROM tag WHERE idTag = ", TagID, ";")
             Using SQLreader As SQLiteDataReader = SQLcommand.ExecuteReader()
@@ -2274,8 +2278,9 @@ Public Class Database
     ''' <param name="WithShow">>If <c>True</c>, also retrieve the TV Show information</param>
     ''' <returns>Database.DBElement object</returns>
     Public Function Load_TVEpisode(ByVal EpisodeID As Long, ByVal withShow As Boolean) As DBElement
-        Dim _TVDB As New DBElement(Enums.ContentType.TVEpisode)
-        _TVDB.TVEpisode = New MediaContainers.EpisodeDetails
+        Dim _TVDB As New DBElement(Enums.ContentType.TVEpisode) With {
+            .TVEpisode = New MediaContainers.EpisodeDetails
+        }
         Dim PathID As Long = -1
 
         _TVDB.ID = EpisodeID
@@ -2363,12 +2368,13 @@ Public Class Database
             Using SQLreader As SQLiteDataReader = SQLcommand.ExecuteReader()
                 Dim person As MediaContainers.Person
                 While SQLreader.Read
-                    person = New MediaContainers.Person
-                    person.ID = Convert.ToInt64(SQLreader("idActor"))
-                    person.Name = SQLreader("strActor").ToString
-                    person.Role = SQLreader("strRole").ToString
-                    person.LocalFilePath = SQLreader("url").ToString
-                    person.URLOriginal = SQLreader("strThumb").ToString
+                    person = New MediaContainers.Person With {
+                        .ID = Convert.ToInt64(SQLreader("idActor")),
+                        .Name = SQLreader("strActor").ToString,
+                        .Role = SQLreader("strRole").ToString,
+                        .LocalFilePath = SQLreader("url").ToString,
+                        .URLOriginal = SQLreader("strThumb").ToString
+                    }
                     _TVDB.TVEpisode.Actors.Add(person)
                 End While
             End Using
@@ -2406,12 +2412,13 @@ Public Class Database
             Using SQLreader As SQLiteDataReader = SQLcommand.ExecuteReader()
                 Dim person As MediaContainers.Person
                 While SQLreader.Read
-                    person = New MediaContainers.Person
-                    person.ID = Convert.ToInt64(SQLreader("idActor"))
-                    person.Name = SQLreader("strActor").ToString
-                    person.Role = SQLreader("strRole").ToString
-                    person.LocalFilePath = SQLreader("url").ToString
-                    person.URLOriginal = SQLreader("strThumb").ToString
+                    person = New MediaContainers.Person With {
+                        .ID = Convert.ToInt64(SQLreader("idActor")),
+                        .Name = SQLreader("strActor").ToString,
+                        .Role = SQLreader("strRole").ToString,
+                        .LocalFilePath = SQLreader("url").ToString,
+                        .URLOriginal = SQLreader("strThumb").ToString
+                    }
                     _TVDB.TVEpisode.GuestStars.Add(person)
                 End While
             End Using
@@ -2525,10 +2532,10 @@ Public Class Database
     ''' <returns>Database.DBElement object</returns>
     ''' <remarks></remarks>
     Public Function Load_TVSeason(ByVal SeasonID As Long, ByVal withShow As Boolean, ByVal withEpisodes As Boolean) As DBElement
-        Dim _TVDB As New DBElement(Enums.ContentType.TVSeason)
-        _TVDB.TVSeason = New MediaContainers.SeasonDetails
-
-        _TVDB.ID = SeasonID
+        Dim _TVDB As New DBElement(Enums.ContentType.TVSeason) With {
+            .TVSeason = New MediaContainers.SeasonDetails,
+            .ID = SeasonID
+        }
         Using SQLcommandTVSeason As SQLiteCommand = _myvideosDBConn.CreateCommand()
             SQLcommandTVSeason.CommandText = String.Concat("SELECT * FROM seasons WHERE idSeason = ", _TVDB.ID, ";")
             Using SQLReader As SQLiteDataReader = SQLcommandTVSeason.ExecuteReader
@@ -2606,8 +2613,9 @@ Public Class Database
     ''' <param name="ShowID">Show ID</param>
     ''' <returns>Database.DBElement object</returns>
     Public Function Load_TVShow(ByVal ShowID As Long, ByVal withSeasons As Boolean, ByVal withEpisodes As Boolean, Optional ByVal withMissingEpisodes As Boolean = False) As DBElement
-        Dim _TVDB As New DBElement(Enums.ContentType.TVShow)
-        _TVDB.TVShow = New MediaContainers.TVShow
+        Dim _TVDB As New DBElement(Enums.ContentType.TVShow) With {
+            .TVShow = New MediaContainers.TVShow
+        }
 
         If ShowID < 0 Then Throw New ArgumentOutOfRangeException("ShowID", "Value must be >= 0, was given: " & ShowID)
 
@@ -2684,12 +2692,13 @@ Public Class Database
             Using SQLreader As SQLiteDataReader = SQLcommand.ExecuteReader()
                 Dim actor As MediaContainers.Person
                 While SQLreader.Read
-                    actor = New MediaContainers.Person
-                    actor.ID = Convert.ToInt64(SQLreader("idActor"))
-                    actor.Name = SQLreader("strActor").ToString
-                    actor.Role = SQLreader("strRole").ToString
-                    actor.LocalFilePath = SQLreader("url").ToString
-                    actor.URLOriginal = SQLreader("strThumb").ToString
+                    actor = New MediaContainers.Person With {
+                        .ID = Convert.ToInt64(SQLreader("idActor")),
+                        .Name = SQLreader("strActor").ToString,
+                        .Role = SQLreader("strRole").ToString,
+                        .LocalFilePath = SQLreader("url").ToString,
+                        .URLOriginal = SQLreader("strThumb").ToString
+                    }
                     _TVDB.TVShow.Actors.Add(actor)
                 End While
             End Using
@@ -2829,9 +2838,9 @@ Public Class Database
     End Function
 
     Public Function Load_Source_TVShow(ByVal SourceID As Long) As DBSource
-        Dim _source As New DBSource
-
-        _source.ID = SourceID
+        Dim _source As New DBSource With {
+            .ID = SourceID
+        }
         Using SQLcommand As SQLiteCommand = _myvideosDBConn.CreateCommand()
             SQLcommand.CommandText = String.Concat("SELECT * FROM tvshowsource WHERE idSource = ", _source.ID, ";")
             Using SQLreader As SQLiteDataReader = SQLcommand.ExecuteReader()
@@ -3087,9 +3096,10 @@ Public Class Database
 
         Master.fLoading.SetProgressBarStyle(ProgressBarStyle.Marquee)
 
-        bwPatchDB = New System.ComponentModel.BackgroundWorker
-        bwPatchDB.WorkerReportsProgress = True
-        bwPatchDB.WorkerSupportsCancellation = False
+        bwPatchDB = New System.ComponentModel.BackgroundWorker With {
+            .WorkerReportsProgress = True,
+            .WorkerSupportsCancellation = False
+        }
         bwPatchDB.RunWorkerAsync(New Arguments With {.currDBPath = cPath, .currVersion = cVersion, .newDBPath = nPath, .newVersion = nVersion})
 
         While bwPatchDB.IsBusy

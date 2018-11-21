@@ -83,8 +83,9 @@ Public Class dlgTVChangeEp
 
         For Each Season As Integer In _DBShow.Episodes.GroupBy(Function(s) s.TVEpisode.Season).Select(Function(group) group.Key)
             tSeason = Season
-            lGroup = New ListViewGroup
-            lGroup.Header = String.Format(Master.eLang.GetString(726, "Season {0}"), tSeason)
+            lGroup = New ListViewGroup With {
+                .Header = String.Format(Master.eLang.GetString(726, "Season {0}"), tSeason)
+            }
             lvEpisodes.Groups.Add(lGroup)
             For Each DBEpisode As Database.DBElement In _DBShow.Episodes.Where(Function(s) s.TVEpisode.Season = tSeason).OrderBy(Function(s) s.TVEpisode.Episode)
                 lItem = lvEpisodes.Items.Add(DBEpisode.TVEpisode.Episode.ToString)

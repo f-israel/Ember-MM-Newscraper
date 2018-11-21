@@ -46,15 +46,16 @@ Namespace EmberTests
 
         <ClassInitialize>
         Public Shared Sub ClassInit(ByVal context As TestContext)
-            debugTarget = New NLog.Targets.DebugTarget()
-            debugTarget.Name = "UnitTest"
             '            debugTarget.Layout = "${longdate}|${callsite}|${threadid}|${uppercase:${level}}|${message}"
-            debugTarget.Layout = String.Join(defaultMessageSeparator, _
-                                             {"${longdate}", _
-                                              "${callsite}", _
-                                              "${threadid}", _
-                                              "${uppercase:${level}}", _
-                                              "${message}"})
+            debugTarget = New NLog.Targets.DebugTarget With {
+                .Name = "UnitTest",
+                .Layout = String.Join(defaultMessageSeparator, _
+{"${longdate}", _
+"${callsite}", _
+"${threadid}", _
+"${uppercase:${level}}", _
+"${message}"})
+            }
             NLog.LogManager.Configuration.AddTarget("UnitTest", debugTarget)
 
             'We only care about error messages from this class, so filter out non-matching messages

@@ -1,9 +1,10 @@
-using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using XBMCRPC.JSONRPC;
+
 namespace XBMCRPC.Methods
 {
-   public partial class JSONRPC
+   public class JSONRPC
    {
         private readonly Client _client;
           public JSONRPC(Client client)
@@ -14,7 +15,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Enumerates all actions and descriptions
                 /// </summary>
-        public async Task<XBMCRPC.JSONRPC.IntrospectResponse> Introspect(bool getdescriptions=false, bool getmetadata=false, bool filterbytransport=false, XBMCRPC.JSONRPC.Introspect_filter filter=null)
+        public async Task<IntrospectResponse> Introspect(bool getdescriptions=false, bool getmetadata=false, bool filterbytransport=false, Introspect_filter filter=null)
         {
             var jArgs = new JObject();
              if (getdescriptions != null)
@@ -37,7 +38,7 @@ namespace XBMCRPC.Methods
                  var jpropfilter = JToken.FromObject(filter, _client.Serializer);
                  jArgs.Add(new JProperty("filter", jpropfilter));
              }
-            return await _client.GetData<XBMCRPC.JSONRPC.IntrospectResponse>("JSONRPC.Introspect", jArgs);
+            return await _client.GetData<IntrospectResponse>("JSONRPC.Introspect", jArgs);
         }
 
                 /// <summary>
@@ -67,10 +68,10 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Retrieve the clients permissions
                 /// </summary>
-        public async Task<XBMCRPC.JSONRPC.PermissionResponse> Permission()
+        public async Task<PermissionResponse> Permission()
         {
             var jArgs = new JObject();
-            return await _client.GetData<XBMCRPC.JSONRPC.PermissionResponse>("JSONRPC.Permission", jArgs);
+            return await _client.GetData<PermissionResponse>("JSONRPC.Permission", jArgs);
         }
 
                 /// <summary>
@@ -85,10 +86,10 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Retrieve the JSON-RPC protocol version.
                 /// </summary>
-        public async Task<XBMCRPC.JSONRPC.VersionResponse> Version()
+        public async Task<VersionResponse> Version()
         {
             var jArgs = new JObject();
-            return await _client.GetData<XBMCRPC.JSONRPC.VersionResponse>("JSONRPC.Version", jArgs);
+            return await _client.GetData<VersionResponse>("JSONRPC.Version", jArgs);
         }
    }
 }

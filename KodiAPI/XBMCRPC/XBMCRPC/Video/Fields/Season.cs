@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
+
 namespace XBMCRPC.Video.Fields
 {
    public enum SeasonItem
@@ -15,7 +14,7 @@ namespace XBMCRPC.Video.Fields
        thumbnail,
        tvshowid,
        watchedepisodes,
-       art,
+       art
    }
    public class Season : List<SeasonItem>
    {

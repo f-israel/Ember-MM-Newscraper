@@ -150,11 +150,12 @@ Namespace EmberTests
         Public Sub YouTube_VideoLinkItemCollection_Add_DoesntYetExist()
             'Arrange
             Dim videoLinkItemCollection As New YouTube.YouTubeLinkItemCollection()
-            Dim itemToAdd = New YouTube.VideoLinkItem()
-            itemToAdd.Description = "First item to add"
-            itemToAdd.URL = "Random URL"
+            Dim itemToAdd = New YouTube.VideoLinkItem With {
+                .Description = "First item to add",
+                .URL = "Random URL"
+            }
 
-            'Act
+                'Act
             videoLinkItemCollection.Add(itemToAdd)
             Dim result = videoLinkItemCollection.VideoLinks.Count()
 
@@ -166,22 +167,25 @@ Namespace EmberTests
         Public Sub YouTube_VideoLinkItemCollection_Add_AlreadyExists1()
             'Arrange
             Dim videoLinkItemCollection As New YouTube.YouTubeLinkItemCollection()
-            Dim firstItemToAdd = New YouTube.VideoLinkItem()
-            firstItemToAdd.Description = "First item to add"
-            firstItemToAdd.URL = "Random URL"
-            firstItemToAdd.FormatQuality = Enums.TrailerVideoQuality.OTHERS
+            Dim firstItemToAdd = New YouTube.VideoLinkItem With {
+                .Description = "First item to add",
+                .URL = "Random URL",
+                .FormatQuality = Enums.TrailerVideoQuality.OTHERS
+            }
 
-            Dim secondItemToAdd = New YouTube.VideoLinkItem()
-            secondItemToAdd.Description = "Second item to add"
-            secondItemToAdd.URL = "Random URL 2"
-            secondItemToAdd.FormatQuality = Enums.TrailerVideoQuality.SQ360p
+            Dim secondItemToAdd = New YouTube.VideoLinkItem With {
+                .Description = "Second item to add",
+                .URL = "Random URL 2",
+                .FormatQuality = Enums.TrailerVideoQuality.SQ360p
+            }
 
-            Dim duplicateItemToAdd = New YouTube.VideoLinkItem()
-            duplicateItemToAdd.Description = "Duplicate item to add"
-            duplicateItemToAdd.URL = "Random URL 2"
-            duplicateItemToAdd.FormatQuality = Enums.TrailerVideoQuality.OTHERS
+            Dim duplicateItemToAdd = New YouTube.VideoLinkItem With {
+                .Description = "Duplicate item to add",
+                .URL = "Random URL 2",
+                .FormatQuality = Enums.TrailerVideoQuality.OTHERS
+            }
 
-            'Act
+                'Act
             videoLinkItemCollection.Add(firstItemToAdd)
             videoLinkItemCollection.Add(secondItemToAdd)
             videoLinkItemCollection.Add(duplicateItemToAdd)
@@ -195,22 +199,25 @@ Namespace EmberTests
         Public Sub YouTube_VideoLinkItemCollection_Add_AlreadyExists2()
             'Arrange
             Dim videoLinkItemCollection As New YouTube.YouTubeLinkItemCollection()
-            Dim firstItemToAdd = New YouTube.VideoLinkItem()
-            firstItemToAdd.Description = "First item to add"
-            firstItemToAdd.URL = "Random URL"
-            firstItemToAdd.FormatQuality = Enums.TrailerVideoQuality.HD1080p
+            Dim firstItemToAdd = New YouTube.VideoLinkItem With {
+                .Description = "First item to add",
+                .URL = "Random URL",
+                .FormatQuality = Enums.TrailerVideoQuality.HD1080p
+            }
 
-            Dim secondItemToAdd = New YouTube.VideoLinkItem()
-            secondItemToAdd.Description = "Second item to add"
-            secondItemToAdd.URL = "Random URL 2"
-            secondItemToAdd.FormatQuality = Enums.TrailerVideoQuality.HD720p
+            Dim secondItemToAdd = New YouTube.VideoLinkItem With {
+                .Description = "Second item to add",
+                .URL = "Random URL 2",
+                .FormatQuality = Enums.TrailerVideoQuality.HD720p
+            }
 
-            Dim duplicateItemToAdd = New YouTube.VideoLinkItem()
-            duplicateItemToAdd.Description = "Duplicate item to add"
-            duplicateItemToAdd.URL = "Random URL 2"
-            duplicateItemToAdd.FormatQuality = Enums.TrailerVideoQuality.HD1080p
+            Dim duplicateItemToAdd = New YouTube.VideoLinkItem With {
+                .Description = "Duplicate item to add",
+                .URL = "Random URL 2",
+                .FormatQuality = Enums.TrailerVideoQuality.HD1080p
+            }
 
-            'Act
+                'Act
             videoLinkItemCollection.Add(firstItemToAdd)
             videoLinkItemCollection.Add(secondItemToAdd)
             videoLinkItemCollection.Add(duplicateItemToAdd)

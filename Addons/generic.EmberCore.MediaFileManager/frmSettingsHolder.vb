@@ -59,8 +59,9 @@ Public Class frmSettingsHolder
     End Sub
 
     Private Sub btnPathNew_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles btnPathNew.Click
-        Dim li As New ListViewItem
-        li.Text = txtName.Text
+        Dim li As New ListViewItem With {
+            .Text = txtName.Text
+        }
         li.SubItems.Add(txtPath.Text)
         li.SubItems.Add(CType(Me.cbType.SelectedItem, KeyValuePair(Of String, Enums.ContentType)).Value.ToString)
         lvPaths.Items.Add(li)

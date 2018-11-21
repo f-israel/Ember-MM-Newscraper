@@ -1,9 +1,16 @@
-using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using XBMCRPC.Global;
+using XBMCRPC.List;
+using XBMCRPC.PVR;
+using XBMCRPC.PVR.Channel;
+using XBMCRPC.PVR.ChannelGroup;
+using XBMCRPC.PVR.Fields;
+using XBMCRPC.PVR.Property;
+
 namespace XBMCRPC.Methods
 {
-   public partial class PVR
+   public class PVR
    {
         private readonly Client _client;
           public PVR(Client client)
@@ -14,7 +21,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Retrieves the details of a specific broadcast
                 /// </summary>
-        public async Task<XBMCRPC.PVR.GetBroadcastDetailsResponse> GetBroadcastDetails(int broadcastid=0, XBMCRPC.PVR.Fields.Broadcast properties=null)
+        public async Task<GetBroadcastDetailsResponse> GetBroadcastDetails(int broadcastid=0, Broadcast properties=null)
         {
             var jArgs = new JObject();
              if (broadcastid != null)
@@ -27,13 +34,13 @@ namespace XBMCRPC.Methods
                  var jpropproperties = JToken.FromObject(properties, _client.Serializer);
                  jArgs.Add(new JProperty("properties", jpropproperties));
              }
-            return await _client.GetData<XBMCRPC.PVR.GetBroadcastDetailsResponse>("PVR.GetBroadcastDetails", jArgs);
+            return await _client.GetData<GetBroadcastDetailsResponse>("PVR.GetBroadcastDetails", jArgs);
         }
 
                 /// <summary>
                 /// Retrieves the program of a specific channel
                 /// </summary>
-        public async Task<XBMCRPC.PVR.GetBroadcastsResponse> GetBroadcasts(int channelid=0, XBMCRPC.PVR.Fields.Broadcast properties=null, XBMCRPC.List.Limits limits=null)
+        public async Task<GetBroadcastsResponse> GetBroadcasts(int channelid=0, Broadcast properties=null, Limits limits=null)
         {
             var jArgs = new JObject();
              if (channelid != null)
@@ -51,13 +58,13 @@ namespace XBMCRPC.Methods
                  var jproplimits = JToken.FromObject(limits, _client.Serializer);
                  jArgs.Add(new JProperty("limits", jproplimits));
              }
-            return await _client.GetData<XBMCRPC.PVR.GetBroadcastsResponse>("PVR.GetBroadcasts", jArgs);
+            return await _client.GetData<GetBroadcastsResponse>("PVR.GetBroadcasts", jArgs);
         }
 
                 /// <summary>
                 /// Retrieves the details of a specific channel
                 /// </summary>
-        public async Task<XBMCRPC.PVR.GetChannelDetailsResponse> GetChannelDetails(int channelid=0, XBMCRPC.PVR.Fields.Channel properties=null)
+        public async Task<GetChannelDetailsResponse> GetChannelDetails(int channelid=0, Channel properties=null)
         {
             var jArgs = new JObject();
              if (channelid != null)
@@ -70,13 +77,13 @@ namespace XBMCRPC.Methods
                  var jpropproperties = JToken.FromObject(properties, _client.Serializer);
                  jArgs.Add(new JProperty("properties", jpropproperties));
              }
-            return await _client.GetData<XBMCRPC.PVR.GetChannelDetailsResponse>("PVR.GetChannelDetails", jArgs);
+            return await _client.GetData<GetChannelDetailsResponse>("PVR.GetChannelDetails", jArgs);
         }
 
                 /// <summary>
                 /// Retrieves the details of a specific channel group
                 /// </summary>
-        public async Task<XBMCRPC.PVR.GetChannelGroupDetailsResponse> GetChannelGroupDetails(int channelgroupid, XBMCRPC.PVR.GetChannelGroupDetails_channels channels=null)
+        public async Task<GetChannelGroupDetailsResponse> GetChannelGroupDetails(int channelgroupid, GetChannelGroupDetails_channels channels=null)
         {
             var jArgs = new JObject();
              if (channelgroupid != null)
@@ -89,13 +96,13 @@ namespace XBMCRPC.Methods
                  var jpropchannels = JToken.FromObject(channels, _client.Serializer);
                  jArgs.Add(new JProperty("channels", jpropchannels));
              }
-            return await _client.GetData<XBMCRPC.PVR.GetChannelGroupDetailsResponse>("PVR.GetChannelGroupDetails", jArgs);
+            return await _client.GetData<GetChannelGroupDetailsResponse>("PVR.GetChannelGroupDetails", jArgs);
         }
 
                 /// <summary>
                 /// Retrieves the details of a specific channel group
                 /// </summary>
-        public async Task<XBMCRPC.PVR.GetChannelGroupDetailsResponse> GetChannelGroupDetails(XBMCRPC.PVR.ChannelGroup.Id1 channelgroupid, XBMCRPC.PVR.GetChannelGroupDetails_channels channels=null)
+        public async Task<GetChannelGroupDetailsResponse> GetChannelGroupDetails(Id1 channelgroupid, GetChannelGroupDetails_channels channels=null)
         {
             var jArgs = new JObject();
              if (channelgroupid != null)
@@ -108,13 +115,13 @@ namespace XBMCRPC.Methods
                  var jpropchannels = JToken.FromObject(channels, _client.Serializer);
                  jArgs.Add(new JProperty("channels", jpropchannels));
              }
-            return await _client.GetData<XBMCRPC.PVR.GetChannelGroupDetailsResponse>("PVR.GetChannelGroupDetails", jArgs);
+            return await _client.GetData<GetChannelGroupDetailsResponse>("PVR.GetChannelGroupDetails", jArgs);
         }
 
                 /// <summary>
                 /// Retrieves the details of a specific channel group
                 /// </summary>
-        public async Task<XBMCRPC.PVR.GetChannelGroupDetailsResponse> GetChannelGroupDetails(XBMCRPC.PVR.GetChannelGroupDetails_channels channels=null)
+        public async Task<GetChannelGroupDetailsResponse> GetChannelGroupDetails(GetChannelGroupDetails_channels channels=null)
         {
             var jArgs = new JObject();
              if (channels != null)
@@ -122,13 +129,13 @@ namespace XBMCRPC.Methods
                  var jpropchannels = JToken.FromObject(channels, _client.Serializer);
                  jArgs.Add(new JProperty("channels", jpropchannels));
              }
-            return await _client.GetData<XBMCRPC.PVR.GetChannelGroupDetailsResponse>("PVR.GetChannelGroupDetails", jArgs);
+            return await _client.GetData<GetChannelGroupDetailsResponse>("PVR.GetChannelGroupDetails", jArgs);
         }
 
                 /// <summary>
                 /// Retrieves the channel groups for the specified type
                 /// </summary>
-        public async Task<XBMCRPC.PVR.GetChannelGroupsResponse> GetChannelGroups(XBMCRPC.PVR.Channel.Type channeltype=0, XBMCRPC.List.Limits limits=null)
+        public async Task<GetChannelGroupsResponse> GetChannelGroups(Type channeltype=0, Limits limits=null)
         {
             var jArgs = new JObject();
              if (channeltype != null)
@@ -141,13 +148,13 @@ namespace XBMCRPC.Methods
                  var jproplimits = JToken.FromObject(limits, _client.Serializer);
                  jArgs.Add(new JProperty("limits", jproplimits));
              }
-            return await _client.GetData<XBMCRPC.PVR.GetChannelGroupsResponse>("PVR.GetChannelGroups", jArgs);
+            return await _client.GetData<GetChannelGroupsResponse>("PVR.GetChannelGroups", jArgs);
         }
 
                 /// <summary>
                 /// Retrieves the channel list
                 /// </summary>
-        public async Task<XBMCRPC.PVR.GetChannelsResponse> GetChannels(int channelgroupid, XBMCRPC.PVR.Fields.Channel properties=null, XBMCRPC.List.Limits limits=null)
+        public async Task<GetChannelsResponse> GetChannels(int channelgroupid, Channel properties=null, Limits limits=null)
         {
             var jArgs = new JObject();
              if (channelgroupid != null)
@@ -165,13 +172,13 @@ namespace XBMCRPC.Methods
                  var jproplimits = JToken.FromObject(limits, _client.Serializer);
                  jArgs.Add(new JProperty("limits", jproplimits));
              }
-            return await _client.GetData<XBMCRPC.PVR.GetChannelsResponse>("PVR.GetChannels", jArgs);
+            return await _client.GetData<GetChannelsResponse>("PVR.GetChannels", jArgs);
         }
 
                 /// <summary>
                 /// Retrieves the channel list
                 /// </summary>
-        public async Task<XBMCRPC.PVR.GetChannelsResponse> GetChannels(XBMCRPC.PVR.ChannelGroup.Id1 channelgroupid, XBMCRPC.PVR.Fields.Channel properties=null, XBMCRPC.List.Limits limits=null)
+        public async Task<GetChannelsResponse> GetChannels(Id1 channelgroupid, Channel properties=null, Limits limits=null)
         {
             var jArgs = new JObject();
              if (channelgroupid != null)
@@ -189,13 +196,13 @@ namespace XBMCRPC.Methods
                  var jproplimits = JToken.FromObject(limits, _client.Serializer);
                  jArgs.Add(new JProperty("limits", jproplimits));
              }
-            return await _client.GetData<XBMCRPC.PVR.GetChannelsResponse>("PVR.GetChannels", jArgs);
+            return await _client.GetData<GetChannelsResponse>("PVR.GetChannels", jArgs);
         }
 
                 /// <summary>
                 /// Retrieves the channel list
                 /// </summary>
-        public async Task<XBMCRPC.PVR.GetChannelsResponse> GetChannels(XBMCRPC.PVR.Fields.Channel properties=null, XBMCRPC.List.Limits limits=null)
+        public async Task<GetChannelsResponse> GetChannels(Channel properties=null, Limits limits=null)
         {
             var jArgs = new JObject();
              if (properties != null)
@@ -208,13 +215,13 @@ namespace XBMCRPC.Methods
                  var jproplimits = JToken.FromObject(limits, _client.Serializer);
                  jArgs.Add(new JProperty("limits", jproplimits));
              }
-            return await _client.GetData<XBMCRPC.PVR.GetChannelsResponse>("PVR.GetChannels", jArgs);
+            return await _client.GetData<GetChannelsResponse>("PVR.GetChannels", jArgs);
         }
 
                 /// <summary>
                 /// Retrieves the values of the given properties
                 /// </summary>
-        public async Task<XBMCRPC.PVR.Property.Value> GetProperties(XBMCRPC.PVR.GetProperties_properties properties=null)
+        public async Task<Value> GetProperties(GetProperties_properties properties=null)
         {
             var jArgs = new JObject();
              if (properties != null)
@@ -222,13 +229,13 @@ namespace XBMCRPC.Methods
                  var jpropproperties = JToken.FromObject(properties, _client.Serializer);
                  jArgs.Add(new JProperty("properties", jpropproperties));
              }
-            return await _client.GetData<XBMCRPC.PVR.Property.Value>("PVR.GetProperties", jArgs);
+            return await _client.GetData<Value>("PVR.GetProperties", jArgs);
         }
 
                 /// <summary>
                 /// Retrieves the details of a specific recording
                 /// </summary>
-        public async Task<XBMCRPC.PVR.GetRecordingDetailsResponse> GetRecordingDetails(int recordingid=0, XBMCRPC.PVR.Fields.Recording properties=null)
+        public async Task<GetRecordingDetailsResponse> GetRecordingDetails(int recordingid=0, Recording properties=null)
         {
             var jArgs = new JObject();
              if (recordingid != null)
@@ -241,13 +248,13 @@ namespace XBMCRPC.Methods
                  var jpropproperties = JToken.FromObject(properties, _client.Serializer);
                  jArgs.Add(new JProperty("properties", jpropproperties));
              }
-            return await _client.GetData<XBMCRPC.PVR.GetRecordingDetailsResponse>("PVR.GetRecordingDetails", jArgs);
+            return await _client.GetData<GetRecordingDetailsResponse>("PVR.GetRecordingDetails", jArgs);
         }
 
                 /// <summary>
                 /// Retrieves the recordings
                 /// </summary>
-        public async Task<XBMCRPC.PVR.GetRecordingsResponse> GetRecordings(XBMCRPC.PVR.Fields.Recording properties=null, XBMCRPC.List.Limits limits=null)
+        public async Task<GetRecordingsResponse> GetRecordings(Recording properties=null, Limits limits=null)
         {
             var jArgs = new JObject();
              if (properties != null)
@@ -260,13 +267,13 @@ namespace XBMCRPC.Methods
                  var jproplimits = JToken.FromObject(limits, _client.Serializer);
                  jArgs.Add(new JProperty("limits", jproplimits));
              }
-            return await _client.GetData<XBMCRPC.PVR.GetRecordingsResponse>("PVR.GetRecordings", jArgs);
+            return await _client.GetData<GetRecordingsResponse>("PVR.GetRecordings", jArgs);
         }
 
                 /// <summary>
                 /// Retrieves the details of a specific timer
                 /// </summary>
-        public async Task<XBMCRPC.PVR.GetTimerDetailsResponse> GetTimerDetails(int timerid=0, XBMCRPC.PVR.Fields.Timer properties=null)
+        public async Task<GetTimerDetailsResponse> GetTimerDetails(int timerid=0, Timer properties=null)
         {
             var jArgs = new JObject();
              if (timerid != null)
@@ -279,13 +286,13 @@ namespace XBMCRPC.Methods
                  var jpropproperties = JToken.FromObject(properties, _client.Serializer);
                  jArgs.Add(new JProperty("properties", jpropproperties));
              }
-            return await _client.GetData<XBMCRPC.PVR.GetTimerDetailsResponse>("PVR.GetTimerDetails", jArgs);
+            return await _client.GetData<GetTimerDetailsResponse>("PVR.GetTimerDetails", jArgs);
         }
 
                 /// <summary>
                 /// Retrieves the timers
                 /// </summary>
-        public async Task<XBMCRPC.PVR.GetTimersResponse> GetTimers(XBMCRPC.PVR.Fields.Timer properties=null, XBMCRPC.List.Limits limits=null)
+        public async Task<GetTimersResponse> GetTimers(Timer properties=null, Limits limits=null)
         {
             var jArgs = new JObject();
              if (properties != null)
@@ -298,7 +305,7 @@ namespace XBMCRPC.Methods
                  var jproplimits = JToken.FromObject(limits, _client.Serializer);
                  jArgs.Add(new JProperty("limits", jproplimits));
              }
-            return await _client.GetData<XBMCRPC.PVR.GetTimersResponse>("PVR.GetTimers", jArgs);
+            return await _client.GetData<GetTimersResponse>("PVR.GetTimers", jArgs);
         }
 
                 /// <summary>
@@ -323,7 +330,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Toggle recording of a channel
                 /// </summary>
-        public async Task<string> Record(XBMCRPC.Global.Toggle2 record, object channel=null)
+        public async Task<string> Record(Toggle2 record, object channel=null)
         {
             var jArgs = new JObject();
              if (record != null)

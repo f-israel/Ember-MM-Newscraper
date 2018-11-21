@@ -344,10 +344,11 @@ Public Class dlgHost
         If dgvHostSources.Rows.Count > 0 Then
             For i = 0 To dgvHostSources.Rows.Count - 1
                 If Not String.IsNullOrEmpty(CStr(dgvHostSources.Rows(i).Cells(0).Value)) AndAlso Not String.IsNullOrEmpty(CStr(dgvHostSources.Rows(i).Cells(1).Value)) Then
-                    Dim nSource As New KodiInterface.Source
-                    nSource.ContentType = CType(dgvHostSources.Rows(i).Cells(2).Value, Enums.ContentType)
-                    nSource.LocalPath = CStr(dgvHostSources.Rows(i).Cells(0).Value)
-                    nSource.RemotePath = CStr(dgvHostSources.Rows(i).Cells(1).Value)
+                    Dim nSource As New KodiInterface.Source With {
+                        .ContentType = CType(dgvHostSources.Rows(i).Cells(2).Value, Enums.ContentType),
+                        .LocalPath = CStr(dgvHostSources.Rows(i).Cells(0).Value),
+                        .RemotePath = CStr(dgvHostSources.Rows(i).Cells(1).Value)
+                    }
                     _currentHost.Sources.Add(nSource)
                 End If
             Next

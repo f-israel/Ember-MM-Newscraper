@@ -1,9 +1,11 @@
-using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using XBMCRPC.Favourite;
+using XBMCRPC.Favourites;
+
 namespace XBMCRPC.Methods
 {
-   public partial class Favourites
+   public class Favourites
    {
         private readonly Client _client;
           public Favourites(Client client)
@@ -14,7 +16,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Add a favourite with the given details
                 /// </summary>
-        public async Task<string> AddFavourite(string title=null, XBMCRPC.Favourite.Type type=0, string path=null, string window=null, string windowparameter=null, string thumbnail=null)
+        public async Task<string> AddFavourite(string title=null, Type type=0, string path=null, string window=null, string windowparameter=null, string thumbnail=null)
         {
             var jArgs = new JObject();
              if (title != null)
@@ -53,7 +55,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Retrieve all favourites
                 /// </summary>
-        public async Task<XBMCRPC.Favourites.GetFavouritesResponse> GetFavourites(XBMCRPC.Favourite.Type type=0, XBMCRPC.Favourite.Fields.Favourite properties=null)
+        public async Task<GetFavouritesResponse> GetFavourites(Type type=0, Favourite.Fields.Favourite properties=null)
         {
             var jArgs = new JObject();
              if (type != null)
@@ -66,7 +68,7 @@ namespace XBMCRPC.Methods
                  var jpropproperties = JToken.FromObject(properties, _client.Serializer);
                  jArgs.Add(new JProperty("properties", jpropproperties));
              }
-            return await _client.GetData<XBMCRPC.Favourites.GetFavouritesResponse>("Favourites.GetFavourites", jArgs);
+            return await _client.GetData<GetFavouritesResponse>("Favourites.GetFavourites", jArgs);
         }
    }
 }

@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
+
 namespace XBMCRPC.PVR.Fields
 {
    public enum BroadcastItem
@@ -25,7 +24,7 @@ namespace XBMCRPC.PVR.Fields
        parentalrating,
        wasactive,
        thumbnail,
-       rating,
+       rating
    }
    public class Broadcast : List<BroadcastItem>
    {

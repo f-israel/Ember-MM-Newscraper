@@ -357,9 +357,10 @@ Public Class dlgExportMovies
 
         'Start worker
         ShowStatus(True)
-        bwLoadInfo = New System.ComponentModel.BackgroundWorker
-        bwLoadInfo.WorkerSupportsCancellation = True
-        bwLoadInfo.WorkerReportsProgress = True
+        bwLoadInfo = New System.ComponentModel.BackgroundWorker With {
+            .WorkerSupportsCancellation = True,
+            .WorkerReportsProgress = True
+        }
         bwLoadInfo.RunWorkerAsync()
     End Sub
 

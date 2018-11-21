@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
+using XBMCRPC.Video.Details;
+
 namespace XBMCRPC.VideoLibrary
 {
    public class GetMusicVideoDetailsResponse
    {
-       public XBMCRPC.Video.Details.MusicVideo musicvideodetails { get; set; }
+       public MusicVideo musicvideodetails { get; set; }
     }
 }

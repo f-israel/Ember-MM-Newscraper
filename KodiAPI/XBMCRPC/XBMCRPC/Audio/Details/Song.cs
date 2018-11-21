@@ -1,15 +1,12 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
+
 namespace XBMCRPC.Audio.Details
 {
-   public class Song : XBMCRPC.Audio.Details.Media
+   public class Song : Media
    {
        public string album { get; set; }
-       public global::System.Collections.Generic.List<string> albumartist { get; set; }
-       public global::System.Collections.Generic.List<int> albumartistid { get; set; }
+       public List<string> albumartist { get; set; }
+       public List<int> albumartistid { get; set; }
        public int albumid { get; set; }
        public string comment { get; set; }
        public int disc { get; set; }

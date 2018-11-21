@@ -1,9 +1,14 @@
-using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using XBMCRPC.List;
+using XBMCRPC.List.Fields;
+using XBMCRPC.Playlist;
+using XBMCRPC.Playlist.Property;
+
 namespace XBMCRPC.Methods
 {
-   public partial class Playlist
+   public class Playlist
    {
         private readonly Client _client;
           public Playlist(Client client)
@@ -14,7 +19,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Add item(s) to playlist
                 /// </summary>
-        public async Task<string> Add(XBMCRPC.Playlist.ItemFile item, int playlistid=0)
+        public async Task<string> Add(ItemFile item, int playlistid=0)
         {
             var jArgs = new JObject();
              if (playlistid != null)
@@ -33,7 +38,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Add item(s) to playlist
                 /// </summary>
-        public async Task<string> Add(XBMCRPC.Playlist.Item1 item, int playlistid=0)
+        public async Task<string> Add(Item1 item, int playlistid=0)
         {
             var jArgs = new JObject();
              if (playlistid != null)
@@ -52,7 +57,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Add item(s) to playlist
                 /// </summary>
-        public async Task<string> Add(XBMCRPC.Playlist.ItemMovieid item, int playlistid=0)
+        public async Task<string> Add(ItemMovieid item, int playlistid=0)
         {
             var jArgs = new JObject();
              if (playlistid != null)
@@ -71,7 +76,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Add item(s) to playlist
                 /// </summary>
-        public async Task<string> Add(XBMCRPC.Playlist.ItemEpisodeid item, int playlistid=0)
+        public async Task<string> Add(ItemEpisodeid item, int playlistid=0)
         {
             var jArgs = new JObject();
              if (playlistid != null)
@@ -90,7 +95,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Add item(s) to playlist
                 /// </summary>
-        public async Task<string> Add(XBMCRPC.Playlist.ItemMusicvideoid item, int playlistid=0)
+        public async Task<string> Add(ItemMusicvideoid item, int playlistid=0)
         {
             var jArgs = new JObject();
              if (playlistid != null)
@@ -109,7 +114,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Add item(s) to playlist
                 /// </summary>
-        public async Task<string> Add(XBMCRPC.Playlist.ItemArtistid item, int playlistid=0)
+        public async Task<string> Add(ItemArtistid item, int playlistid=0)
         {
             var jArgs = new JObject();
              if (playlistid != null)
@@ -128,7 +133,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Add item(s) to playlist
                 /// </summary>
-        public async Task<string> Add(XBMCRPC.Playlist.ItemAlbumid item, int playlistid=0)
+        public async Task<string> Add(ItemAlbumid item, int playlistid=0)
         {
             var jArgs = new JObject();
              if (playlistid != null)
@@ -147,7 +152,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Add item(s) to playlist
                 /// </summary>
-        public async Task<string> Add(XBMCRPC.Playlist.ItemSongid item, int playlistid=0)
+        public async Task<string> Add(ItemSongid item, int playlistid=0)
         {
             var jArgs = new JObject();
              if (playlistid != null)
@@ -166,7 +171,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Add item(s) to playlist
                 /// </summary>
-        public async Task<string> Add(XBMCRPC.Playlist.ItemGenreid item, int playlistid=0)
+        public async Task<string> Add(ItemGenreid item, int playlistid=0)
         {
             var jArgs = new JObject();
              if (playlistid != null)
@@ -185,7 +190,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Add item(s) to playlist
                 /// </summary>
-        public async Task<string> Add(global::System.Collections.Generic.List<object> item, int playlistid=0)
+        public async Task<string> Add(List<object> item, int playlistid=0)
         {
             var jArgs = new JObject();
              if (playlistid != null)
@@ -232,7 +237,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Get all items from playlist
                 /// </summary>
-        public async Task<XBMCRPC.Playlist.GetItemsResponse> GetItems(int playlistid=0, XBMCRPC.List.Fields.All properties=null, XBMCRPC.List.Limits limits=null, XBMCRPC.List.Sort sort=null)
+        public async Task<GetItemsResponse> GetItems(int playlistid=0, All properties=null, Limits limits=null, Sort sort=null)
         {
             var jArgs = new JObject();
              if (playlistid != null)
@@ -255,22 +260,22 @@ namespace XBMCRPC.Methods
                  var jpropsort = JToken.FromObject(sort, _client.Serializer);
                  jArgs.Add(new JProperty("sort", jpropsort));
              }
-            return await _client.GetData<XBMCRPC.Playlist.GetItemsResponse>("Playlist.GetItems", jArgs);
+            return await _client.GetData<GetItemsResponse>("Playlist.GetItems", jArgs);
         }
 
                 /// <summary>
                 /// Returns all existing playlists
                 /// </summary>
-        public async Task<global::System.Collections.Generic.List<XBMCRPC.Playlist.GetPlaylistsResponseItem>> GetPlaylists()
+        public async Task<List<GetPlaylistsResponseItem>> GetPlaylists()
         {
             var jArgs = new JObject();
-            return await _client.GetData<global::System.Collections.Generic.List<XBMCRPC.Playlist.GetPlaylistsResponseItem>>("Playlist.GetPlaylists", jArgs);
+            return await _client.GetData<List<GetPlaylistsResponseItem>>("Playlist.GetPlaylists", jArgs);
         }
 
                 /// <summary>
                 /// Retrieves the values of the given properties
                 /// </summary>
-        public async Task<XBMCRPC.Playlist.Property.Value> GetProperties(int playlistid=0, XBMCRPC.Playlist.GetProperties_properties properties=null)
+        public async Task<Value> GetProperties(int playlistid=0, GetProperties_properties properties=null)
         {
             var jArgs = new JObject();
              if (playlistid != null)
@@ -283,13 +288,13 @@ namespace XBMCRPC.Methods
                  var jpropproperties = JToken.FromObject(properties, _client.Serializer);
                  jArgs.Add(new JProperty("properties", jpropproperties));
              }
-            return await _client.GetData<XBMCRPC.Playlist.Property.Value>("Playlist.GetProperties", jArgs);
+            return await _client.GetData<Value>("Playlist.GetProperties", jArgs);
         }
 
                 /// <summary>
                 /// Insert item(s) into playlist. Does not work for picture playlists (aka slideshows).
                 /// </summary>
-        public async Task<string> Insert(XBMCRPC.Playlist.ItemFile item, int playlistid=0, int position=0)
+        public async Task<string> Insert(ItemFile item, int playlistid=0, int position=0)
         {
             var jArgs = new JObject();
              if (playlistid != null)
@@ -313,7 +318,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Insert item(s) into playlist. Does not work for picture playlists (aka slideshows).
                 /// </summary>
-        public async Task<string> Insert(XBMCRPC.Playlist.Item1 item, int playlistid=0, int position=0)
+        public async Task<string> Insert(Item1 item, int playlistid=0, int position=0)
         {
             var jArgs = new JObject();
              if (playlistid != null)
@@ -337,7 +342,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Insert item(s) into playlist. Does not work for picture playlists (aka slideshows).
                 /// </summary>
-        public async Task<string> Insert(XBMCRPC.Playlist.ItemMovieid item, int playlistid=0, int position=0)
+        public async Task<string> Insert(ItemMovieid item, int playlistid=0, int position=0)
         {
             var jArgs = new JObject();
              if (playlistid != null)
@@ -361,7 +366,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Insert item(s) into playlist. Does not work for picture playlists (aka slideshows).
                 /// </summary>
-        public async Task<string> Insert(XBMCRPC.Playlist.ItemEpisodeid item, int playlistid=0, int position=0)
+        public async Task<string> Insert(ItemEpisodeid item, int playlistid=0, int position=0)
         {
             var jArgs = new JObject();
              if (playlistid != null)
@@ -385,7 +390,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Insert item(s) into playlist. Does not work for picture playlists (aka slideshows).
                 /// </summary>
-        public async Task<string> Insert(XBMCRPC.Playlist.ItemMusicvideoid item, int playlistid=0, int position=0)
+        public async Task<string> Insert(ItemMusicvideoid item, int playlistid=0, int position=0)
         {
             var jArgs = new JObject();
              if (playlistid != null)
@@ -409,7 +414,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Insert item(s) into playlist. Does not work for picture playlists (aka slideshows).
                 /// </summary>
-        public async Task<string> Insert(XBMCRPC.Playlist.ItemArtistid item, int playlistid=0, int position=0)
+        public async Task<string> Insert(ItemArtistid item, int playlistid=0, int position=0)
         {
             var jArgs = new JObject();
              if (playlistid != null)
@@ -433,7 +438,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Insert item(s) into playlist. Does not work for picture playlists (aka slideshows).
                 /// </summary>
-        public async Task<string> Insert(XBMCRPC.Playlist.ItemAlbumid item, int playlistid=0, int position=0)
+        public async Task<string> Insert(ItemAlbumid item, int playlistid=0, int position=0)
         {
             var jArgs = new JObject();
              if (playlistid != null)
@@ -457,7 +462,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Insert item(s) into playlist. Does not work for picture playlists (aka slideshows).
                 /// </summary>
-        public async Task<string> Insert(XBMCRPC.Playlist.ItemSongid item, int playlistid=0, int position=0)
+        public async Task<string> Insert(ItemSongid item, int playlistid=0, int position=0)
         {
             var jArgs = new JObject();
              if (playlistid != null)
@@ -481,7 +486,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Insert item(s) into playlist. Does not work for picture playlists (aka slideshows).
                 /// </summary>
-        public async Task<string> Insert(XBMCRPC.Playlist.ItemGenreid item, int playlistid=0, int position=0)
+        public async Task<string> Insert(ItemGenreid item, int playlistid=0, int position=0)
         {
             var jArgs = new JObject();
              if (playlistid != null)
@@ -505,7 +510,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Insert item(s) into playlist. Does not work for picture playlists (aka slideshows).
                 /// </summary>
-        public async Task<string> Insert(global::System.Collections.Generic.List<object> item, int playlistid=0, int position=0)
+        public async Task<string> Insert(List<object> item, int playlistid=0, int position=0)
         {
             var jArgs = new JObject();
              if (playlistid != null)
@@ -588,9 +593,9 @@ namespace XBMCRPC.Methods
             return await _client.GetData<string>("Playlist.Swap", jArgs);
         }
 
-        public delegate void OnAddDelegate(string sender=null, XBMCRPC.Playlist.OnAdd_data data=null);
+        public delegate void OnAddDelegate(string sender=null, OnAdd_data data=null);
         public event OnAddDelegate OnAdd;
-        internal void RaiseOnAdd(string sender=null, XBMCRPC.Playlist.OnAdd_data data=null)
+        internal void RaiseOnAdd(string sender=null, OnAdd_data data=null)
         {
             if (OnAdd != null)
             {
@@ -598,9 +603,9 @@ namespace XBMCRPC.Methods
             }
         }
 
-        public delegate void OnClearDelegate(string sender=null, XBMCRPC.Playlist.OnClear_data data=null);
+        public delegate void OnClearDelegate(string sender=null, OnClear_data data=null);
         public event OnClearDelegate OnClear;
-        internal void RaiseOnClear(string sender=null, XBMCRPC.Playlist.OnClear_data data=null)
+        internal void RaiseOnClear(string sender=null, OnClear_data data=null)
         {
             if (OnClear != null)
             {
@@ -608,9 +613,9 @@ namespace XBMCRPC.Methods
             }
         }
 
-        public delegate void OnRemoveDelegate(string sender=null, XBMCRPC.Playlist.OnRemove_data data=null);
+        public delegate void OnRemoveDelegate(string sender=null, OnRemove_data data=null);
         public event OnRemoveDelegate OnRemove;
-        internal void RaiseOnRemove(string sender=null, XBMCRPC.Playlist.OnRemove_data data=null)
+        internal void RaiseOnRemove(string sender=null, OnRemove_data data=null)
         {
             if (OnRemove != null)
             {

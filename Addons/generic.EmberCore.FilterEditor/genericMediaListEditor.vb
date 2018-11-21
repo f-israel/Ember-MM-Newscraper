@@ -149,9 +149,10 @@ Public Class genericMediaListEditor
                         cTabType = Enums.ContentType.TV
                     End If
                     If Not cTabType = Enums.ContentType.None AndAlso Not String.IsNullOrEmpty(cTab.Name) Then
-                        Dim NewTabPage As New TabPage
-                        NewTabPage.Text = cTab.Name
-                        NewTabPage.Tag = New Structures.MainTabType With {.ContentName = cTab.Name, .ContentType = cTabType, .DefaultList = cTab.Value}
+                        Dim NewTabPage As New TabPage With {
+                            .Text = cTab.Name,
+                            .Tag = New Structures.MainTabType With {.ContentName = cTab.Name, .ContentType = cTabType, .DefaultList = cTab.Value}
+                        }
                         NewCustomTabs.Add(NewTabPage)
                     End If
                 End If

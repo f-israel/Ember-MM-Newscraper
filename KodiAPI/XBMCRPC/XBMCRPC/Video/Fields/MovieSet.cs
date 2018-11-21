@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
+
 namespace XBMCRPC.Video.Fields
 {
    public enum MovieSetItem
@@ -11,7 +10,7 @@ namespace XBMCRPC.Video.Fields
        playcount,
        fanart,
        thumbnail,
-       art,
+       art
    }
    public class MovieSet : List<MovieSetItem>
    {

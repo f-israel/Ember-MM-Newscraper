@@ -1,13 +1,12 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
+using XBMCRPC.Library.Details;
+using XBMCRPC.List;
+
 namespace XBMCRPC.VideoLibrary
 {
    public class GetGenresResponse
    {
-       public global::System.Collections.Generic.List<XBMCRPC.Library.Details.Genre> genres { get; set; }
-       public XBMCRPC.List.LimitsReturned limits { get; set; }
+       public List<Genre> genres { get; set; }
+       public LimitsReturned limits { get; set; }
     }
 }

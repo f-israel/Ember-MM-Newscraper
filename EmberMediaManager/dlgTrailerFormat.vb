@@ -64,9 +64,10 @@ Public Class dlgTrailerFormat
         prbStatus.Style = ProgressBarStyle.Marquee
         Application.DoEvents()
 
-        bwParseTrailer = New System.ComponentModel.BackgroundWorker
-        bwParseTrailer.WorkerReportsProgress = False
-        bwParseTrailer.WorkerSupportsCancellation = True
+        bwParseTrailer = New System.ComponentModel.BackgroundWorker With {
+            .WorkerReportsProgress = False,
+            .WorkerSupportsCancellation = True
+        }
         bwParseTrailer.RunWorkerAsync(New Arguments With {.bType = False, .Parameter = _url})
     End Sub
 

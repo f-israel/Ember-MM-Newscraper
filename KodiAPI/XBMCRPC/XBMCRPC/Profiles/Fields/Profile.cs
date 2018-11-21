@@ -1,14 +1,13 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
+
 namespace XBMCRPC.Profiles.Fields
 {
    public enum ProfileItem
    {
        thumbnail,
-       lockmode,
+       lockmode
    }
    public class Profile : List<ProfileItem>
    {

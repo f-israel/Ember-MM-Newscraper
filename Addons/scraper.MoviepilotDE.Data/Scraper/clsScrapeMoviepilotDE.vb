@@ -74,8 +74,9 @@ Namespace MoviepilotDE
             Try
                 Dim bIsScraperLanguage As Boolean = strLanguage.ToLower.StartsWith("de")
 
-                Dim nMovie As New MediaContainers.Movie
-                nMovie.Scrapersource = "MOVIEPILOT"
+                Dim nMovie As New MediaContainers.Movie With {
+                    .Scrapersource = "MOVIEPILOT"
+                }
 
 
                 Dim sURL As String = SearchMovie(strOriginalTitle, strYear)

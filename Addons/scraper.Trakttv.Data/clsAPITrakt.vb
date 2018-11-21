@@ -99,8 +99,9 @@ Public Class clsAPITrakt
             dCreatedAt = Functions.ConvertFromUnixTimestamp(iCreatedAt)
         End If
 
-        _client = New TraktClient(clientId, clientSecret)
-        _client.Authorization = Authentication.TraktAuthorization.CreateWith(dCreatedAt, iExpiresIn, tAddonSettings.APIAccessToken, tAddonSettings.APIRefreshToken)
+        _client = New TraktClient(clientId, clientSecret) With {
+            .Authorization = Authentication.TraktAuthorization.CreateWith(dCreatedAt, iExpiresIn, tAddonSettings.APIAccessToken, tAddonSettings.APIRefreshToken)
+        }
 
         If Not _client.IsValidForUseWithAuthorization Then
             If _client.Authorization.IsRefreshPossible Then

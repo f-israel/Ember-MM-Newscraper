@@ -987,12 +987,11 @@ Public Class clsAPITMDB
     End Function
 
     Public Function GetInfo_TVEpisode(ByRef EpisodeInfo As TMDbLib.Objects.TvShows.TvEpisode, ByRef FilteredOptions As Structures.ScrapeOptions) As MediaContainers.EpisodeDetails
-        Dim nTVEpisode As New MediaContainers.EpisodeDetails
-
-        nTVEpisode.Scrapersource = "TMDB"
-
         'IDs
-        nTVEpisode.TMDB = CStr(EpisodeInfo.Id)
+        Dim nTVEpisode As New MediaContainers.EpisodeDetails With {
+            .Scrapersource = "TMDB",
+            .TMDB = CStr(EpisodeInfo.Id)
+        }
         If EpisodeInfo.ExternalIds IsNot Nothing AndAlso EpisodeInfo.ExternalIds.TvdbId IsNot Nothing Then nTVEpisode.TVDB = CStr(EpisodeInfo.ExternalIds.TvdbId)
         If EpisodeInfo.ExternalIds IsNot Nothing AndAlso EpisodeInfo.ExternalIds.ImdbId IsNot Nothing Then nTVEpisode.IMDB = EpisodeInfo.ExternalIds.ImdbId
 
@@ -1170,12 +1169,11 @@ Public Class clsAPITMDB
     End Function
 
     Public Function GetInfo_TVSeason(ByRef SeasonInfo As TMDbLib.Objects.TvShows.TvSeason, ByRef FilteredOptions As Structures.ScrapeOptions) As MediaContainers.SeasonDetails
-        Dim nTVSeason As New MediaContainers.SeasonDetails
-
-        nTVSeason.Scrapersource = "TMDB"
-
         'IDs
-        nTVSeason.TMDB = CStr(SeasonInfo.Id)
+        Dim nTVSeason As New MediaContainers.SeasonDetails With {
+            .Scrapersource = "TMDB",
+            .TMDB = CStr(SeasonInfo.Id)
+        }
         If SeasonInfo.ExternalIds IsNot Nothing AndAlso SeasonInfo.ExternalIds.TvdbId IsNot Nothing Then nTVSeason.TVDB = CStr(SeasonInfo.ExternalIds.TvdbId)
 
         'Season #
@@ -1614,8 +1612,10 @@ Public Class clsAPITMDB
                         If aShow.FirstAirDate IsNot Nothing AndAlso Not String.IsNullOrEmpty(CStr(aShow.FirstAirDate)) Then
                             t2 = CStr(aShow.FirstAirDate.Value.Year)
                         End If
-                        Dim lNewShow As MediaContainers.TVShow = New MediaContainers.TVShow(String.Empty, t1, t2)
-                        lNewShow.TMDB = CStr(aShow.Id)
+
+                        Dim lNewShow As MediaContainers.TVShow = New MediaContainers.TVShow(String.Empty, t1, t2) With {
+                            .TMDB = CStr(aShow.Id)
+                        }
                         R.Matches.Add(lNewShow)
                     Next
                 End If

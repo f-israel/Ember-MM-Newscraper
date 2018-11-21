@@ -762,9 +762,10 @@ Namespace EmberTests
         <TestMethod()>
         Public Sub ImageUtils_SetGlassOverlay_NothingImage()
             'Arrange
-            Dim source As PictureBox = New PictureBox()
-            source.Image = Nothing
-            'Act
+            Dim source As PictureBox = New PictureBox With {
+                .Image = Nothing
+            }
+                'Act
             ImageUtils.SetGlassOverlay(source)
 
             'Assert

@@ -817,11 +817,12 @@ Public Class frmMain
                 End Using
             End Using
 
-            Dim saveFileDialog1 As New SaveFileDialog()
-            saveFileDialog1.FileName = "export_movies" + ".xml"
-            saveFileDialog1.Filter = "xml files (*.xml)|*.xml"
-            saveFileDialog1.FilterIndex = 2
-            saveFileDialog1.RestoreDirectory = True
+            Dim saveFileDialog1 As New SaveFileDialog With {
+                .FileName = "export_movies" + ".xml",
+                .Filter = "xml files (*.xml)|*.xml",
+                .FilterIndex = 2,
+                .RestoreDirectory = True
+            }
 
             If saveFileDialog1.ShowDialog() = DialogResult.OK Then
                 table.WriteXml(saveFileDialog1.FileName)
@@ -842,11 +843,12 @@ Public Class frmMain
                 End Using
             End Using
 
-            Dim saveFileDialog1 As New SaveFileDialog()
-            saveFileDialog1.FileName = "export_tvshows" + ".xml"
-            saveFileDialog1.Filter = "xml files (*.xml)|*.xml"
-            saveFileDialog1.FilterIndex = 2
-            saveFileDialog1.RestoreDirectory = True
+            Dim saveFileDialog1 As New SaveFileDialog With {
+                .FileName = "export_tvshows" + ".xml",
+                .Filter = "xml files (*.xml)|*.xml",
+                .FilterIndex = 2,
+                .RestoreDirectory = True
+            }
 
             If saveFileDialog1.ShowDialog() = DialogResult.OK Then
                 table.WriteXml(saveFileDialog1.FileName)
@@ -5630,10 +5632,12 @@ Public Class frmMain
             Try
                 ReDim Preserve pnlGenre(i)
                 ReDim Preserve pbGenre(i)
-                pnlGenre(i) = New Panel()
-                pnlGenre(i).Visible = False
-                pbGenre(i) = New PictureBox()
-                pbGenre(i).Name = genres(i).Trim.ToUpper
+                pnlGenre(i) = New Panel With {
+                    .Visible = False
+                }
+                pbGenre(i) = New PictureBox With {
+                    .Name = genres(i).Trim.ToUpper
+                }
                 pnlGenre(i).Size = New Size(68, 100)
                 pbGenre(i).Size = New Size(62, 94)
                 pnlGenre(i).BackColor = GenrePanelColor
@@ -5698,8 +5702,9 @@ Public Class frmMain
             dgvMovies.Rows(objCell.RowIndex).Selected = True
             currRow_Movie = objCell.RowIndex
 
-            Dim scrapeOptions As New Structures.ScrapeOptions
-            scrapeOptions.bMainCollectionID = True
+            Dim scrapeOptions As New Structures.ScrapeOptions With {
+                .bMainCollectionID = True
+            }
             Dim ScrapeModifiers As New Structures.ScrapeModifiers
             Functions.SetScrapeModifiers(ScrapeModifiers, Enums.ModifierType.MainNFO, True)
             CreateScrapeList_Movie(Enums.ScrapeType.SingleField, scrapeOptions, ScrapeModifiers)
@@ -10215,11 +10220,12 @@ Public Class frmMain
         Visible = False
 
         If Master.isWindows Then 'Dam mono on MacOSX don't have trayicon implemented yet
-            TrayIcon = New NotifyIcon(components)
-            TrayIcon.Icon = Icon
-            TrayIcon.ContextMenuStrip = cmnuTray
-            TrayIcon.Text = "Ember Media Manager"
-            TrayIcon.Visible = True
+            TrayIcon = New NotifyIcon(components) With {
+                .Icon = Icon,
+                .ContextMenuStrip = cmnuTray,
+                .Text = "Ember Media Manager",
+                .Visible = True
+            }
         End If
 
         bwCheckVersion.RunWorkerAsync()
@@ -11179,8 +11185,9 @@ Public Class frmMain
             Application.DoEvents()
         End While
 
-        bwLoadImages_Movie = New ComponentModel.BackgroundWorker
-        bwLoadImages_Movie.WorkerSupportsCancellation = True
+        bwLoadImages_Movie = New ComponentModel.BackgroundWorker With {
+            .WorkerSupportsCancellation = True
+        }
         bwLoadImages_Movie.RunWorkerAsync()
     End Sub
 
@@ -11199,8 +11206,9 @@ Public Class frmMain
             Application.DoEvents()
         End While
 
-        bwLoadImages_MovieSet = New ComponentModel.BackgroundWorker
-        bwLoadImages_MovieSet.WorkerSupportsCancellation = True
+        bwLoadImages_MovieSet = New ComponentModel.BackgroundWorker With {
+            .WorkerSupportsCancellation = True
+        }
         bwLoadImages_MovieSet.RunWorkerAsync()
     End Sub
 
@@ -11221,8 +11229,9 @@ Public Class frmMain
             Application.DoEvents()
         End While
 
-        bwLoadImages_TVEpisode = New ComponentModel.BackgroundWorker
-        bwLoadImages_TVEpisode.WorkerSupportsCancellation = True
+        bwLoadImages_TVEpisode = New ComponentModel.BackgroundWorker With {
+            .WorkerSupportsCancellation = True
+        }
         bwLoadImages_TVEpisode.RunWorkerAsync()
     End Sub
 
@@ -11243,8 +11252,9 @@ Public Class frmMain
             Application.DoEvents()
         End While
 
-        bwLoadImages_TVSeason = New ComponentModel.BackgroundWorker
-        bwLoadImages_TVSeason.WorkerSupportsCancellation = True
+        bwLoadImages_TVSeason = New ComponentModel.BackgroundWorker With {
+            .WorkerSupportsCancellation = True
+        }
         bwLoadImages_TVSeason.RunWorkerAsync()
     End Sub
 
@@ -11265,9 +11275,9 @@ Public Class frmMain
             Application.DoEvents()
         End While
 
-
-        bwLoadImages_TVShow = New ComponentModel.BackgroundWorker
-        bwLoadImages_TVShow.WorkerSupportsCancellation = True
+        bwLoadImages_TVShow = New ComponentModel.BackgroundWorker With {
+            .WorkerSupportsCancellation = True
+        }
         bwLoadImages_TVShow.RunWorkerAsync()
 
         FillList_TVSeasons(ID)
@@ -11300,8 +11310,9 @@ Public Class frmMain
                     End While
                 End If
 
-                bwDownloadPic = New ComponentModel.BackgroundWorker
-                bwDownloadPic.WorkerSupportsCancellation = True
+                bwDownloadPic = New ComponentModel.BackgroundWorker With {
+                    .WorkerSupportsCancellation = True
+                }
                 bwDownloadPic.RunWorkerAsync(New Arguments With {.pURL = alActors.Item(lstActors.SelectedIndex).ToString})
             End If
 
@@ -12195,23 +12206,24 @@ Public Class frmMain
         For Each drvRow As DataRow In DataRowList
             If Convert.ToBoolean(drvRow.Item("Lock")) AndAlso Not sType = Enums.ScrapeType.SingleScrape Then Continue For
 
-            Dim sModifier As New Structures.ScrapeModifiers
-            sModifier.DoSearch = ScrapeModifiers.DoSearch
-            sModifier.MainActorthumbs = ScrapeModifiers.MainActorthumbs AndAlso ActorThumbsAllowed
-            sModifier.MainBanner = ScrapeModifiers.MainBanner AndAlso BannerAllowed
-            sModifier.MainClearArt = ScrapeModifiers.MainClearArt AndAlso ClearArtAllowed
-            sModifier.MainClearLogo = ScrapeModifiers.MainClearLogo AndAlso ClearLogoAllowed
-            sModifier.MainDiscArt = ScrapeModifiers.MainDiscArt AndAlso DiscArtAllowed
-            sModifier.MainExtrafanarts = ScrapeModifiers.MainExtrafanarts AndAlso ExtrafanartsAllowed
-            sModifier.MainExtrathumbs = ScrapeModifiers.MainExtrathumbs AndAlso ExtrathumbsAllowed
-            sModifier.MainFanart = ScrapeModifiers.MainFanart AndAlso FanartAllowed
-            sModifier.MainLandscape = ScrapeModifiers.MainLandscape AndAlso LandscapeAllowed
-            sModifier.MainMeta = ScrapeModifiers.MainMeta
-            sModifier.MainNFO = ScrapeModifiers.MainNFO
-            sModifier.MainPoster = ScrapeModifiers.MainPoster AndAlso PosterAllowed
             'sModifier.MainSubtitles = ScrapeModifier.MainSubtitles AndAlso SubtitlesAllowed
-            sModifier.MainTheme = ScrapeModifiers.MainTheme AndAlso ThemeAllowed
-            sModifier.MainTrailer = ScrapeModifiers.MainTrailer AndAlso TrailerAllowed
+            Dim sModifier As New Structures.ScrapeModifiers With {
+                .DoSearch = ScrapeModifiers.DoSearch,
+                .MainActorthumbs = ScrapeModifiers.MainActorthumbs AndAlso ActorThumbsAllowed,
+                .MainBanner = ScrapeModifiers.MainBanner AndAlso BannerAllowed,
+                .MainClearArt = ScrapeModifiers.MainClearArt AndAlso ClearArtAllowed,
+                .MainClearLogo = ScrapeModifiers.MainClearLogo AndAlso ClearLogoAllowed,
+                .MainDiscArt = ScrapeModifiers.MainDiscArt AndAlso DiscArtAllowed,
+                .MainExtrafanarts = ScrapeModifiers.MainExtrafanarts AndAlso ExtrafanartsAllowed,
+                .MainExtrathumbs = ScrapeModifiers.MainExtrathumbs AndAlso ExtrathumbsAllowed,
+                .MainFanart = ScrapeModifiers.MainFanart AndAlso FanartAllowed,
+                .MainLandscape = ScrapeModifiers.MainLandscape AndAlso LandscapeAllowed,
+                .MainMeta = ScrapeModifiers.MainMeta,
+                .MainNFO = ScrapeModifiers.MainNFO,
+                .MainPoster = ScrapeModifiers.MainPoster AndAlso PosterAllowed,
+                .MainTheme = ScrapeModifiers.MainTheme AndAlso ThemeAllowed,
+                .MainTrailer = ScrapeModifiers.MainTrailer AndAlso TrailerAllowed
+            }
 
             Select Case sType
                 Case Enums.ScrapeType.NewAsk, Enums.ScrapeType.NewAuto, Enums.ScrapeType.NewSkip
@@ -12369,16 +12381,17 @@ Public Class frmMain
         For Each drvRow As DataRow In DataRowList
             If Convert.ToBoolean(drvRow.Item("Lock")) AndAlso Not sType = Enums.ScrapeType.SingleScrape Then Continue For
 
-            Dim sModifier As New Structures.ScrapeModifiers
-            sModifier.DoSearch = ScrapeModifiers.DoSearch
-            sModifier.MainBanner = ScrapeModifiers.MainBanner AndAlso BannerAllowed
-            sModifier.MainClearArt = ScrapeModifiers.MainClearArt AndAlso ClearArtAllowed
-            sModifier.MainClearLogo = ScrapeModifiers.MainClearLogo AndAlso ClearLogoAllowed
-            sModifier.MainDiscArt = ScrapeModifiers.MainDiscArt AndAlso DiscArtAllowed
-            sModifier.MainFanart = ScrapeModifiers.MainFanart AndAlso FanartAllowed
-            sModifier.MainLandscape = ScrapeModifiers.MainLandscape AndAlso LandscapeAllowed
-            sModifier.MainNFO = ScrapeModifiers.MainNFO
-            sModifier.MainPoster = ScrapeModifiers.MainPoster AndAlso PosterAllowed
+            Dim sModifier As New Structures.ScrapeModifiers With {
+                .DoSearch = ScrapeModifiers.DoSearch,
+                .MainBanner = ScrapeModifiers.MainBanner AndAlso BannerAllowed,
+                .MainClearArt = ScrapeModifiers.MainClearArt AndAlso ClearArtAllowed,
+                .MainClearLogo = ScrapeModifiers.MainClearLogo AndAlso ClearLogoAllowed,
+                .MainDiscArt = ScrapeModifiers.MainDiscArt AndAlso DiscArtAllowed,
+                .MainFanart = ScrapeModifiers.MainFanart AndAlso FanartAllowed,
+                .MainLandscape = ScrapeModifiers.MainLandscape AndAlso LandscapeAllowed,
+                .MainNFO = ScrapeModifiers.MainNFO,
+                .MainPoster = ScrapeModifiers.MainPoster AndAlso PosterAllowed
+            }
 
             Select Case sType
                 Case Enums.ScrapeType.NewAsk, Enums.ScrapeType.NewAuto, Enums.ScrapeType.NewSkip
@@ -12548,34 +12561,35 @@ Public Class frmMain
         For Each drvRow As DataRow In DataRowList
             If Convert.ToBoolean(drvRow.Item("Lock")) AndAlso Not sType = Enums.ScrapeType.SingleScrape Then Continue For
 
-            Dim sModifier As New Structures.ScrapeModifiers
-            sModifier.DoSearch = ScrapeModifiers.DoSearch
-            sModifier.AllSeasonsBanner = ScrapeModifiers.AllSeasonsBanner AndAlso AllSeasonsBannerAllowed
-            sModifier.AllSeasonsFanart = ScrapeModifiers.AllSeasonsFanart AndAlso AllSeasonsFanartAllowed
-            sModifier.AllSeasonsLandscape = ScrapeModifiers.AllSeasonsLandscape AndAlso AllSeasonsLandscapeAllowed
-            sModifier.AllSeasonsPoster = ScrapeModifiers.AllSeasonsPoster AndAlso AllSeasonsPosterAllowed
-            sModifier.EpisodeActorThumbs = ScrapeModifiers.EpisodeActorThumbs AndAlso EpisodeActorThumbsAllowed
-            sModifier.EpisodeFanart = ScrapeModifiers.EpisodeFanart AndAlso EpisodeFanartAllowed
-            sModifier.EpisodeMeta = ScrapeModifiers.EpisodeMeta AndAlso EpisodeMetaAllowed
-            sModifier.EpisodeNFO = ScrapeModifiers.EpisodeNFO
-            sModifier.EpisodePoster = ScrapeModifiers.EpisodePoster AndAlso EpisodePosterAllowed
-            sModifier.MainActorthumbs = ScrapeModifiers.MainActorthumbs AndAlso MainActorThumbsAllowed
-            sModifier.MainBanner = ScrapeModifiers.MainBanner AndAlso MainBannerAllowed
-            sModifier.MainCharacterArt = ScrapeModifiers.MainCharacterArt AndAlso MainCharacterArtAllowed
-            sModifier.MainClearArt = ScrapeModifiers.MainClearArt AndAlso MainClearArtAllowed
-            sModifier.MainClearLogo = ScrapeModifiers.MainClearLogo AndAlso MainClearLogoAllowed
-            sModifier.MainExtrafanarts = ScrapeModifiers.MainExtrafanarts AndAlso MainExtrafanartsAllowed
-            sModifier.MainFanart = ScrapeModifiers.MainFanart AndAlso MainFanartAllowed
-            sModifier.MainLandscape = ScrapeModifiers.MainLandscape AndAlso MainLandscapeAllowed
-            sModifier.MainNFO = ScrapeModifiers.MainNFO
-            sModifier.MainPoster = ScrapeModifiers.MainPoster AndAlso MainPosterAllowed
-            sModifier.MainTheme = ScrapeModifiers.MainTheme AndAlso MainThemeAllowed
-            sModifier.SeasonBanner = ScrapeModifiers.SeasonBanner AndAlso SeasonBannerAllowed
-            sModifier.SeasonFanart = ScrapeModifiers.SeasonFanart AndAlso SeasonFanartAllowed
-            sModifier.SeasonLandscape = ScrapeModifiers.SeasonLandscape AndAlso SeasonLandscapeAllowed
-            sModifier.SeasonPoster = ScrapeModifiers.SeasonPoster AndAlso SeasonPosterAllowed
-            sModifier.withEpisodes = ScrapeModifiers.withEpisodes
-            sModifier.withSeasons = ScrapeModifiers.withSeasons
+            Dim sModifier As New Structures.ScrapeModifiers With {
+                .DoSearch = ScrapeModifiers.DoSearch,
+                .AllSeasonsBanner = ScrapeModifiers.AllSeasonsBanner AndAlso AllSeasonsBannerAllowed,
+                .AllSeasonsFanart = ScrapeModifiers.AllSeasonsFanart AndAlso AllSeasonsFanartAllowed,
+                .AllSeasonsLandscape = ScrapeModifiers.AllSeasonsLandscape AndAlso AllSeasonsLandscapeAllowed,
+                .AllSeasonsPoster = ScrapeModifiers.AllSeasonsPoster AndAlso AllSeasonsPosterAllowed,
+                .EpisodeActorThumbs = ScrapeModifiers.EpisodeActorThumbs AndAlso EpisodeActorThumbsAllowed,
+                .EpisodeFanart = ScrapeModifiers.EpisodeFanart AndAlso EpisodeFanartAllowed,
+                .EpisodeMeta = ScrapeModifiers.EpisodeMeta AndAlso EpisodeMetaAllowed,
+                .EpisodeNFO = ScrapeModifiers.EpisodeNFO,
+                .EpisodePoster = ScrapeModifiers.EpisodePoster AndAlso EpisodePosterAllowed,
+                .MainActorthumbs = ScrapeModifiers.MainActorthumbs AndAlso MainActorThumbsAllowed,
+                .MainBanner = ScrapeModifiers.MainBanner AndAlso MainBannerAllowed,
+                .MainCharacterArt = ScrapeModifiers.MainCharacterArt AndAlso MainCharacterArtAllowed,
+                .MainClearArt = ScrapeModifiers.MainClearArt AndAlso MainClearArtAllowed,
+                .MainClearLogo = ScrapeModifiers.MainClearLogo AndAlso MainClearLogoAllowed,
+                .MainExtrafanarts = ScrapeModifiers.MainExtrafanarts AndAlso MainExtrafanartsAllowed,
+                .MainFanart = ScrapeModifiers.MainFanart AndAlso MainFanartAllowed,
+                .MainLandscape = ScrapeModifiers.MainLandscape AndAlso MainLandscapeAllowed,
+                .MainNFO = ScrapeModifiers.MainNFO,
+                .MainPoster = ScrapeModifiers.MainPoster AndAlso MainPosterAllowed,
+                .MainTheme = ScrapeModifiers.MainTheme AndAlso MainThemeAllowed,
+                .SeasonBanner = ScrapeModifiers.SeasonBanner AndAlso SeasonBannerAllowed,
+                .SeasonFanart = ScrapeModifiers.SeasonFanart AndAlso SeasonFanartAllowed,
+                .SeasonLandscape = ScrapeModifiers.SeasonLandscape AndAlso SeasonLandscapeAllowed,
+                .SeasonPoster = ScrapeModifiers.SeasonPoster AndAlso SeasonPosterAllowed,
+                .withEpisodes = ScrapeModifiers.withEpisodes,
+                .withSeasons = ScrapeModifiers.withSeasons
+            }
 
             Select Case sType
                 Case Enums.ScrapeType.NewAsk, Enums.ScrapeType.NewAuto, Enums.ScrapeType.NewSkip
@@ -12728,13 +12742,14 @@ Public Class frmMain
         For Each drvRow As DataRow In DataRowList
             If Convert.ToBoolean(drvRow.Item("Lock")) AndAlso Not sType = Enums.ScrapeType.SingleScrape Then Continue For
 
-            Dim sModifier As New Structures.ScrapeModifiers
-            sModifier.DoSearch = ScrapeModifiers.DoSearch
-            sModifier.EpisodeActorThumbs = ScrapeModifiers.EpisodeActorThumbs AndAlso ActorThumbsAllowed
-            sModifier.EpisodeFanart = ScrapeModifiers.EpisodeFanart AndAlso FanartAllowed
-            sModifier.EpisodeMeta = ScrapeModifiers.EpisodeMeta
-            sModifier.EpisodeNFO = ScrapeModifiers.EpisodeNFO
-            sModifier.EpisodePoster = ScrapeModifiers.EpisodePoster AndAlso PosterAllowed
+            Dim sModifier As New Structures.ScrapeModifiers With {
+                .DoSearch = ScrapeModifiers.DoSearch,
+                .EpisodeActorThumbs = ScrapeModifiers.EpisodeActorThumbs AndAlso ActorThumbsAllowed,
+                .EpisodeFanart = ScrapeModifiers.EpisodeFanart AndAlso FanartAllowed,
+                .EpisodeMeta = ScrapeModifiers.EpisodeMeta,
+                .EpisodeNFO = ScrapeModifiers.EpisodeNFO,
+                .EpisodePoster = ScrapeModifiers.EpisodePoster AndAlso PosterAllowed
+            }
 
             Select Case sType
                 Case Enums.ScrapeType.NewAsk, Enums.ScrapeType.NewAuto, Enums.ScrapeType.NewSkip
@@ -12884,17 +12899,18 @@ Public Class frmMain
         For Each drvRow As DataRow In DataRowList
             If Convert.ToBoolean(drvRow.Item("Lock")) AndAlso Not sType = Enums.ScrapeType.SingleScrape Then Continue For
 
-            Dim sModifier As New Structures.ScrapeModifiers
-            sModifier.DoSearch = ScrapeModifiers.DoSearch
-            sModifier.AllSeasonsBanner = ScrapeModifiers.AllSeasonsBanner AndAlso AllSeasonsBannerAllowed AndAlso CInt(drvRow.Item("Season")) = -1
-            sModifier.AllSeasonsFanart = ScrapeModifiers.AllSeasonsFanart AndAlso AllSeasonsFanartAllowed AndAlso CInt(drvRow.Item("Season")) = -1
-            sModifier.AllSeasonsLandscape = ScrapeModifiers.AllSeasonsLandscape AndAlso AllSeasonsLandscapeAllowed AndAlso CInt(drvRow.Item("Season")) = -1
-            sModifier.AllSeasonsPoster = ScrapeModifiers.AllSeasonsPoster AndAlso AllSeasonsPosterAllowed AndAlso CInt(drvRow.Item("Season")) = -1
-            sModifier.SeasonBanner = ScrapeModifiers.SeasonBanner AndAlso SeasonBannerAllowed AndAlso Not CInt(drvRow.Item("Season")) = -1
-            sModifier.SeasonFanart = ScrapeModifiers.SeasonFanart AndAlso SeasonFanartAllowed AndAlso Not CInt(drvRow.Item("Season")) = -1
-            sModifier.SeasonLandscape = ScrapeModifiers.SeasonLandscape AndAlso SeasonLandscapeAllowed AndAlso Not CInt(drvRow.Item("Season")) = -1
-            sModifier.SeasonNFO = ScrapeModifiers.SeasonNFO
-            sModifier.SeasonPoster = ScrapeModifiers.SeasonPoster AndAlso SeasonPosterAllowed AndAlso Not CInt(drvRow.Item("Season")) = -1
+            Dim sModifier As New Structures.ScrapeModifiers With {
+                .DoSearch = ScrapeModifiers.DoSearch,
+                .AllSeasonsBanner = ScrapeModifiers.AllSeasonsBanner AndAlso AllSeasonsBannerAllowed AndAlso CInt(drvRow.Item("Season")) = -1,
+                .AllSeasonsFanart = ScrapeModifiers.AllSeasonsFanart AndAlso AllSeasonsFanartAllowed AndAlso CInt(drvRow.Item("Season")) = -1,
+                .AllSeasonsLandscape = ScrapeModifiers.AllSeasonsLandscape AndAlso AllSeasonsLandscapeAllowed AndAlso CInt(drvRow.Item("Season")) = -1,
+                .AllSeasonsPoster = ScrapeModifiers.AllSeasonsPoster AndAlso AllSeasonsPosterAllowed AndAlso CInt(drvRow.Item("Season")) = -1,
+                .SeasonBanner = ScrapeModifiers.SeasonBanner AndAlso SeasonBannerAllowed AndAlso Not CInt(drvRow.Item("Season")) = -1,
+                .SeasonFanart = ScrapeModifiers.SeasonFanart AndAlso SeasonFanartAllowed AndAlso Not CInt(drvRow.Item("Season")) = -1,
+                .SeasonLandscape = ScrapeModifiers.SeasonLandscape AndAlso SeasonLandscapeAllowed AndAlso Not CInt(drvRow.Item("Season")) = -1,
+                .SeasonNFO = ScrapeModifiers.SeasonNFO,
+                .SeasonPoster = ScrapeModifiers.SeasonPoster AndAlso SeasonPosterAllowed AndAlso Not CInt(drvRow.Item("Season")) = -1
+            }
 
             Select Case sType
                 Case Enums.ScrapeType.NewAsk, Enums.ScrapeType.NewAuto, Enums.ScrapeType.NewSkip
@@ -16617,10 +16633,11 @@ Public Class frmMain
                             Application.DoEvents()
                             Threading.Thread.Sleep(50)
                         End While
-                        Dim DBCleaner As New Structures.ScanOrClean
                         'it's not necessary to clean the DB if we clean it anyway after DB update
-                        DBCleaner.Movies = dresult.NeedsDBClean_Movie AndAlso Not (dresult.NeedsDBUpdate_Movie AndAlso Master.eSettings.MovieCleanDB)
-                        DBCleaner.TV = dresult.NeedsDBClean_TV AndAlso Not (dresult.NeedsDBUpdate_TV AndAlso Master.eSettings.TVCleanDB)
+                        Dim DBCleaner As New Structures.ScanOrClean With {
+                            .Movies = dresult.NeedsDBClean_Movie AndAlso Not (dresult.NeedsDBUpdate_Movie AndAlso Master.eSettings.MovieCleanDB),
+                            .TV = dresult.NeedsDBClean_TV AndAlso Not (dresult.NeedsDBUpdate_TV AndAlso Master.eSettings.TVCleanDB)
+                        }
                         CleanDB(DBCleaner)
                     End If
                 End If

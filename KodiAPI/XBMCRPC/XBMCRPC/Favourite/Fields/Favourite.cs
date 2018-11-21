@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
+
 namespace XBMCRPC.Favourite.Fields
 {
    public enum FavouriteItem
@@ -10,7 +9,7 @@ namespace XBMCRPC.Favourite.Fields
        window,
        windowparameter,
        thumbnail,
-       path,
+       path
    }
    public class Favourite : List<FavouriteItem>
    {

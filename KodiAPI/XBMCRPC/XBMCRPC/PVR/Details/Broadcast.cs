@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
+using XBMCRPC.Item.Details;
+
 namespace XBMCRPC.PVR.Details
 {
-   public class Broadcast : XBMCRPC.Item.Details.Base
+   public class Broadcast : Base
    {
        public int broadcastid { get; set; }
        public string endtime { get; set; }

@@ -1,13 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
+using XBMCRPC.Item.Details;
+using XBMCRPC.Media;
+using XBMCRPC.Video;
+
 namespace XBMCRPC.PVR.Details
 {
-   public class Recording : XBMCRPC.Item.Details.Base
+   public class Recording : Base
    {
-       public XBMCRPC.Media.Artwork art { get; set; }
+       public Artwork art { get; set; }
        public string channel { get; set; }
        public string directory { get; set; }
        public string endtime { get; set; }
@@ -19,7 +18,7 @@ namespace XBMCRPC.PVR.Details
        public string plot { get; set; }
        public string plotoutline { get; set; }
        public int recordingid { get; set; }
-       public XBMCRPC.Video.Resume resume { get; set; }
+       public Resume resume { get; set; }
        public int runtime { get; set; }
        public string starttime { get; set; }
        public string streamurl { get; set; }

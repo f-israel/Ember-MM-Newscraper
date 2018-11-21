@@ -1,9 +1,13 @@
-using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using XBMCRPC.Global;
+using XBMCRPC.GUI;
+using XBMCRPC.GUI.Property;
+
 namespace XBMCRPC.Methods
 {
-   public partial class GUI
+   public class GUI
    {
         private readonly Client _client;
           public GUI(Client client)
@@ -14,7 +18,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Activates the given window
                 /// </summary>
-        public async Task<string> ActivateWindow(XBMCRPC.GUI.Window window=0, global::System.Collections.Generic.List<string> parameters=null)
+        public async Task<string> ActivateWindow(Window window=0, List<string> parameters=null)
         {
             var jArgs = new JObject();
              if (window != null)
@@ -33,7 +37,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Retrieves the values of the given properties
                 /// </summary>
-        public async Task<XBMCRPC.GUI.Property.Value> GetProperties(XBMCRPC.GUI.GetProperties_properties properties=null)
+        public async Task<Value> GetProperties(GetProperties_properties properties=null)
         {
             var jArgs = new JObject();
              if (properties != null)
@@ -41,16 +45,16 @@ namespace XBMCRPC.Methods
                  var jpropproperties = JToken.FromObject(properties, _client.Serializer);
                  jArgs.Add(new JProperty("properties", jpropproperties));
              }
-            return await _client.GetData<XBMCRPC.GUI.Property.Value>("GUI.GetProperties", jArgs);
+            return await _client.GetData<Value>("GUI.GetProperties", jArgs);
         }
 
                 /// <summary>
                 /// Returns the supported stereoscopic modes of the GUI
                 /// </summary>
-        public async Task<XBMCRPC.GUI.GetStereoscopicModesResponse> GetStereoscopicModes()
+        public async Task<GetStereoscopicModesResponse> GetStereoscopicModes()
         {
             var jArgs = new JObject();
-            return await _client.GetData<XBMCRPC.GUI.GetStereoscopicModesResponse>("GUI.GetStereoscopicModes", jArgs);
+            return await _client.GetData<GetStereoscopicModesResponse>("GUI.GetStereoscopicModes", jArgs);
         }
 
                 /// <summary>
@@ -70,7 +74,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Toggle fullscreen/GUI
                 /// </summary>
-        public async Task<bool> SetFullscreen(XBMCRPC.Global.Toggle2 fullscreen)
+        public async Task<bool> SetFullscreen(Toggle2 fullscreen)
         {
             var jArgs = new JObject();
              if (fullscreen != null)
@@ -93,7 +97,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Sets the stereoscopic mode of the GUI to the given mode
                 /// </summary>
-        public async Task<string> SetStereoscopicMode(XBMCRPC.GUI.SetStereoscopicMode_mode mode=0)
+        public async Task<string> SetStereoscopicMode(SetStereoscopicMode_mode mode=0)
         {
             var jArgs = new JObject();
              if (mode != null)
@@ -107,7 +111,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Shows a GUI notification
                 /// </summary>
-        public async Task<string> ShowNotification(XBMCRPC.GUI.ShowNotification_image1 image, string title=null, string message=null, int displaytime=0)
+        public async Task<string> ShowNotification(ShowNotification_image1 image, string title=null, string message=null, int displaytime=0)
         {
             var jArgs = new JObject();
              if (title != null)

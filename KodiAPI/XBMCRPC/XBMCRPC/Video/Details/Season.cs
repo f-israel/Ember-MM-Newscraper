@@ -1,11 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
 namespace XBMCRPC.Video.Details
 {
-   public class Season : XBMCRPC.Video.Details.Base
+   public class Season : Base
    {
        public int episode { get; set; }
        public int season { get; set; }

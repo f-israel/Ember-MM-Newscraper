@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
 namespace XBMCRPC.Favourite
 {
    public enum Type
@@ -10,6 +5,6 @@ namespace XBMCRPC.Favourite
        media,
        window,
        script,
-       unknown,
+       unknown
    }
 }

@@ -1,9 +1,11 @@
-using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using XBMCRPC.Files;
+using XBMCRPC.List;
+
 namespace XBMCRPC.Methods
 {
-   public partial class Files
+   public class Files
    {
         private readonly Client _client;
           public Files(Client client)
@@ -14,7 +16,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Get the directories and files in the given directory
                 /// </summary>
-        public async Task<XBMCRPC.Files.GetDirectoryResponse> GetDirectory(string directory=null, XBMCRPC.Files.Media media=0, XBMCRPC.List.Fields.Files properties=null, XBMCRPC.List.Sort sort=null, XBMCRPC.List.Limits limits=null)
+        public async Task<GetDirectoryResponse> GetDirectory(string directory=null, XBMCRPC.Files.Media media=0, List.Fields.Files properties=null, Sort sort=null, Limits limits=null)
         {
             var jArgs = new JObject();
              if (directory != null)
@@ -42,13 +44,13 @@ namespace XBMCRPC.Methods
                  var jproplimits = JToken.FromObject(limits, _client.Serializer);
                  jArgs.Add(new JProperty("limits", jproplimits));
              }
-            return await _client.GetData<XBMCRPC.Files.GetDirectoryResponse>("Files.GetDirectory", jArgs);
+            return await _client.GetData<GetDirectoryResponse>("Files.GetDirectory", jArgs);
         }
 
                 /// <summary>
                 /// Get details for a specific file
                 /// </summary>
-        public async Task<XBMCRPC.Files.GetFileDetailsResponse> GetFileDetails(string file=null, XBMCRPC.Files.Media media=0, XBMCRPC.List.Fields.Files properties=null)
+        public async Task<GetFileDetailsResponse> GetFileDetails(string file=null, XBMCRPC.Files.Media media=0, List.Fields.Files properties=null)
         {
             var jArgs = new JObject();
              if (file != null)
@@ -66,13 +68,13 @@ namespace XBMCRPC.Methods
                  var jpropproperties = JToken.FromObject(properties, _client.Serializer);
                  jArgs.Add(new JProperty("properties", jpropproperties));
              }
-            return await _client.GetData<XBMCRPC.Files.GetFileDetailsResponse>("Files.GetFileDetails", jArgs);
+            return await _client.GetData<GetFileDetailsResponse>("Files.GetFileDetails", jArgs);
         }
 
                 /// <summary>
                 /// Get the sources of the media windows
                 /// </summary>
-        public async Task<XBMCRPC.Files.GetSourcesResponse> GetSources(XBMCRPC.Files.Media media=0, XBMCRPC.List.Limits limits=null, XBMCRPC.List.Sort sort=null)
+        public async Task<GetSourcesResponse> GetSources(XBMCRPC.Files.Media media=0, Limits limits=null, Sort sort=null)
         {
             var jArgs = new JObject();
              if (media != null)
@@ -90,13 +92,13 @@ namespace XBMCRPC.Methods
                  var jpropsort = JToken.FromObject(sort, _client.Serializer);
                  jArgs.Add(new JProperty("sort", jpropsort));
              }
-            return await _client.GetData<XBMCRPC.Files.GetSourcesResponse>("Files.GetSources", jArgs);
+            return await _client.GetData<GetSourcesResponse>("Files.GetSources", jArgs);
         }
 
                 /// <summary>
                 /// Provides a way to download a given file (e.g. providing an URL to the real file location)
                 /// </summary>
-        public async Task<XBMCRPC.Files.PrepareDownloadResponse> PrepareDownload(string path=null)
+        public async Task<PrepareDownloadResponse> PrepareDownload(string path=null)
         {
             var jArgs = new JObject();
              if (path != null)
@@ -104,7 +106,7 @@ namespace XBMCRPC.Methods
                  var jproppath = JToken.FromObject(path, _client.Serializer);
                  jArgs.Add(new JProperty("path", jproppath));
              }
-            return await _client.GetData<XBMCRPC.Files.PrepareDownloadResponse>("Files.PrepareDownload", jArgs);
+            return await _client.GetData<PrepareDownloadResponse>("Files.PrepareDownload", jArgs);
         }
    }
 }

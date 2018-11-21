@@ -1,9 +1,10 @@
-using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using XBMCRPC.Input;
+
 namespace XBMCRPC.Methods
 {
-   public partial class Input
+   public class Input
    {
         private readonly Client _client;
           public Input(Client client)
@@ -41,7 +42,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Execute a specific action
                 /// </summary>
-        public async Task<string> ExecuteAction(XBMCRPC.Input.Action action=0)
+        public async Task<string> ExecuteAction(Action action=0)
         {
             var jArgs = new JObject();
              if (action != null)
@@ -153,9 +154,9 @@ namespace XBMCRPC.Methods
             }
         }
 
-        public delegate void OnInputRequestedDelegate(string sender=null, XBMCRPC.Input.OnInputRequested_data data=null);
+        public delegate void OnInputRequestedDelegate(string sender=null, OnInputRequested_data data=null);
         public event OnInputRequestedDelegate OnInputRequested;
-        internal void RaiseOnInputRequested(string sender=null, XBMCRPC.Input.OnInputRequested_data data=null)
+        internal void RaiseOnInputRequested(string sender=null, OnInputRequested_data data=null)
         {
             if (OnInputRequested != null)
             {

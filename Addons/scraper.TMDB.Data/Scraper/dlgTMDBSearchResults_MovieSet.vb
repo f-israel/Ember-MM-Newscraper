@@ -247,8 +247,9 @@ Public Class dlgTMDBSearchResults_MovieSet
                         bwDownloadPic.CancelAsync()
                     End If
                     pnlPicStatus.Visible = True
-                    bwDownloadPic = New System.ComponentModel.BackgroundWorker
-                    bwDownloadPic.WorkerSupportsCancellation = True
+                    bwDownloadPic = New System.ComponentModel.BackgroundWorker With {
+                        .WorkerSupportsCancellation = True
+                    }
                     bwDownloadPic.RunWorkerAsync(New Arguments With {.pURL = sPoster, .IMDBId = _tmpMovieSet.TMDB})
                 End If
 
@@ -289,9 +290,10 @@ Public Class dlgTMDBSearchResults_MovieSet
     End Sub
 
     Private Function SetPreviewOptions() As Structures.ScrapeOptions
-        Dim aOpt As New Structures.ScrapeOptions
-        aOpt.bMainPlot = True
-        aOpt.bMainTitle = True
+        Dim aOpt As New Structures.ScrapeOptions With {
+            .bMainPlot = True,
+            .bMainTitle = True
+        }
 
         Return aOpt
     End Function

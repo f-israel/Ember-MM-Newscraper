@@ -1,12 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
+using XBMCRPC.Addon;
+
 namespace XBMCRPC.Setting.Details
 {
-   public class SettingAddon : XBMCRPC.Setting.Details.SettingString
+   public class SettingAddon : SettingString
    {
-       public XBMCRPC.Addon.Types addontype { get; set; }
+       public Types addontype { get; set; }
     }
 }

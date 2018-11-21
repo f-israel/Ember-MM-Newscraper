@@ -217,16 +217,18 @@ Public Class dlgFileInfo
         lvStreams.Items.Clear()
         Try
             If _FileInfo.StreamDetails.Video.Count > 0 Then
-                g = New ListViewGroup
-                g.Header = Master.eLang.GetString(595, "Video Streams")
+                g = New ListViewGroup With {
+                    .Header = Master.eLang.GetString(595, "Video Streams")
+                }
                 lvStreams.Groups.Add(g)
                 c = 1
                 ' Fake Group Header
-                i = New ListViewItem
                 'i.UseItemStyleForSubItems = False
-                i.ForeColor = Color.DarkBlue
-                i.Tag = "Header"
-                i.Text = String.Empty
+                i = New ListViewItem With {
+                    .ForeColor = Color.DarkBlue,
+                    .Tag = "Header",
+                    .Text = String.Empty
+                }
                 i.SubItems.Add(Master.eLang.GetString(604, "Codec"))
                 i.SubItems.Add(Master.eLang.GetString(605, "Scan Type"))
                 i.SubItems.Add(Master.eLang.GetString(606, "Width"))
@@ -246,9 +248,10 @@ Public Class dlgFileInfo
                 For c = 0 To _FileInfo.StreamDetails.Video.Count - 1
                     v = _FileInfo.StreamDetails.Video(c)
                     If Not v Is Nothing Then
-                        i = New ListViewItem
-                        i.Tag = Master.eLang.GetString(595, "Video Streams")
-                        i.Text = c.ToString
+                        i = New ListViewItem With {
+                            .Tag = Master.eLang.GetString(595, "Video Streams"),
+                            .Text = c.ToString
+                        }
                         i.SubItems.Add(v.Codec)
                         i.SubItems.Add(v.Scantype)
                         i.SubItems.Add(v.Width)
@@ -267,16 +270,18 @@ Public Class dlgFileInfo
                 Next
             End If
             If _FileInfo.StreamDetails.Audio.Count > 0 Then
-                g = New ListViewGroup
-                g.Header = Master.eLang.GetString(596, "Audio Streams")
+                g = New ListViewGroup With {
+                    .Header = Master.eLang.GetString(596, "Audio Streams")
+                }
                 lvStreams.Groups.Add(g)
                 c = 1
                 ' Fake Group Header
-                i = New ListViewItem
                 'i.UseItemStyleForSubItems = False
-                i.ForeColor = Color.DarkBlue
-                i.Tag = "Header"
-                i.Text = String.Empty
+                i = New ListViewItem With {
+                    .ForeColor = Color.DarkBlue,
+                    .Tag = "Header",
+                    .Text = String.Empty
+                }
                 i.SubItems.Add(Master.eLang.GetString(604, "Codec"))
                 i.SubItems.Add(Master.eLang.GetString(610, "Language"))
                 i.SubItems.Add(Master.eLang.GetString(611, "Channels"))
@@ -288,9 +293,10 @@ Public Class dlgFileInfo
                 For c = 0 To _FileInfo.StreamDetails.Audio.Count - 1
                     a = _FileInfo.StreamDetails.Audio(c)
                     If Not a Is Nothing Then
-                        i = New ListViewItem
-                        i.Tag = Master.eLang.GetString(596, "Audio Streams")
-                        i.Text = c.ToString
+                        i = New ListViewItem With {
+                            .Tag = Master.eLang.GetString(596, "Audio Streams"),
+                            .Text = c.ToString
+                        }
                         i.SubItems.Add(a.Codec)
                         i.SubItems.Add(a.LongLanguage)
                         i.SubItems.Add(a.Channels)
@@ -302,16 +308,18 @@ Public Class dlgFileInfo
                 Next
             End If
             If _FileInfo.StreamDetails.Subtitle.Count > 0 Then
-                g = New ListViewGroup
-                g.Header = Master.eLang.GetString(597, "Subtitle Streams")
+                g = New ListViewGroup With {
+                    .Header = Master.eLang.GetString(597, "Subtitle Streams")
+                }
                 lvStreams.Groups.Add(g)
                 c = 1
                 ' Fake Group Header
-                i = New ListViewItem
                 'i.UseItemStyleForSubItems = False
-                i.ForeColor = Color.DarkBlue
-                i.Tag = "Header"
-                i.Text = String.Empty
+                i = New ListViewItem With {
+                    .ForeColor = Color.DarkBlue,
+                    .Tag = "Header",
+                    .Text = String.Empty
+                }
                 i.SubItems.Add(Master.eLang.GetString(610, "Language"))
                 i.SubItems.Add(Master.eLang.GetString(1288, "Type"))
                 i.SubItems.Add(Master.eLang.GetString(1287, "Forced"))
@@ -322,9 +330,10 @@ Public Class dlgFileInfo
                 For c = 0 To _FileInfo.StreamDetails.Subtitle.Count - 1
                     s = _FileInfo.StreamDetails.Subtitle(c)
                     If Not s Is Nothing Then
-                        i = New ListViewItem
-                        i.Tag = Master.eLang.GetString(597, "Subtitle Streams")
-                        i.Text = c.ToString
+                        i = New ListViewItem With {
+                            .Tag = Master.eLang.GetString(597, "Subtitle Streams"),
+                            .Text = c.ToString
+                        }
                         i.SubItems.Add(s.LongLanguage)
                         i.SubItems.Add(s.SubsType)
                         i.SubItems.Add(If(s.SubsForced, Master.eLang.GetString(300, "Yes"), Master.eLang.GetString(720, "No")))

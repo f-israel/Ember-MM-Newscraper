@@ -235,13 +235,14 @@ Namespace Davestrailerpage
                                             trailerURLResults = Regex.Matches(strtrailersection, trailerlinkPattern, RegexOptions.Singleline)
                                             If Not trailerURLResults Is Nothing AndAlso trailerURLResults.Count > 0 Then
                                                 For Each trailerlink As Match In trailerURLResults
-                                                    Dim trailer As New MediaContainers.Trailer
                                                     'trailer description
-                                                    trailer.Title = trailerresult.Groups(1).Value
                                                     'trailer URLs
-                                                    trailer.URLVideoStream = trailerlink.Groups(1).Value
-                                                    trailer.URLWebsite = trailerlink.Groups(1).Value
-                                                    'trailer extension
+                                                    Dim trailer As New MediaContainers.Trailer With {
+                                                        .Title = trailerresult.Groups(1).Value,
+                                                        .URLVideoStream = trailerlink.Groups(1).Value,
+                                                        .URLWebsite = trailerlink.Groups(1).Value
+                                                    }
+                                                        'trailer extension
                                                     trailer.TrailerOriginal.Extention = IO.Path.GetExtension(trailer.URLVideoStream)
                                                     'trailer source
                                                     trailer.Source = "Davestrailer"
@@ -276,13 +277,14 @@ Namespace Davestrailerpage
                                         For Each trailerlink As Match In trailerURLResults
 
                                             If trailerlink.Groups(1).Value.ToLower.Contains(".mov") OrElse trailerlink.Groups(1).Value.ToLower.Contains(".mp4") OrElse trailerlink.Groups(1).Value.ToLower.Contains(".flv") Then
-                                                Dim trailer As New MediaContainers.Trailer
                                                 'trailer description
-                                                trailer.Title = trailerlink.Groups(2).Value
                                                 'trailer URLs
-                                                trailer.URLVideoStream = trailerlink.Groups(1).Value
-                                                trailer.URLWebsite = trailerlink.Groups(1).Value
-                                                'trailer extension
+                                                Dim trailer As New MediaContainers.Trailer With {
+                                                    .Title = trailerlink.Groups(2).Value,
+                                                    .URLVideoStream = trailerlink.Groups(1).Value,
+                                                    .URLWebsite = trailerlink.Groups(1).Value
+                                                }
+                                                    'trailer extension
                                                 trailer.TrailerOriginal.Extention = IO.Path.GetExtension(trailer.URLVideoStream)
                                                 'trailer source
                                                 trailer.Source = "Davestrailer"

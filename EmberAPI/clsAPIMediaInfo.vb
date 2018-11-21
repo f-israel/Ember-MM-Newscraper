@@ -629,15 +629,15 @@ Public Class MediaInfo
         Dim a_Profile As String = String.Empty
 
         For a As Integer = 0 To AudioStreams - 1
-            miAudio = New MediaContainers.Audio
-            miAudio.Codec = ConvertAFormat(Get_(StreamKind.Audio, a, "CodecID"), Get_(StreamKind.Audio, a, "Format"),
-                                           Get_(StreamKind.Audio, a, "CodecID/Hint"), Get_(StreamKind.Audio, a, "Format_Profile"))
-            miAudio.Channels = FormatAudioChannel(Get_(StreamKind.Audio, a, "Channel(s)"))
-
             'cocotus, 2013/02 Added support for new MediaInfo-fields
             'Audio-Bitrate
-            miAudio.Bitrate = FormatBitrate(Get_(StreamKind.Audio, a, "BitRate/String"))
-            'cocotus end
+            miAudio = New MediaContainers.Audio With {
+                .Codec = ConvertAFormat(Get_(StreamKind.Audio, a, "CodecID"), Get_(StreamKind.Audio, a, "Format"),
+Get_(StreamKind.Audio, a, "CodecID/Hint"), Get_(StreamKind.Audio, a, "Format_Profile")),
+                .Channels = FormatAudioChannel(Get_(StreamKind.Audio, a, "Channel(s)")),
+                .Bitrate = FormatBitrate(Get_(StreamKind.Audio, a, "BitRate/String"))
+            }
+                'cocotus end
 
             aLang = Get_(StreamKind.Audio, a, "Language/String")
             If Not String.IsNullOrEmpty(aLang) Then
@@ -676,10 +676,11 @@ Public Class MediaInfo
         Dim VideoStreams As Integer
         VideoStreams = Count_Get(StreamKind.Visual)
         For v As Integer = 0 To VideoStreams - 1
-            miVideo = New MediaContainers.Video
             'cocotus, It's possible that duration returns empty when retrieved from videostream data - so instead use "General" section of MediaInfo.dll to read duration (is always filled!)
             'More here: http://forum.xbmc.org/showthread.php?tid=169900 
-            miVideo.Duration = Get_(StreamKind.Visual, v, "Duration/String1")
+            miVideo = New MediaContainers.Video With {
+                .Duration = Get_(StreamKind.Visual, v, "Duration/String1")
+            }
             If miVideo.Duration = String.Empty Then
                 miVideo.Duration = Get_(StreamKind.General, 0, "Duration/String1")
             End If
@@ -827,17 +828,18 @@ Public Class MediaInfo
                 End If
 
                 For v As Integer = 0 To VideoStreams - 1
-                    miVideo = New MediaContainers.Video
                     'cocotus, 2013/02 Added support for new MediaInfo-fields
                     'Video-Bitrate
-                    miVideo.Bitrate = FormatBitrate(Get_(StreamKind.Visual, v, "BitRate/String"))
                     'MultiViewCount (Support for 3D Movie, If > 1 -> 3D Movie)
-                    miVideo.MultiViewCount = Get_(StreamKind.Visual, v, "MultiView_Count")
                     'MultiViewLayout (http://matroska.org/technical/specs/index.html#StereoMode)
-                    miVideo.MultiViewLayout = Get_(StreamKind.Visual, v, "MultiView_Layout")
-                    'Encoder-settings
-                    'miVideo.EncodedSettings = Me.Get_(StreamKind.Visual, v, "Encoded_Library_Settings")
-                    'cocotus end
+                    miVideo = New MediaContainers.Video With {
+                        .Bitrate = FormatBitrate(Get_(StreamKind.Visual, v, "BitRate/String")),
+                        .MultiViewCount = Get_(StreamKind.Visual, v, "MultiView_Count"),
+                        .MultiViewLayout = Get_(StreamKind.Visual, v, "MultiView_Layout")
+                    }
+                        'Encoder-settings
+                        'miVideo.EncodedSettings = Me.Get_(StreamKind.Visual, v, "Encoded_Library_Settings")
+                        'cocotus end
                     miVideo.StereoMode = ConvertVStereoMode(miVideo.MultiViewLayout)
 
                     miVideo.Width = Get_(StreamKind.Visual, v, "Width")
@@ -895,10 +897,11 @@ Public Class MediaInfo
 
 
                 For a As Integer = 0 To AudioStreams - 1
-                    miAudio = New MediaContainers.Audio
-                    miAudio.Codec = ConvertAFormat(Get_(StreamKind.Audio, a, "CodecID"), Get_(StreamKind.Audio, a, "Format"),
-                                                   Get_(StreamKind.Audio, a, "CodecID/Hint"), Get_(StreamKind.Audio, a, "Format_Profile"))
-                    miAudio.Channels = FormatAudioChannel(Get_(StreamKind.Audio, a, "Channel(s)_Original"))
+                    miAudio = New MediaContainers.Audio With {
+                        .Codec = ConvertAFormat(Get_(StreamKind.Audio, a, "CodecID"), Get_(StreamKind.Audio, a, "Format"),
+                                                   Get_(StreamKind.Audio, a, "CodecID/Hint"), Get_(StreamKind.Audio, a, "Format_Profile")),
+                        .Channels = FormatAudioChannel(Get_(StreamKind.Audio, a, "Channel(s)_Original"))
+                    }
                     If String.IsNullOrEmpty(miAudio.Channels) Then
                         miAudio.Channels = FormatAudioChannel(Get_(StreamKind.Audio, a, "Channel(s)"))
                     End If

@@ -103,8 +103,9 @@ Public Class dlgEditTVShow
             ReDim Preserve pnlExtrafanartsImage(iIndex)
             ReDim Preserve pbExtrafanartsImage(iIndex)
             pnlExtrafanartsImage(iIndex) = New Panel()
-            pbExtrafanartsImage(iIndex) = New PictureBox()
-            pbExtrafanartsImage(iIndex).Name = iIndex.ToString
+            pbExtrafanartsImage(iIndex) = New PictureBox With {
+                .Name = iIndex.ToString
+            }
             pnlExtrafanartsImage(iIndex).Name = iIndex.ToString
             pnlExtrafanartsImage(iIndex).Size = New Size(128, 72)
             pbExtrafanartsImage(iIndex).Size = New Size(128, 72)

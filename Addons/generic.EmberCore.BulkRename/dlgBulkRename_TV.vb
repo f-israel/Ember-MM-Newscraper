@@ -310,9 +310,10 @@ Public Class dlgBulkRenamer_TV
             Application.DoEvents()
 
             'Start worker
-            bwLoadInfo = New System.ComponentModel.BackgroundWorker
-            bwLoadInfo.WorkerSupportsCancellation = True
-            bwLoadInfo.WorkerReportsProgress = True
+            bwLoadInfo = New System.ComponentModel.BackgroundWorker With {
+                .WorkerSupportsCancellation = True,
+                .WorkerReportsProgress = True
+            }
             bwLoadInfo.RunWorkerAsync()
 
         Catch ex As Exception
@@ -357,9 +358,10 @@ Public Class dlgBulkRenamer_TV
         pbCompile.Value = 0
         Application.DoEvents()
         'Start worker
-        bwDoRename = New System.ComponentModel.BackgroundWorker
-        bwDoRename.WorkerSupportsCancellation = True
-        bwDoRename.WorkerReportsProgress = True
+        bwDoRename = New System.ComponentModel.BackgroundWorker With {
+            .WorkerSupportsCancellation = True,
+            .WorkerReportsProgress = True
+        }
         bwDoRename.RunWorkerAsync()
     End Sub
 

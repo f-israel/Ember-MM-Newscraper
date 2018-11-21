@@ -40,11 +40,11 @@ Public Class ThumbGenerator
     ''' <param name="isEdit"></param>
     ''' <returns>Fanart path if an extrathumb was set as fanart.</returns>
     Public Shared Function CreateRandomThumbs(ByVal mMovie As Database.DBElement, ByVal ThumbCount As Integer, ByVal isEdit As Boolean) As String
-        Dim tThumb As New GeneratorThread
-
-        tThumb.Movie = mMovie
-        tThumb.ThumbCount = ThumbCount
-        tThumb.isEdit = isEdit
+        Dim tThumb As New GeneratorThread With {
+            .Movie = mMovie,
+            .ThumbCount = ThumbCount,
+            .isEdit = isEdit
+        }
 
         tThumb.Start()
 

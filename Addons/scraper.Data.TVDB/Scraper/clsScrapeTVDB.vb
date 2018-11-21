@@ -160,8 +160,10 @@ Namespace TVDBs
                         If Not String.IsNullOrEmpty(CStr(aShow.FirstAired)) Then
                             t2 = CStr(aShow.FirstAired.Year)
                         End If
-                        Dim lNewShow As MediaContainers.TVShow = New MediaContainers.TVShow(String.Empty, t1, t2)
-                        lNewShow.TVDB = CStr(aShow.Id)
+
+                        Dim lNewShow As MediaContainers.TVShow = New MediaContainers.TVShow(String.Empty, t1, t2) With {
+                            .TVDB = CStr(aShow.Id)
+                        }
                         R.Matches.Add(lNewShow)
                     End If
                 Next
@@ -393,10 +395,10 @@ Namespace TVDBs
         End Function
 
         Public Function GetTVEpisodeInfo(ByRef EpisodeInfo As TVDB.Model.Episode, ByRef TVShowInfo As TVDB.Model.SeriesDetails, ByRef FilteredOptions As Structures.ScrapeOptions) As MediaContainers.EpisodeDetails
-            Dim nEpisode As New MediaContainers.EpisodeDetails
-
             'IDs
-            nEpisode.TVDB = CStr(EpisodeInfo.Id)
+            Dim nEpisode As New MediaContainers.EpisodeDetails With {
+                .TVDB = CStr(EpisodeInfo.Id)
+            }
             If EpisodeInfo.IMDBId IsNot Nothing AndAlso Not String.IsNullOrEmpty(EpisodeInfo.IMDBId) Then nEpisode.IMDB = EpisodeInfo.IMDBId
 
             'Episode # Absolute

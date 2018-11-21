@@ -64,9 +64,10 @@ Public Class dlgWorker
 
     Private Sub btnStart_Click(sender As Object, e As EventArgs) Handles btnStart.Click
         btnStart.Enabled = False
-        bwGetWatchedState = New ComponentModel.BackgroundWorker
-        bwGetWatchedState.WorkerSupportsCancellation = True
-        bwGetWatchedState.WorkerReportsProgress = True
+        bwGetWatchedState = New ComponentModel.BackgroundWorker With {
+            .WorkerSupportsCancellation = True,
+            .WorkerReportsProgress = True
+        }
         bwGetWatchedState.RunWorkerAsync()
     End Sub
 

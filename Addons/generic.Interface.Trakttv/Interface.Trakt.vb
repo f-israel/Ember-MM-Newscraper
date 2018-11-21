@@ -556,9 +556,10 @@ Public Class Addon
         '    tMenu.DropDownItems.Add(mnuHostSyncFullItem)
         'End If
         If tContentType = Enums.ContentType.Movie OrElse tContentType = Enums.ContentType.TVEpisode OrElse tContentType = Enums.ContentType.TVSeason OrElse tContentType = Enums.ContentType.TVShow Then
-            Dim mnuGetWatchedState As New ToolStripMenuItem
-            mnuGetWatchedState.Image = New Bitmap(My.Resources.menuWatchedState)
-            mnuGetWatchedState.Text = Master.eLang.GetString(1070, "Get Watched State")
+            Dim mnuGetWatchedState As New ToolStripMenuItem With {
+                .Image = New Bitmap(My.Resources.menuWatchedState),
+                .Text = Master.eLang.GetString(1070, "Get Watched State")
+            }
             Select Case tContentType
                 Case Enums.ContentType.Movie
                     AddHandler mnuGetWatchedState.Click, AddressOf cmnuGetWatchedState_Movie_Click
@@ -588,27 +589,30 @@ Public Class Addon
     End Sub
 
     Private Sub CreateToolsMenu(ByRef tMenu As ToolStripMenuItem)
-        Dim mnuTrakttvManager As New ToolStripMenuItem
-        mnuTrakttvManager.Image = New Bitmap(My.Resources.icon)
-        mnuTrakttvManager.Text = String.Concat(Master.eLang.GetString(871, "Trakt.tv Manager"), " (temp. disabled for rework)")
-        mnuTrakttvManager.Enabled = False
+        Dim mnuTrakttvManager As New ToolStripMenuItem With {
+            .Image = New Bitmap(My.Resources.icon),
+            .Text = String.Concat(Master.eLang.GetString(871, "Trakt.tv Manager"), " (temp. disabled for rework)"),
+            .Enabled = False
+        }
         AddHandler mnuTrakttvManager.Click, AddressOf mnuTrakttvManager_Click
         tMenu.DropDownItems.Add(mnuTrakttvManager)
         tMenu.DropDownItems.Add(New ToolStripSeparator)
 
-        Dim mnuGetPlaycount_Movies As New ToolStripMenuItem
-        mnuGetPlaycount_Movies.Image = New Bitmap(My.Resources.menuWatchedState)
-        mnuGetPlaycount_Movies.Text = String.Format("{0} - {1}",
+        Dim mnuGetPlaycount_Movies As New ToolStripMenuItem With {
+            .Image = New Bitmap(My.Resources.menuWatchedState),
+            .Text = String.Format("{0} - {1}",
                                                         Master.eLang.GetString(1070, "Get Watched State"),
                                                         Master.eLang.GetString(36, "Movies"))
+        }
         AddHandler mnuGetPlaycount_Movies.Click, AddressOf mnuGetPlaycount_Movies_Click
         tMenu.DropDownItems.Add(mnuGetPlaycount_Movies)
 
-        Dim mnuGetPlaycount_TVEpisodes As New ToolStripMenuItem
-        mnuGetPlaycount_TVEpisodes.Image = New Bitmap(My.Resources.menuWatchedState)
-        mnuGetPlaycount_TVEpisodes.Text = String.Format("{0} - {1}",
+        Dim mnuGetPlaycount_TVEpisodes As New ToolStripMenuItem With {
+            .Image = New Bitmap(My.Resources.menuWatchedState),
+            .Text = String.Format("{0} - {1}",
                                                             Master.eLang.GetString(1070, "Get Watched State"),
                                                             Master.eLang.GetString(682, "Episodes"))
+        }
         AddHandler mnuGetPlaycount_TVEpisodes.Click, AddressOf mnuGetPlaycount_TVEpisodes_Click
         tMenu.DropDownItems.Add(mnuGetPlaycount_TVEpisodes)
     End Sub

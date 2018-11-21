@@ -168,8 +168,9 @@ Public Class dlgManualEdit
 
         Dim xmlP As New XmlTextReader(tempFile)
         ' Set the validation settings.
-        Dim settings As XmlReaderSettings = New XmlReaderSettings()
-        settings.ValidationType = ValidationType.Schema
+        Dim settings As XmlReaderSettings = New XmlReaderSettings With {
+            .ValidationType = ValidationType.Schema
+        }
         settings.ValidationFlags = settings.ValidationFlags Or XmlSchemaValidationFlags.ProcessInlineSchema
         settings.ValidationFlags = settings.ValidationFlags Or XmlSchemaValidationFlags.ReportValidationWarnings
 

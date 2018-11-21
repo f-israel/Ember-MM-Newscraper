@@ -83,8 +83,9 @@ Public Class dlgAddEditActor
 
                 pbActLoad.Visible = True
 
-                bwDownloadPic = New System.ComponentModel.BackgroundWorker
-                bwDownloadPic.WorkerSupportsCancellation = True
+                bwDownloadPic = New System.ComponentModel.BackgroundWorker With {
+                    .WorkerSupportsCancellation = True
+                }
                 bwDownloadPic.RunWorkerAsync()
             Else
                 MessageBox.Show(Master.eLang.GetString(159, "Specified URL is not valid."), Master.eLang.GetString(160, "Invalid URL"), MessageBoxButtons.OK, MessageBoxIcon.Exclamation)

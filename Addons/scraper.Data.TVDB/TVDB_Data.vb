@@ -236,9 +236,10 @@ Public Class TVDB_Data
 
         LoadSettings()
 
-        Dim Settings As New SpecialSettings
-        Settings.APIKey = _SpecialSettings.APIKey
-        Settings.Language = oDBTV.Language_Main
+        Dim Settings As New SpecialSettings With {
+            .APIKey = _SpecialSettings.APIKey,
+            .Language = oDBTV.Language_Main
+        }
 
         Dim nTVShow As MediaContainers.TVShow = Nothing
         Dim _scraper As New TVDBs.Scraper(Settings)
@@ -300,9 +301,10 @@ Public Class TVDB_Data
 
         LoadSettings()
 
-        Dim Settings As New SpecialSettings
-        Settings.APIKey = _SpecialSettings.APIKey
-        Settings.Language = oDBTVEpisode.Language_Main
+        Dim Settings As New SpecialSettings With {
+            .APIKey = _SpecialSettings.APIKey,
+            .Language = oDBTVEpisode.Language_Main
+        }
 
         Dim nTVEpisode As New MediaContainers.EpisodeDetails
         Dim _scraper As New TVDBs.Scraper(Settings)

@@ -5029,10 +5029,10 @@ Namespace MediaContainers
         End Sub
 
         Public Sub SortAndFilter(ByVal tDBElement As Database.DBElement)
-            Dim cSettings As New FilterSettings
-
-            cSettings.ContentType = tDBElement.ContentType
-            cSettings.MediaLanguage = tDBElement.Language_Main
+            Dim cSettings As New FilterSettings With {
+                .ContentType = tDBElement.ContentType,
+                .MediaLanguage = tDBElement.Language_Main
+            }
 
             Select Case tDBElement.ContentType
                 Case Enums.ContentType.Movie

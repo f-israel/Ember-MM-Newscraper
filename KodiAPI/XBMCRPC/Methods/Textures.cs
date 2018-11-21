@@ -1,9 +1,12 @@
-using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using XBMCRPC.List.Filter;
+using XBMCRPC.Textures;
+using XBMCRPC.Textures.Fields;
+
 namespace XBMCRPC.Methods
 {
-   public partial class Textures
+   public class Textures
    {
         private readonly Client _client;
           public Textures(Client client)
@@ -14,7 +17,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Retrieve all textures
                 /// </summary>
-        public async Task<XBMCRPC.Textures.GetTexturesResponse> GetTextures(XBMCRPC.List.Filter.TexturesAnd filter, XBMCRPC.Textures.Fields.Texture properties=null)
+        public async Task<GetTexturesResponse> GetTextures(TexturesAnd filter, Texture properties=null)
         {
             var jArgs = new JObject();
              if (properties != null)
@@ -27,13 +30,13 @@ namespace XBMCRPC.Methods
                  var jpropfilter = JToken.FromObject(filter, _client.Serializer);
                  jArgs.Add(new JProperty("filter", jpropfilter));
              }
-            return await _client.GetData<XBMCRPC.Textures.GetTexturesResponse>("Textures.GetTextures", jArgs);
+            return await _client.GetData<GetTexturesResponse>("Textures.GetTextures", jArgs);
         }
 
                 /// <summary>
                 /// Retrieve all textures
                 /// </summary>
-        public async Task<XBMCRPC.Textures.GetTexturesResponse> GetTextures(XBMCRPC.List.Filter.TexturesOr filter, XBMCRPC.Textures.Fields.Texture properties=null)
+        public async Task<GetTexturesResponse> GetTextures(TexturesOr filter, Texture properties=null)
         {
             var jArgs = new JObject();
              if (properties != null)
@@ -46,13 +49,13 @@ namespace XBMCRPC.Methods
                  var jpropfilter = JToken.FromObject(filter, _client.Serializer);
                  jArgs.Add(new JProperty("filter", jpropfilter));
              }
-            return await _client.GetData<XBMCRPC.Textures.GetTexturesResponse>("Textures.GetTextures", jArgs);
+            return await _client.GetData<GetTexturesResponse>("Textures.GetTextures", jArgs);
         }
 
                 /// <summary>
                 /// Retrieve all textures
                 /// </summary>
-        public async Task<XBMCRPC.Textures.GetTexturesResponse> GetTextures(XBMCRPC.List.Filter.Rule.Textures filter, XBMCRPC.Textures.Fields.Texture properties=null)
+        public async Task<GetTexturesResponse> GetTextures(Rule.Textures filter, Texture properties=null)
         {
             var jArgs = new JObject();
              if (properties != null)
@@ -65,13 +68,13 @@ namespace XBMCRPC.Methods
                  var jpropfilter = JToken.FromObject(filter, _client.Serializer);
                  jArgs.Add(new JProperty("filter", jpropfilter));
              }
-            return await _client.GetData<XBMCRPC.Textures.GetTexturesResponse>("Textures.GetTextures", jArgs);
+            return await _client.GetData<GetTexturesResponse>("Textures.GetTextures", jArgs);
         }
 
                 /// <summary>
                 /// Retrieve all textures
                 /// </summary>
-        public async Task<XBMCRPC.Textures.GetTexturesResponse> GetTextures(XBMCRPC.Textures.Fields.Texture properties=null)
+        public async Task<GetTexturesResponse> GetTextures(Texture properties=null)
         {
             var jArgs = new JObject();
              if (properties != null)
@@ -79,7 +82,7 @@ namespace XBMCRPC.Methods
                  var jpropproperties = JToken.FromObject(properties, _client.Serializer);
                  jArgs.Add(new JProperty("properties", jpropproperties));
              }
-            return await _client.GetData<XBMCRPC.Textures.GetTexturesResponse>("Textures.GetTextures", jArgs);
+            return await _client.GetData<GetTexturesResponse>("Textures.GetTextures", jArgs);
         }
 
                 /// <summary>

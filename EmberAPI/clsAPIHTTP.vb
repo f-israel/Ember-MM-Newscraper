@@ -370,9 +370,10 @@ Public Class HTTP
     ''' <remarks></remarks>
     Public Sub PrepareProxy()
         If Not String.IsNullOrEmpty(Master.eSettings.ProxyURI) AndAlso Master.eSettings.ProxyPort >= 0 Then
-            Dim wProxy As New WebProxy(Master.eSettings.ProxyURI, Master.eSettings.ProxyPort)
-            wProxy.BypassProxyOnLocal = True
-            'TODO Dekker500 - Verify if this Password/empty clause is required. Proxies can have usernames but blank passwords, no?
+            Dim wProxy As New WebProxy(Master.eSettings.ProxyURI, Master.eSettings.ProxyPort) With {
+                .BypassProxyOnLocal = True
+            }
+                'TODO Dekker500 - Verify if this Password/empty clause is required. Proxies can have usernames but blank passwords, no?
             If Not String.IsNullOrEmpty(Master.eSettings.ProxyCredentials.UserName) AndAlso
             Not String.IsNullOrEmpty(Master.eSettings.ProxyCredentials.Password) Then
                 wProxy.Credentials = Master.eSettings.ProxyCredentials
@@ -390,8 +391,9 @@ Public Class HTTP
     Public Sub StartDownloadImage(ByVal sURL As String)
         Clear()
         _URL = sURL
-        dThread = New Threading.Thread(AddressOf DownloadImage)
-        dThread.IsBackground = True
+        dThread = New Threading.Thread(AddressOf DownloadImage) With {
+            .IsBackground = True
+        }
         dThread.Start()
     End Sub
 

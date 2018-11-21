@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
+
 namespace XBMCRPC.Video.Fields
 {
    public enum MusicVideoItem
@@ -26,7 +25,7 @@ namespace XBMCRPC.Video.Fields
        resume,
        dateadded,
        tag,
-       art,
+       art
    }
    public class MusicVideo : List<MusicVideoItem>
    {

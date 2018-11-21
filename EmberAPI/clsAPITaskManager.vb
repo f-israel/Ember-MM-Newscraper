@@ -1255,9 +1255,10 @@ Public Class TaskManager
             Threading.Thread.Sleep(50)
         End While
         RaiseEvent ProgressUpdate(New ProgressValue With {.EventType = Enums.TaskManagerEventType.TaskManagerStarted, .Message = "TaskManager is running"})
-        bwTaskManager = New System.ComponentModel.BackgroundWorker
-        bwTaskManager.WorkerReportsProgress = True
-        bwTaskManager.WorkerSupportsCancellation = True
+        bwTaskManager = New System.ComponentModel.BackgroundWorker With {
+            .WorkerReportsProgress = True,
+            .WorkerSupportsCancellation = True
+        }
         bwTaskManager.RunWorkerAsync()
     End Sub
 

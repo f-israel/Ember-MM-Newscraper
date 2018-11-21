@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
+
 namespace XBMCRPC.List.Fields
 {
    public enum FilesItem
@@ -74,7 +73,7 @@ namespace XBMCRPC.List.Fields
        dateadded,
        size,
        lastmodified,
-       mimetype,
+       mimetype
    }
    public class Files : List<FilesItem>
    {

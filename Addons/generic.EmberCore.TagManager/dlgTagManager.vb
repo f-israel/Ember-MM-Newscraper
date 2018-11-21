@@ -165,9 +165,10 @@ Public Class dlgTagManager
         If lbTags.Items.Count = 0 Then
             For Each sRow As DataRow In dtMovieTags.Rows
                 If Not String.IsNullOrEmpty(sRow.Item("strTag").ToString) Then
-                    Dim tmpnewTag As New SyncTag
-                    tmpnewTag.ID = CInt(sRow.Item("idTag"))
-                    tmpnewTag.Name = CStr(sRow.Item("strTag"))
+                    Dim tmpnewTag As New SyncTag With {
+                        .ID = CInt(sRow.Item("idTag")),
+                        .Name = CStr(sRow.Item("strTag"))
+                    }
                     Dim tmpTag = Master.DB.Load_Tag_Movie(CInt(sRow.Item("idTag")))
                     tmpnewTag.Movies = tmpTag.Movies
                     globalMovieTags.Add(tmpnewTag)

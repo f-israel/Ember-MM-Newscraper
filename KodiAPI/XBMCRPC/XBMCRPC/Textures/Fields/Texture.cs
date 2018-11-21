@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
+
 namespace XBMCRPC.Textures.Fields
 {
    public enum TextureItem
@@ -11,7 +10,7 @@ namespace XBMCRPC.Textures.Fields
        cachedurl,
        lasthashcheck,
        imagehash,
-       sizes,
+       sizes
    }
    public class Texture : List<TextureItem>
    {

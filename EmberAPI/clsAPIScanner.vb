@@ -1339,13 +1339,15 @@ Public Class Scanner
                         Else
                             MoviePaths.Add(FileUtils.Common.RemoveStackingMarkers(tFile).ToLower)
                         End If
-                        currMovieContainer = New Database.DBElement(Enums.ContentType.Movie)
-                        currMovieContainer.ActorThumbs = New List(Of String)
-                        currMovieContainer.Filename = tFile
-                        currMovieContainer.IsSingle = True
-                        currMovieContainer.Language = sSource.Language
-                        currMovieContainer.Source = sSource
-                        currMovieContainer.Subtitles = New List(Of MediaContainers.Subtitle)
+
+                        currMovieContainer = New Database.DBElement(Enums.ContentType.Movie) With {
+                            .ActorThumbs = New List(Of String),
+                            .Filename = tFile,
+                            .IsSingle = True,
+                            .Language = sSource.Language,
+                            .Source = sSource,
+                            .Subtitles = New List(Of MediaContainers.Subtitle)
+                        }
                         Load_Movie(currMovieContainer, True)
                         bwPrelim.ReportProgress(-1, New ProgressValue With {.EventType = Enums.ScannerEventType.Added_Movie, .ID = currMovieContainer.ID, .Message = currMovieContainer.Movie.Title})
                     End If
@@ -1381,13 +1383,14 @@ Public Class Scanner
                     End If
 
                     For Each s As String In fList
-                        currMovieContainer = New Database.DBElement(Enums.ContentType.Movie)
-                        currMovieContainer.ActorThumbs = New List(Of String)
-                        currMovieContainer.Filename = s
-                        currMovieContainer.IsSingle = sSource.IsSingle
-                        currMovieContainer.Language = sSource.Language
-                        currMovieContainer.Source = sSource
-                        currMovieContainer.Subtitles = New List(Of MediaContainers.Subtitle)
+                        currMovieContainer = New Database.DBElement(Enums.ContentType.Movie) With {
+                            .ActorThumbs = New List(Of String),
+                            .Filename = s,
+                            .IsSingle = sSource.IsSingle,
+                            .Language = sSource.Language,
+                            .Source = sSource,
+                            .Subtitles = New List(Of MediaContainers.Subtitle)
+                        }
                         Load_Movie(currMovieContainer, True)
                         bwPrelim.ReportProgress(-1, New ProgressValue With {.EventType = Enums.ScannerEventType.Added_Movie, .ID = currMovieContainer.ID, .Message = currMovieContainer.Movie.Title})
                     Next
@@ -1498,12 +1501,13 @@ Public Class Scanner
 
             'tv show folder as a source
             If sSource.IsSingle OrElse forcepathastvshowfolder Then
-                currShowContainer = New Database.DBElement(Enums.ContentType.TVShow)
-                currShowContainer.EpisodeSorting = sSource.EpisodeSorting
-                currShowContainer.Language = sSource.Language
-                currShowContainer.Ordering = sSource.Ordering
-                currShowContainer.ShowPath = dInfo.FullName
-                currShowContainer.Source = sSource
+                currShowContainer = New Database.DBElement(Enums.ContentType.TVShow) With {
+                    .EpisodeSorting = sSource.EpisodeSorting,
+                    .Language = sSource.Language,
+                    .Ordering = sSource.Ordering,
+                    .ShowPath = dInfo.FullName,
+                    .Source = sSource
+                }
                 ScanForFiles_TV(currShowContainer, dInfo.FullName)
 
                 If Master.eSettings.TVScanOrderModify Then
@@ -1531,12 +1535,13 @@ Public Class Scanner
                 End If
             Else
                 For Each inDir As DirectoryInfo In dInfo.GetDirectories.Where(Function(d) IsValidDir(d, True)).OrderBy(Function(d) d.Name)
-                    currShowContainer = New Database.DBElement(Enums.ContentType.TVShow)
-                    currShowContainer.EpisodeSorting = sSource.EpisodeSorting
-                    currShowContainer.Language = sSource.Language
-                    currShowContainer.Ordering = sSource.Ordering
-                    currShowContainer.ShowPath = inDir.FullName
-                    currShowContainer.Source = sSource
+                    currShowContainer = New Database.DBElement(Enums.ContentType.TVShow) With {
+                        .EpisodeSorting = sSource.EpisodeSorting,
+                        .Language = sSource.Language,
+                        .Ordering = sSource.Ordering,
+                        .ShowPath = inDir.FullName,
+                        .Source = sSource
+                    }
                     ScanForFiles_TV(currShowContainer, inDir.FullName)
 
                     inInfo = New DirectoryInfo(inDir.FullName)
@@ -1600,9 +1605,10 @@ Public Class Scanner
     End Sub
 
     Public Sub Start(ByVal Scan As Structures.ScanOrClean, ByVal SourceID As Long, ByVal Folder As String)
-        bwPrelim = New System.ComponentModel.BackgroundWorker
-        bwPrelim.WorkerReportsProgress = True
-        bwPrelim.WorkerSupportsCancellation = True
+        bwPrelim = New System.ComponentModel.BackgroundWorker With {
+            .WorkerReportsProgress = True,
+            .WorkerSupportsCancellation = True
+        }
         bwPrelim.RunWorkerAsync(New Arguments With {.Scan = Scan, .SourceID = SourceID, .Folder = Folder})
     End Sub
 

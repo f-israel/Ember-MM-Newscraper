@@ -1,11 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
+using XBMCRPC.Item.Details;
+
 namespace XBMCRPC.Library.Details
 {
-   public class Genre : XBMCRPC.Item.Details.Base
+   public class Genre : Base
    {
        public int genreid { get; set; }
        public string thumbnail { get; set; }

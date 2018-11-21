@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
+
 namespace XBMCRPC.Audio.Fields
 {
    public enum ArtistItem
@@ -20,7 +19,7 @@ namespace XBMCRPC.Audio.Fields
        musicbrainzartistid,
        fanart,
        thumbnail,
-       compilationartist,
+       compilationartist
    }
    public class Artist : List<ArtistItem>
    {

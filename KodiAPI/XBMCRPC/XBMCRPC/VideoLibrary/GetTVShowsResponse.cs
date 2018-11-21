@@ -1,13 +1,12 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
+using XBMCRPC.List;
+using XBMCRPC.Video.Details;
+
 namespace XBMCRPC.VideoLibrary
 {
    public class GetTVShowsResponse
    {
-       public XBMCRPC.List.LimitsReturned limits { get; set; }
-       public global::System.Collections.Generic.List<XBMCRPC.Video.Details.TVShow> tvshows { get; set; }
+       public LimitsReturned limits { get; set; }
+       public List<TVShow> tvshows { get; set; }
     }
 }

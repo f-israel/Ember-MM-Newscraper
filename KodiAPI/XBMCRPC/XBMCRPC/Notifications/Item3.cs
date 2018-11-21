@@ -1,8 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
+using XBMCRPC.Notifications.Item;
+
 namespace XBMCRPC.Notifications
 {
    public class Item3
@@ -11,6 +8,6 @@ namespace XBMCRPC.Notifications
        public int season { get; set; }
        public string showtitle { get; set; }
        public string title { get; set; }
-       public XBMCRPC.Notifications.Item.Type type { get; set; }
+       public Type type { get; set; }
     }
 }

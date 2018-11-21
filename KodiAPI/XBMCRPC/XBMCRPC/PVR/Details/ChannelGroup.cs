@@ -1,18 +1,18 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
+using XBMCRPC.Item.Details;
+using XBMCRPC.List;
+using XBMCRPC.PVR.Channel;
+
 namespace XBMCRPC.PVR.Details
 {
-   public class ChannelGroup : XBMCRPC.Item.Details.Base
+   public class ChannelGroup : Base
    {
        public int channelgroupid { get; set; }
-       public XBMCRPC.PVR.Channel.Type channeltype { get; set; }
-   public class Extended : XBMCRPC.PVR.Details.ChannelGroup
+       public Type channeltype { get; set; }
+   public class Extended : ChannelGroup
    {
-       public global::System.Collections.Generic.List<XBMCRPC.PVR.Details.Channel> channels { get; set; }
-       public XBMCRPC.List.LimitsReturned limits { get; set; }
+       public List<Channel> channels { get; set; }
+       public LimitsReturned limits { get; set; }
     }
     }
 }

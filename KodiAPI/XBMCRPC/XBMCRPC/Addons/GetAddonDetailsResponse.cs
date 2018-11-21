@@ -1,13 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
+using XBMCRPC.Addon;
+using XBMCRPC.List;
+
 namespace XBMCRPC.Addons
 {
    public class GetAddonDetailsResponse
    {
-       public XBMCRPC.Addon.Details addon { get; set; }
-       public XBMCRPC.List.LimitsReturned limits { get; set; }
+       public Details addon { get; set; }
+       public LimitsReturned limits { get; set; }
     }
 }

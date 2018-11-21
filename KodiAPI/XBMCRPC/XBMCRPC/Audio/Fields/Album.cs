@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
+
 namespace XBMCRPC.Audio.Fields
 {
    public enum AlbumItem
@@ -25,7 +24,7 @@ namespace XBMCRPC.Audio.Fields
        playcount,
        genreid,
        artistid,
-       displayartist,
+       displayartist
    }
    public class Album : List<AlbumItem>
    {

@@ -436,8 +436,9 @@ Public Class FileManagerExternalModule
         _setup.lvPaths.Items.Clear()
         Dim lvItem As ListViewItem
         For Each e As SettingItem In eSettings.ModuleSettings
-            lvItem = New ListViewItem
-            lvItem.Text = e.Name
+            lvItem = New ListViewItem With {
+                .Text = e.Name
+            }
             lvItem.SubItems.Add(e.FolderPath)
             lvItem.SubItems.Add(e.Type.ToString)
             _setup.lvPaths.Items.Add(lvItem)
@@ -458,9 +459,10 @@ Public Class FileManagerExternalModule
         mnu.DropDownItems.Clear()
         cmnuMediaCustomList.RemoveAll(Function(b) True)
 
-        Dim FolderSubMenuItemCustom As New ToolStripMenuItem
-        FolderSubMenuItemCustom.Text = String.Concat(Master.eLang.GetString(338, "Select path"), "...")
-        FolderSubMenuItemCustom.Tag = New SettingItem With {.Name = "CUSTOM", .FolderPath = "CUSTOM", .Type = ContentType}
+        Dim FolderSubMenuItemCustom As New ToolStripMenuItem With {
+            .Text = String.Concat(Master.eLang.GetString(338, "Select path"), "..."),
+            .Tag = New SettingItem With {.Name = "CUSTOM", .FolderPath = "CUSTOM", .Type = ContentType}
+        }
         mnu.DropDownItems.Add(FolderSubMenuItemCustom)
         AddHandler FolderSubMenuItemCustom.Click, AddressOf FolderSubMenuItem_Click
 
@@ -470,9 +472,10 @@ Public Class FileManagerExternalModule
         End If
 
         For Each e In eSettings.ModuleSettings.Where(Function(f) f.Type = ContentType)
-            Dim FolderSubMenuItem As New ToolStripMenuItem
-            FolderSubMenuItem.Text = e.Name
-            FolderSubMenuItem.Tag = New SettingItem With {.Name = e.Name, .FolderPath = e.FolderPath, .Type = ContentType}
+            Dim FolderSubMenuItem As New ToolStripMenuItem With {
+                .Text = e.Name,
+                .Tag = New SettingItem With {.Name = e.Name, .FolderPath = e.FolderPath, .Type = ContentType}
+            }
             cmnuMediaCustomList.Add(FolderSubMenuItem)
             AddHandler FolderSubMenuItem.Click, AddressOf FolderSubMenuItem_Click
         Next

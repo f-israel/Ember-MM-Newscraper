@@ -1,9 +1,11 @@
-using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using XBMCRPC.System;
+using XBMCRPC.System.Property;
+
 namespace XBMCRPC.Methods
 {
-   public partial class System
+   public class System
    {
         private readonly Client _client;
           public System(Client client)
@@ -23,7 +25,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Retrieves the values of the given properties
                 /// </summary>
-        public async Task<XBMCRPC.System.Property.Value> GetProperties(XBMCRPC.System.GetProperties_properties properties=null)
+        public async Task<Value> GetProperties(GetProperties_properties properties=null)
         {
             var jArgs = new JObject();
              if (properties != null)
@@ -31,7 +33,7 @@ namespace XBMCRPC.Methods
                  var jpropproperties = JToken.FromObject(properties, _client.Serializer);
                  jArgs.Add(new JProperty("properties", jpropproperties));
              }
-            return await _client.GetData<XBMCRPC.System.Property.Value>("System.GetProperties", jArgs);
+            return await _client.GetData<Value>("System.GetProperties", jArgs);
         }
 
                 /// <summary>

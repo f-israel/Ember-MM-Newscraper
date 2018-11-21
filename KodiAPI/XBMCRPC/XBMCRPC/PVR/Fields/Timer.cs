@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
+
 namespace XBMCRPC.PVR.Fields
 {
    public enum TimerItem
@@ -23,7 +22,7 @@ namespace XBMCRPC.PVR.Fields
        endmargin,
        state,
        file,
-       directory,
+       directory
    }
    public class Timer : List<TimerItem>
    {

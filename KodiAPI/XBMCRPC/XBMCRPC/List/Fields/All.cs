@@ -1,8 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
+
 namespace XBMCRPC.List.Fields
 {
    public enum AllItem
@@ -78,7 +77,7 @@ namespace XBMCRPC.List.Fields
        locked,
        channelnumber,
        starttime,
-       endtime,
+       endtime
    }
    public class All : List<AllItem>
    {

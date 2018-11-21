@@ -1,9 +1,12 @@
-using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using XBMCRPC.Application;
+using XBMCRPC.Application.Property;
+using XBMCRPC.Global;
+
 namespace XBMCRPC.Methods
 {
-   public partial class Application
+   public class Application
    {
         private readonly Client _client;
           public Application(Client client)
@@ -14,7 +17,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Retrieves the values of the given properties
                 /// </summary>
-        public async Task<XBMCRPC.Application.Property.Value> GetProperties(XBMCRPC.Application.GetProperties_properties properties=null)
+        public async Task<Value> GetProperties(GetProperties_properties properties=null)
         {
             var jArgs = new JObject();
              if (properties != null)
@@ -22,7 +25,7 @@ namespace XBMCRPC.Methods
                  var jpropproperties = JToken.FromObject(properties, _client.Serializer);
                  jArgs.Add(new JProperty("properties", jpropproperties));
              }
-            return await _client.GetData<XBMCRPC.Application.Property.Value>("Application.GetProperties", jArgs);
+            return await _client.GetData<Value>("Application.GetProperties", jArgs);
         }
 
                 /// <summary>
@@ -51,7 +54,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Toggle mute/unmute
                 /// </summary>
-        public async Task<bool> SetMute(XBMCRPC.Global.Toggle2 mute)
+        public async Task<bool> SetMute(Toggle2 mute)
         {
             var jArgs = new JObject();
              if (mute != null)
@@ -88,7 +91,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Set the current volume
                 /// </summary>
-        public async Task<int> SetVolume(XBMCRPC.Global.IncrementDecrement volume)
+        public async Task<int> SetVolume(IncrementDecrement volume)
         {
             var jArgs = new JObject();
              if (volume != null)
@@ -108,9 +111,9 @@ namespace XBMCRPC.Methods
             return await _client.GetData<int>("Application.SetVolume", jArgs);
         }
 
-        public delegate void OnVolumeChangedDelegate(string sender=null, XBMCRPC.Application.OnVolumeChanged_data data=null);
+        public delegate void OnVolumeChangedDelegate(string sender=null, OnVolumeChanged_data data=null);
         public event OnVolumeChangedDelegate OnVolumeChanged;
-        internal void RaiseOnVolumeChanged(string sender=null, XBMCRPC.Application.OnVolumeChanged_data data=null)
+        internal void RaiseOnVolumeChanged(string sender=null, OnVolumeChanged_data data=null)
         {
             if (OnVolumeChanged != null)
             {

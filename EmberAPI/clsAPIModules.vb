@@ -266,11 +266,12 @@ Public Class ModulesManager
                         Dim ProcessorModule As Interfaces.GenericModule 'Object
                         ProcessorModule = CType(Activator.CreateInstance(fileType), Interfaces.GenericModule)
 
-                        Dim GenericModule As New _externalGenericModuleClass
-                        GenericModule.ProcessorModule = ProcessorModule
-                        GenericModule.AssemblyName = tAssemblyItem.AssemblyName
-                        GenericModule.AssemblyFileName = tAssemblyItem.Assembly.ManifestModule.Name
-                        GenericModule.Type = ProcessorModule.ModuleType
+                        Dim GenericModule As New _externalGenericModuleClass With {
+                            .ProcessorModule = ProcessorModule,
+                            .AssemblyName = tAssemblyItem.AssemblyName,
+                            .AssemblyFileName = tAssemblyItem.Assembly.ManifestModule.Name,
+                            .Type = ProcessorModule.ModuleType
+                        }
                         externalGenericModules.Add(GenericModule)
 
                         GenericModule.ProcessorModule.Init(GenericModule.AssemblyName, GenericModule.AssemblyFileName)
@@ -295,10 +296,11 @@ Public Class ModulesManager
                         Dim ProcessorModule As Interfaces.ScraperModule_Data_Movie
                         ProcessorModule = CType(Activator.CreateInstance(fileType), Interfaces.ScraperModule_Data_Movie)
 
-                        Dim ScraperModule As New _externalScraperModuleClass_Data_Movie
-                        ScraperModule.ProcessorModule = ProcessorModule
-                        ScraperModule.AssemblyName = tAssemblyItem.AssemblyName
-                        ScraperModule.AssemblyFileName = tAssemblyItem.Assembly.ManifestModule.Name
+                        Dim ScraperModule As New _externalScraperModuleClass_Data_Movie With {
+                            .ProcessorModule = ProcessorModule,
+                            .AssemblyName = tAssemblyItem.AssemblyName,
+                            .AssemblyFileName = tAssemblyItem.Assembly.ManifestModule.Name
+                        }
                         externalScrapersModules_Data_Movie.Add(ScraperModule)
 
                         logger.Trace(String.Concat("[ModulesManager] [LoadModules] Scraper Added: ", ScraperModule.AssemblyName, "_", ScraperModule.ContentType))
@@ -322,10 +324,11 @@ Public Class ModulesManager
                         Dim ProcessorModule As Interfaces.ScraperModule_Image_Movie
                         ProcessorModule = CType(Activator.CreateInstance(fileType), Interfaces.ScraperModule_Image_Movie)
 
-                        Dim ScraperModule As New _externalScraperModuleClass_Image_Movie
-                        ScraperModule.ProcessorModule = ProcessorModule
-                        ScraperModule.AssemblyName = tAssemblyItem.AssemblyName
-                        ScraperModule.AssemblyFileName = tAssemblyItem.Assembly.ManifestModule.Name
+                        Dim ScraperModule As New _externalScraperModuleClass_Image_Movie With {
+                            .ProcessorModule = ProcessorModule,
+                            .AssemblyName = tAssemblyItem.AssemblyName,
+                            .AssemblyFileName = tAssemblyItem.Assembly.ManifestModule.Name
+                        }
                         externalScrapersModules_Image_Movie.Add(ScraperModule)
 
                         logger.Trace(String.Concat("[ModulesManager] [LoadModules] Scraper Added: ", ScraperModule.AssemblyName, "_", ScraperModule.ContentType))
@@ -349,10 +352,11 @@ Public Class ModulesManager
                         Dim ProcessorModule As Interfaces.ScraperModule_Trailer_Movie
                         ProcessorModule = CType(Activator.CreateInstance(fileType), Interfaces.ScraperModule_Trailer_Movie)
 
-                        Dim ScraperModule As New _externalScraperModuleClass_Trailer_Movie
-                        ScraperModule.ProcessorModule = ProcessorModule
-                        ScraperModule.AssemblyName = tAssemblyItem.AssemblyName
-                        ScraperModule.AssemblyFileName = tAssemblyItem.Assembly.ManifestModule.Name
+                        Dim ScraperModule As New _externalScraperModuleClass_Trailer_Movie With {
+                            .ProcessorModule = ProcessorModule,
+                            .AssemblyName = tAssemblyItem.AssemblyName,
+                            .AssemblyFileName = tAssemblyItem.Assembly.ManifestModule.Name
+                        }
                         externalScrapersModules_Trailer_Movie.Add(ScraperModule)
 
                         logger.Trace(String.Concat("[ModulesManager] [LoadModules] Scraper Added: ", ScraperModule.AssemblyName, "_", ScraperModule.ContentType))
@@ -376,10 +380,11 @@ Public Class ModulesManager
                         Dim ProcessorModule As Interfaces.ScraperModule_Theme_Movie
                         ProcessorModule = CType(Activator.CreateInstance(fileType), Interfaces.ScraperModule_Theme_Movie)
 
-                        Dim ScraperModule As New _externalScraperModuleClass_Theme_Movie
-                        ScraperModule.ProcessorModule = ProcessorModule
-                        ScraperModule.AssemblyName = tAssemblyItem.AssemblyName
-                        ScraperModule.AssemblyFileName = tAssemblyItem.Assembly.ManifestModule.Name
+                        Dim ScraperModule As New _externalScraperModuleClass_Theme_Movie With {
+                            .ProcessorModule = ProcessorModule,
+                            .AssemblyName = tAssemblyItem.AssemblyName,
+                            .AssemblyFileName = tAssemblyItem.Assembly.ManifestModule.Name
+                        }
                         externalScrapersModules_Theme_Movie.Add(ScraperModule)
 
                         logger.Trace(String.Concat("[ModulesManager] [LoadModules] Scraper Added: ", ScraperModule.AssemblyName, "_", ScraperModule.ContentType))
@@ -403,10 +408,11 @@ Public Class ModulesManager
                         Dim ProcessorModule As Interfaces.ScraperModule_Data_MovieSet
                         ProcessorModule = CType(Activator.CreateInstance(fileType), Interfaces.ScraperModule_Data_MovieSet)
 
-                        Dim ScraperModule As New _externalScraperModuleClass_Data_MovieSet
-                        ScraperModule.ProcessorModule = ProcessorModule
-                        ScraperModule.AssemblyName = tAssemblyItem.AssemblyName
-                        ScraperModule.AssemblyFileName = tAssemblyItem.Assembly.ManifestModule.Name
+                        Dim ScraperModule As New _externalScraperModuleClass_Data_MovieSet With {
+                            .ProcessorModule = ProcessorModule,
+                            .AssemblyName = tAssemblyItem.AssemblyName,
+                            .AssemblyFileName = tAssemblyItem.Assembly.ManifestModule.Name
+                        }
                         externalScrapersModules_Data_MovieSet.Add(ScraperModule)
 
                         logger.Trace(String.Concat("[ModulesManager] [LoadModules] Scraper Added: ", ScraperModule.AssemblyName, "_", ScraperModule.ContentType))
@@ -430,10 +436,11 @@ Public Class ModulesManager
                         Dim ProcessorModule As Interfaces.ScraperModule_Image_MovieSet
                         ProcessorModule = CType(Activator.CreateInstance(fileType), Interfaces.ScraperModule_Image_MovieSet)
 
-                        Dim ScraperModule As New _externalScraperModuleClass_Image_MovieSet
-                        ScraperModule.ProcessorModule = ProcessorModule
-                        ScraperModule.AssemblyName = tAssemblyItem.AssemblyName
-                        ScraperModule.AssemblyFileName = tAssemblyItem.Assembly.ManifestModule.Name
+                        Dim ScraperModule As New _externalScraperModuleClass_Image_MovieSet With {
+                            .ProcessorModule = ProcessorModule,
+                            .AssemblyName = tAssemblyItem.AssemblyName,
+                            .AssemblyFileName = tAssemblyItem.Assembly.ManifestModule.Name
+                        }
                         externalScrapersModules_Image_MovieSet.Add(ScraperModule)
 
                         logger.Trace(String.Concat("[ModulesManager] [LoadModules] Scraper Added: ", ScraperModule.AssemblyName, "_", ScraperModule.ContentType))
@@ -457,10 +464,11 @@ Public Class ModulesManager
                         Dim ProcessorModule As Interfaces.ScraperModule_Data_TV
                         ProcessorModule = CType(Activator.CreateInstance(fileType), Interfaces.ScraperModule_Data_TV)
 
-                        Dim ScraperModule As New _externalScraperModuleClass_Data_TV
-                        ScraperModule.ProcessorModule = ProcessorModule
-                        ScraperModule.AssemblyName = tAssemblyItem.AssemblyName
-                        ScraperModule.AssemblyFileName = tAssemblyItem.Assembly.ManifestModule.Name
+                        Dim ScraperModule As New _externalScraperModuleClass_Data_TV With {
+                            .ProcessorModule = ProcessorModule,
+                            .AssemblyName = tAssemblyItem.AssemblyName,
+                            .AssemblyFileName = tAssemblyItem.Assembly.ManifestModule.Name
+                        }
                         externalScrapersModules_Data_TV.Add(ScraperModule)
 
                         logger.Trace(String.Concat("[ModulesManager] [LoadModules] Scraper Added: ", ScraperModule.AssemblyName, "_", ScraperModule.ContentType))
@@ -484,10 +492,11 @@ Public Class ModulesManager
                         Dim ProcessorModule As Interfaces.ScraperModule_Image_TV
                         ProcessorModule = CType(Activator.CreateInstance(fileType), Interfaces.ScraperModule_Image_TV)
 
-                        Dim ScraperModule As New _externalScraperModuleClass_Image_TV
-                        ScraperModule.ProcessorModule = ProcessorModule
-                        ScraperModule.AssemblyName = tAssemblyItem.AssemblyName
-                        ScraperModule.AssemblyFileName = tAssemblyItem.Assembly.ManifestModule.Name
+                        Dim ScraperModule As New _externalScraperModuleClass_Image_TV With {
+                            .ProcessorModule = ProcessorModule,
+                            .AssemblyName = tAssemblyItem.AssemblyName,
+                            .AssemblyFileName = tAssemblyItem.Assembly.ManifestModule.Name
+                        }
                         externalScrapersModules_Image_TV.Add(ScraperModule)
 
                         logger.Trace(String.Concat("[ModulesManager] [LoadModules] Scraper Added: ", ScraperModule.AssemblyName, "_", ScraperModule.ContentType))
@@ -511,10 +520,11 @@ Public Class ModulesManager
                         Dim ProcessorModule As Interfaces.ScraperModule_Theme_TV
                         ProcessorModule = CType(Activator.CreateInstance(fileType), Interfaces.ScraperModule_Theme_TV)
 
-                        Dim ScraperModule As New _externalScraperModuleClass_Theme_TV
-                        ScraperModule.ProcessorModule = ProcessorModule
-                        ScraperModule.AssemblyName = tAssemblyItem.AssemblyName
-                        ScraperModule.AssemblyFileName = tAssemblyItem.Assembly.ManifestModule.Name
+                        Dim ScraperModule As New _externalScraperModuleClass_Theme_TV With {
+                            .ProcessorModule = ProcessorModule,
+                            .AssemblyName = tAssemblyItem.AssemblyName,
+                            .AssemblyFileName = tAssemblyItem.Assembly.ManifestModule.Name
+                        }
                         externalScrapersModules_Theme_TV.Add(ScraperModule)
 
                         logger.Trace(String.Concat("[ModulesManager] [LoadModules] Scraper Added: ", ScraperModule.AssemblyName, "_", ScraperModule.ContentType))
@@ -800,92 +810,102 @@ Public Class ModulesManager
         End While
 
         For Each _externalProcessorModule As _externalGenericModuleClass In externalGenericModules
-            Dim t As New _XMLEmberModuleClass
-            t.AssemblyName = _externalProcessorModule.AssemblyName
-            t.AssemblyFileName = _externalProcessorModule.AssemblyFileName
-            t.GenericEnabled = _externalProcessorModule.ProcessorModule.Enabled
-            t.ContentType = _externalProcessorModule.ContentType
+            Dim t As New _XMLEmberModuleClass With {
+                .AssemblyName = _externalProcessorModule.AssemblyName,
+                .AssemblyFileName = _externalProcessorModule.AssemblyFileName,
+                .GenericEnabled = _externalProcessorModule.ProcessorModule.Enabled,
+                .ContentType = _externalProcessorModule.ContentType
+            }
             tmpForXML.Add(t)
         Next
         For Each _externalScraperModule As _externalScraperModuleClass_Data_Movie In externalScrapersModules_Data_Movie
-            Dim t As New _XMLEmberModuleClass
-            t.AssemblyName = _externalScraperModule.AssemblyName
-            t.AssemblyFileName = _externalScraperModule.AssemblyFileName
-            t.ModuleEnabled = _externalScraperModule.ProcessorModule.ScraperEnabled
-            t.ModuleOrder = _externalScraperModule.ModuleOrder
-            t.ContentType = _externalScraperModule.ContentType
+            Dim t As New _XMLEmberModuleClass With {
+                .AssemblyName = _externalScraperModule.AssemblyName,
+                .AssemblyFileName = _externalScraperModule.AssemblyFileName,
+                .ModuleEnabled = _externalScraperModule.ProcessorModule.ScraperEnabled,
+                .ModuleOrder = _externalScraperModule.ModuleOrder,
+                .ContentType = _externalScraperModule.ContentType
+            }
             tmpForXML.Add(t)
         Next
         For Each _externalScraperModule As _externalScraperModuleClass_Data_MovieSet In externalScrapersModules_Data_MovieSet
-            Dim t As New _XMLEmberModuleClass
-            t.AssemblyName = _externalScraperModule.AssemblyName
-            t.AssemblyFileName = _externalScraperModule.AssemblyFileName
-            t.ModuleEnabled = _externalScraperModule.ProcessorModule.ScraperEnabled
-            t.ModuleOrder = _externalScraperModule.ModuleOrder
-            t.ContentType = _externalScraperModule.ContentType
+            Dim t As New _XMLEmberModuleClass With {
+                .AssemblyName = _externalScraperModule.AssemblyName,
+                .AssemblyFileName = _externalScraperModule.AssemblyFileName,
+                .ModuleEnabled = _externalScraperModule.ProcessorModule.ScraperEnabled,
+                .ModuleOrder = _externalScraperModule.ModuleOrder,
+                .ContentType = _externalScraperModule.ContentType
+            }
             tmpForXML.Add(t)
         Next
         For Each _externalScraperModule As _externalScraperModuleClass_Data_TV In externalScrapersModules_Data_TV
-            Dim t As New _XMLEmberModuleClass
-            t.AssemblyName = _externalScraperModule.AssemblyName
-            t.AssemblyFileName = _externalScraperModule.AssemblyFileName
-            t.ModuleEnabled = _externalScraperModule.ProcessorModule.ScraperEnabled
-            t.ModuleOrder = _externalScraperModule.ModuleOrder
-            t.ContentType = _externalScraperModule.ContentType
+            Dim t As New _XMLEmberModuleClass With {
+                .AssemblyName = _externalScraperModule.AssemblyName,
+                .AssemblyFileName = _externalScraperModule.AssemblyFileName,
+                .ModuleEnabled = _externalScraperModule.ProcessorModule.ScraperEnabled,
+                .ModuleOrder = _externalScraperModule.ModuleOrder,
+                .ContentType = _externalScraperModule.ContentType
+            }
             tmpForXML.Add(t)
         Next
         For Each _externalScraperModule As _externalScraperModuleClass_Image_Movie In externalScrapersModules_Image_Movie
-            Dim t As New _XMLEmberModuleClass
-            t.AssemblyName = _externalScraperModule.AssemblyName
-            t.AssemblyFileName = _externalScraperModule.AssemblyFileName
-            t.ModuleEnabled = _externalScraperModule.ProcessorModule.ScraperEnabled
-            t.ModuleOrder = _externalScraperModule.ModuleOrder
-            t.ContentType = _externalScraperModule.ContentType
+            Dim t As New _XMLEmberModuleClass With {
+                .AssemblyName = _externalScraperModule.AssemblyName,
+                .AssemblyFileName = _externalScraperModule.AssemblyFileName,
+                .ModuleEnabled = _externalScraperModule.ProcessorModule.ScraperEnabled,
+                .ModuleOrder = _externalScraperModule.ModuleOrder,
+                .ContentType = _externalScraperModule.ContentType
+            }
             tmpForXML.Add(t)
         Next
         For Each _externalScraperModule As _externalScraperModuleClass_Image_MovieSet In externalScrapersModules_Image_MovieSet
-            Dim t As New _XMLEmberModuleClass
-            t.AssemblyName = _externalScraperModule.AssemblyName
-            t.AssemblyFileName = _externalScraperModule.AssemblyFileName
-            t.ModuleEnabled = _externalScraperModule.ProcessorModule.ScraperEnabled
-            t.ModuleOrder = _externalScraperModule.ModuleOrder
-            t.ContentType = _externalScraperModule.ContentType
+            Dim t As New _XMLEmberModuleClass With {
+                .AssemblyName = _externalScraperModule.AssemblyName,
+                .AssemblyFileName = _externalScraperModule.AssemblyFileName,
+                .ModuleEnabled = _externalScraperModule.ProcessorModule.ScraperEnabled,
+                .ModuleOrder = _externalScraperModule.ModuleOrder,
+                .ContentType = _externalScraperModule.ContentType
+            }
             tmpForXML.Add(t)
         Next
         For Each _externalScraperModule As _externalScraperModuleClass_Image_TV In externalScrapersModules_Image_TV
-            Dim t As New _XMLEmberModuleClass
-            t.AssemblyName = _externalScraperModule.AssemblyName
-            t.AssemblyFileName = _externalScraperModule.AssemblyFileName
-            t.ModuleEnabled = _externalScraperModule.ProcessorModule.ScraperEnabled
-            t.ModuleOrder = _externalScraperModule.ModuleOrder
-            t.ContentType = _externalScraperModule.ContentType
+            Dim t As New _XMLEmberModuleClass With {
+                .AssemblyName = _externalScraperModule.AssemblyName,
+                .AssemblyFileName = _externalScraperModule.AssemblyFileName,
+                .ModuleEnabled = _externalScraperModule.ProcessorModule.ScraperEnabled,
+                .ModuleOrder = _externalScraperModule.ModuleOrder,
+                .ContentType = _externalScraperModule.ContentType
+            }
             tmpForXML.Add(t)
         Next
         For Each _externalScraperModule As _externalScraperModuleClass_Theme_Movie In externalScrapersModules_Theme_Movie
-            Dim t As New _XMLEmberModuleClass
-            t.AssemblyName = _externalScraperModule.AssemblyName
-            t.AssemblyFileName = _externalScraperModule.AssemblyFileName
-            t.ModuleEnabled = _externalScraperModule.ProcessorModule.ScraperEnabled
-            t.ModuleOrder = _externalScraperModule.ModuleOrder
-            t.ContentType = _externalScraperModule.ContentType
+            Dim t As New _XMLEmberModuleClass With {
+                .AssemblyName = _externalScraperModule.AssemblyName,
+                .AssemblyFileName = _externalScraperModule.AssemblyFileName,
+                .ModuleEnabled = _externalScraperModule.ProcessorModule.ScraperEnabled,
+                .ModuleOrder = _externalScraperModule.ModuleOrder,
+                .ContentType = _externalScraperModule.ContentType
+            }
             tmpForXML.Add(t)
         Next
         For Each _externalTVScraperModule As _externalScraperModuleClass_Theme_TV In externalScrapersModules_Theme_TV
-            Dim t As New _XMLEmberModuleClass
-            t.AssemblyName = _externalTVScraperModule.AssemblyName
-            t.AssemblyFileName = _externalTVScraperModule.AssemblyFileName
-            t.ModuleEnabled = _externalTVScraperModule.ProcessorModule.ScraperEnabled
-            t.ModuleOrder = _externalTVScraperModule.ModuleOrder
-            t.ContentType = _externalTVScraperModule.ContentType
+            Dim t As New _XMLEmberModuleClass With {
+                .AssemblyName = _externalTVScraperModule.AssemblyName,
+                .AssemblyFileName = _externalTVScraperModule.AssemblyFileName,
+                .ModuleEnabled = _externalTVScraperModule.ProcessorModule.ScraperEnabled,
+                .ModuleOrder = _externalTVScraperModule.ModuleOrder,
+                .ContentType = _externalTVScraperModule.ContentType
+            }
             tmpForXML.Add(t)
         Next
         For Each _externalScraperModule As _externalScraperModuleClass_Trailer_Movie In externalScrapersModules_Trailer_Movie
-            Dim t As New _XMLEmberModuleClass
-            t.AssemblyName = _externalScraperModule.AssemblyName
-            t.AssemblyFileName = _externalScraperModule.AssemblyFileName
-            t.ModuleEnabled = _externalScraperModule.ProcessorModule.ScraperEnabled
-            t.ModuleOrder = _externalScraperModule.ModuleOrder
-            t.ContentType = _externalScraperModule.ContentType
+            Dim t As New _XMLEmberModuleClass With {
+                .AssemblyName = _externalScraperModule.AssemblyName,
+                .AssemblyFileName = _externalScraperModule.AssemblyFileName,
+                .ModuleEnabled = _externalScraperModule.ProcessorModule.ScraperEnabled,
+                .ModuleOrder = _externalScraperModule.ModuleOrder,
+                .ContentType = _externalScraperModule.ContentType
+            }
             tmpForXML.Add(t)
         Next
         Master.eSettings.EmberModules = tmpForXML
@@ -914,11 +934,11 @@ Public Class ModulesManager
             'clean DBMovie if the movie is to be changed. For this, all existing (incorrect) information must be deleted and the images triggers set to remove.
             If (ScrapeType = Enums.ScrapeType.SingleScrape OrElse ScrapeType = Enums.ScrapeType.SingleAuto) AndAlso ScrapeModifiers.DoSearch Then
                 DBElement.ImagesContainer = New MediaContainers.ImagesContainer
-                DBElement.Movie = New MediaContainers.Movie
-
-                DBElement.Movie.Title = StringUtils.FilterTitleFromPath_Movie(DBElement.Filename, DBElement.IsSingle, DBElement.Source.UseFolderName)
-                DBElement.Movie.VideoSource = DBElement.VideoSource
-                DBElement.Movie.Year = StringUtils.FilterYearFromPath_Movie(DBElement.Filename, DBElement.IsSingle, DBElement.Source.UseFolderName)
+                DBElement.Movie = New MediaContainers.Movie With {
+                    .Title = StringUtils.FilterTitleFromPath_Movie(DBElement.Filename, DBElement.IsSingle, DBElement.Source.UseFolderName),
+                    .VideoSource = DBElement.VideoSource,
+                    .Year = StringUtils.FilterYearFromPath_Movie(DBElement.Filename, DBElement.IsSingle, DBElement.Source.UseFolderName)
+                }
             End If
 
             'create a clone of DBMovie
@@ -1002,9 +1022,9 @@ Public Class ModulesManager
             Dim tmpTitle As String = DBElement.MovieSet.Title
 
             DBElement.ImagesContainer = New MediaContainers.ImagesContainer
-            DBElement.MovieSet = New MediaContainers.MovieSet
-
-            DBElement.MovieSet.Title = tmpTitle
+            DBElement.MovieSet = New MediaContainers.MovieSet With {
+                .Title = tmpTitle
+            }
         End If
 
         'create a clone of DBMovieSet
@@ -1212,9 +1232,9 @@ Public Class ModulesManager
                 DBElement.NfoPath = String.Empty
                 DBElement.Seasons.Clear()
                 DBElement.Theme = New MediaContainers.Theme
-                DBElement.TVShow = New MediaContainers.TVShow
-
-                DBElement.TVShow.Title = StringUtils.FilterTitleFromPath_TVShow(DBElement.ShowPath)
+                DBElement.TVShow = New MediaContainers.TVShow With {
+                    .Title = StringUtils.FilterTitleFromPath_TVShow(DBElement.ShowPath)
+                }
 
                 For Each sEpisode As Database.DBElement In DBElement.Episodes
                     Dim iEpisode As Integer = sEpisode.TVEpisode.Episode

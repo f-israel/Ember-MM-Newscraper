@@ -1,8 +1,3 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
 namespace XBMCRPC.Setting
 {
    public enum Level
@@ -10,6 +5,6 @@ namespace XBMCRPC.Setting
        basic,
        standard,
        advanced,
-       expert,
+       expert
    }
 }

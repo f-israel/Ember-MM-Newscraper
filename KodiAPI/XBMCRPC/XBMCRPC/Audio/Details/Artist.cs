@@ -1,11 +1,8 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using Newtonsoft.Json.Linq;
-using System.Runtime.Serialization;
+
 namespace XBMCRPC.Audio.Details
 {
-   public class Artist : XBMCRPC.Audio.Details.Base
+   public class Artist : Base
    {
        public string artist { get; set; }
        public int artistid { get; set; }
@@ -15,10 +12,10 @@ namespace XBMCRPC.Audio.Details
        public string died { get; set; }
        public string disbanded { get; set; }
        public string formed { get; set; }
-       public global::System.Collections.Generic.List<string> instrument { get; set; }
-       public global::System.Collections.Generic.List<string> mood { get; set; }
+       public List<string> instrument { get; set; }
+       public List<string> mood { get; set; }
        public string musicbrainzartistid { get; set; }
-       public global::System.Collections.Generic.List<string> style { get; set; }
-       public global::System.Collections.Generic.List<string> yearsactive { get; set; }
+       public List<string> style { get; set; }
+       public List<string> yearsactive { get; set; }
     }
 }

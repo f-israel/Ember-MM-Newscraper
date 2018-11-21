@@ -1066,10 +1066,11 @@ Public Class KodiInterface
     Private Sub CreateContextMenu(ByRef tMenu As ToolStripMenuItem, ByVal tContentType As Enums.ContentType)
         'Single Host
         If _SpecialSettings.Hosts IsNot Nothing AndAlso _SpecialSettings.Hosts.Count = 1 Then
-            Dim mnuHostSyncItem As New ToolStripMenuItem
-            mnuHostSyncItem.Image = New Bitmap(My.Resources.menuSync)
-            mnuHostSyncItem.Tag = _SpecialSettings.Hosts(0)
-            mnuHostSyncItem.Text = Master.eLang.GetString(1446, "Sync")
+            Dim mnuHostSyncItem As New ToolStripMenuItem With {
+                .Image = New Bitmap(My.Resources.menuSync),
+                .Tag = _SpecialSettings.Hosts(0),
+                .Text = Master.eLang.GetString(1446, "Sync")
+            }
             Select Case tContentType
                 Case Enums.ContentType.Movie
                     AddHandler mnuHostSyncItem.Click, AddressOf cmnuHostSyncItem_Movie_Click
@@ -1084,10 +1085,11 @@ Public Class KodiInterface
             End Select
             tMenu.DropDownItems.Add(mnuHostSyncItem)
             If tContentType = Enums.ContentType.TVSeason OrElse tContentType = Enums.ContentType.TVShow Then
-                Dim mnuHostSyncFullItem As New ToolStripMenuItem
-                mnuHostSyncFullItem.Image = New Bitmap(My.Resources.menuSync)
-                mnuHostSyncFullItem.Tag = _SpecialSettings.Hosts(0)
-                mnuHostSyncFullItem.Text = Master.eLang.GetString(1008, "Sync Full")
+                Dim mnuHostSyncFullItem As New ToolStripMenuItem With {
+                    .Image = New Bitmap(My.Resources.menuSync),
+                    .Tag = _SpecialSettings.Hosts(0),
+                    .Text = Master.eLang.GetString(1008, "Sync Full")
+                }
                 Select Case tContentType
                     Case Enums.ContentType.TVSeason
                         AddHandler mnuHostSyncFullItem.Click, AddressOf cmnuHostSyncFullItem_TVSeason_Click
@@ -1100,10 +1102,11 @@ Public Class KodiInterface
                 If _SpecialSettings.GetWatchedState AndAlso Not String.IsNullOrEmpty(_SpecialSettings.GetWatchedStateHost) Then
                     Dim mHost As Host = _SpecialSettings.Hosts.FirstOrDefault(Function(f) f.Label = _SpecialSettings.GetWatchedStateHost)
                     If mHost IsNot Nothing Then
-                        Dim mnuHostGetPlaycount As New ToolStripMenuItem
-                        mnuHostGetPlaycount.Image = New Bitmap(My.Resources.menuWatchedState)
-                        mnuHostGetPlaycount.Tag = mHost
-                        mnuHostGetPlaycount.Text = Master.eLang.GetString(1070, "Get Watched State")
+                        Dim mnuHostGetPlaycount As New ToolStripMenuItem With {
+                            .Image = New Bitmap(My.Resources.menuWatchedState),
+                            .Tag = mHost,
+                            .Text = Master.eLang.GetString(1070, "Get Watched State")
+                        }
                         Select Case tContentType
                             Case Enums.ContentType.Movie
                                 AddHandler mnuHostGetPlaycount.Click, AddressOf cmnuHostGetPlaycount_Movie_Click
@@ -1119,10 +1122,11 @@ Public Class KodiInterface
                 End If
             End If
             If tContentType = Enums.ContentType.Movie OrElse tContentType = Enums.ContentType.TVEpisode OrElse tContentType = Enums.ContentType.TVShow Then
-                Dim mnuHostRemoveItem As New ToolStripMenuItem
-                mnuHostRemoveItem.Image = New Bitmap(My.Resources.menuRemove)
-                mnuHostRemoveItem.Tag = _SpecialSettings.Hosts(0)
-                mnuHostRemoveItem.Text = Master.eLang.GetString(30, "Remove")
+                Dim mnuHostRemoveItem As New ToolStripMenuItem With {
+                    .Image = New Bitmap(My.Resources.menuRemove),
+                    .Tag = _SpecialSettings.Hosts(0),
+                    .Text = Master.eLang.GetString(30, "Remove")
+                }
                 Select Case tContentType
                     Case Enums.ContentType.Movie
                         AddHandler mnuHostRemoveItem.Click, AddressOf cmnuHostRemoveItem_Movie_Click
@@ -1137,13 +1141,15 @@ Public Class KodiInterface
             'Multiple Hosts
         ElseIf _SpecialSettings.Hosts IsNot Nothing AndAlso _SpecialSettings.Hosts.Count > 1 Then
             For Each kHost As Host In _SpecialSettings.Hosts
-                Dim mnuHost As New ToolStripMenuItem
-                mnuHost.Image = New Bitmap(My.Resources.icon)
-                mnuHost.Text = kHost.Label
-                Dim mnuHostSyncItem As New ToolStripMenuItem
-                mnuHostSyncItem.Image = New Bitmap(My.Resources.menuSync)
-                mnuHostSyncItem.Tag = kHost
-                mnuHostSyncItem.Text = Master.eLang.GetString(1446, "Sync")
+                Dim mnuHost As New ToolStripMenuItem With {
+                    .Image = New Bitmap(My.Resources.icon),
+                    .Text = kHost.Label
+                }
+                Dim mnuHostSyncItem As New ToolStripMenuItem With {
+                    .Image = New Bitmap(My.Resources.menuSync),
+                    .Tag = kHost,
+                    .Text = Master.eLang.GetString(1446, "Sync")
+                }
                 Select Case tContentType
                     Case Enums.ContentType.Movie
                         AddHandler mnuHostSyncItem.Click, AddressOf cmnuHostSyncItem_Movie_Click
@@ -1158,10 +1164,11 @@ Public Class KodiInterface
                 End Select
                 mnuHost.DropDownItems.Add(mnuHostSyncItem)
                 If tContentType = Enums.ContentType.TVSeason OrElse tContentType = Enums.ContentType.TVShow Then
-                    Dim mnuHostSyncFullItem As New ToolStripMenuItem
-                    mnuHostSyncFullItem.Image = New Bitmap(My.Resources.menuSync)
-                    mnuHostSyncFullItem.Tag = kHost
-                    mnuHostSyncFullItem.Text = Master.eLang.GetString(1008, "Sync Full")
+                    Dim mnuHostSyncFullItem As New ToolStripMenuItem With {
+                        .Image = New Bitmap(My.Resources.menuSync),
+                        .Tag = kHost,
+                        .Text = Master.eLang.GetString(1008, "Sync Full")
+                    }
                     Select Case tContentType
                         Case Enums.ContentType.TVSeason
                             AddHandler mnuHostSyncFullItem.Click, AddressOf cmnuHostSyncFullItem_TVSeason_Click
@@ -1171,10 +1178,11 @@ Public Class KodiInterface
                     mnuHost.DropDownItems.Add(mnuHostSyncFullItem)
                 End If
                 If tContentType = Enums.ContentType.Movie OrElse tContentType = Enums.ContentType.TVEpisode OrElse tContentType = Enums.ContentType.TVShow Then
-                    Dim mnuHostRemoveItem As New ToolStripMenuItem
-                    mnuHostRemoveItem.Image = New Bitmap(My.Resources.menuRemove)
-                    mnuHostRemoveItem.Tag = kHost
-                    mnuHostRemoveItem.Text = Master.eLang.GetString(30, "Remove")
+                    Dim mnuHostRemoveItem As New ToolStripMenuItem With {
+                        .Image = New Bitmap(My.Resources.menuRemove),
+                        .Tag = kHost,
+                        .Text = Master.eLang.GetString(30, "Remove")
+                    }
                     Select Case tContentType
                         Case Enums.ContentType.Movie
                             AddHandler mnuHostRemoveItem.Click, AddressOf cmnuHostRemoveItem_Movie_Click
@@ -1191,10 +1199,11 @@ Public Class KodiInterface
                 If _SpecialSettings.GetWatchedState AndAlso Not String.IsNullOrEmpty(_SpecialSettings.GetWatchedStateHost) Then
                     Dim mHost As Host = _SpecialSettings.Hosts.FirstOrDefault(Function(f) f.Label = _SpecialSettings.GetWatchedStateHost)
                     If mHost IsNot Nothing Then
-                        Dim mnuHostGetPlaycount As New ToolStripMenuItem
-                        mnuHostGetPlaycount.Image = New Bitmap(My.Resources.menuWatchedState)
-                        mnuHostGetPlaycount.Tag = mHost
-                        mnuHostGetPlaycount.Text = String.Format("{0} ({1})", Master.eLang.GetString(1070, "Get Watched State"), _SpecialSettings.GetWatchedStateHost)
+                        Dim mnuHostGetPlaycount As New ToolStripMenuItem With {
+                            .Image = New Bitmap(My.Resources.menuWatchedState),
+                            .Tag = mHost,
+                            .Text = String.Format("{0} ({1})", Master.eLang.GetString(1070, "Get Watched State"), _SpecialSettings.GetWatchedStateHost)
+                        }
                         Select Case tContentType
                             Case Enums.ContentType.Movie
                                 AddHandler mnuHostGetPlaycount.Click, AddressOf cmnuHostGetPlaycount_Movie_Click
@@ -1210,25 +1219,28 @@ Public Class KodiInterface
                 End If
             End If
         Else
-            Dim mnuDummy As New ToolStripMenuItem
-            mnuDummy.Enabled = False
-            mnuDummy.Text = Master.eLang.GetString(1447, "No Host Configured!")
+            Dim mnuDummy As New ToolStripMenuItem With {
+                .Enabled = False,
+                .Text = Master.eLang.GetString(1447, "No Host Configured!")
+            }
             tMenu.DropDownItems.Add(mnuDummy)
         End If
     End Sub
 
     Private Sub CreateToolsMenu(ByRef tMenu As ToolStripMenuItem)
         If _SpecialSettings.Hosts IsNot Nothing AndAlso _SpecialSettings.Hosts.Count = 1 Then
-            Dim mnuHostScanVideoLibrary As New ToolStripMenuItem
-            mnuHostScanVideoLibrary.Image = New Bitmap(My.Resources.menuSync)
-            mnuHostScanVideoLibrary.Tag = _SpecialSettings.Hosts(0)
-            mnuHostScanVideoLibrary.Text = Master.eLang.GetString(82, "Update Library")
+            Dim mnuHostScanVideoLibrary As New ToolStripMenuItem With {
+                .Image = New Bitmap(My.Resources.menuSync),
+                .Tag = _SpecialSettings.Hosts(0),
+                .Text = Master.eLang.GetString(82, "Update Library")
+            }
             AddHandler mnuHostScanVideoLibrary.Click, AddressOf mnuHostScanVideoLibrary_Click
             tMenu.DropDownItems.Add(mnuHostScanVideoLibrary)
-            Dim mnuHostCleanVideoLibrary As New ToolStripMenuItem
-            mnuHostCleanVideoLibrary.Image = New Bitmap(My.Resources.menuClean)
-            mnuHostCleanVideoLibrary.Tag = _SpecialSettings.Hosts(0)
-            mnuHostCleanVideoLibrary.Text = Master.eLang.GetString(709, "Clean Database")
+            Dim mnuHostCleanVideoLibrary As New ToolStripMenuItem With {
+                .Image = New Bitmap(My.Resources.menuClean),
+                .Tag = _SpecialSettings.Hosts(0),
+                .Text = Master.eLang.GetString(709, "Clean Database")
+            }
             AddHandler mnuHostCleanVideoLibrary.Click, AddressOf mnuHostCleanVideoLibrary_Click
             tMenu.DropDownItems.Add(mnuHostCleanVideoLibrary)
             If _SpecialSettings.GetWatchedState AndAlso Not String.IsNullOrEmpty(_SpecialSettings.GetWatchedStateHost) Then
@@ -1236,40 +1248,45 @@ Public Class KodiInterface
                 If mHost IsNot Nothing Then
                     tMenu.DropDownItems.Add(New ToolStripSeparator)
 
-                    Dim mnuHostGetPlaycount_Movies As New ToolStripMenuItem
-                    mnuHostGetPlaycount_Movies.Image = New Bitmap(My.Resources.menuWatchedState)
-                    mnuHostGetPlaycount_Movies.Tag = mHost
-                    mnuHostGetPlaycount_Movies.Text = String.Format("{0} - {1}",
+                    Dim mnuHostGetPlaycount_Movies As New ToolStripMenuItem With {
+                        .Image = New Bitmap(My.Resources.menuWatchedState),
+                        .Tag = mHost,
+                        .Text = String.Format("{0} - {1}",
                                                                     Master.eLang.GetString(1070, "Get Watched State"),
                                                                     Master.eLang.GetString(36, "Movies"))
+                    }
                     AddHandler mnuHostGetPlaycount_Movies.Click, AddressOf mnuHostGetPlaycount_Movies_Click
                     tMenu.DropDownItems.Add(mnuHostGetPlaycount_Movies)
 
-                    Dim mnuHostGetPlaycount_TVEpisodes As New ToolStripMenuItem
-                    mnuHostGetPlaycount_TVEpisodes.Image = New Bitmap(My.Resources.menuWatchedState)
-                    mnuHostGetPlaycount_TVEpisodes.Tag = mHost
-                    mnuHostGetPlaycount_TVEpisodes.Text = String.Format("{0} - {1}",
+                    Dim mnuHostGetPlaycount_TVEpisodes As New ToolStripMenuItem With {
+                        .Image = New Bitmap(My.Resources.menuWatchedState),
+                        .Tag = mHost,
+                        .Text = String.Format("{0} - {1}",
                                                                     Master.eLang.GetString(1070, "Get Watched State"),
                                                                     Master.eLang.GetString(682, "Episodes"))
+                    }
                     AddHandler mnuHostGetPlaycount_TVEpisodes.Click, AddressOf mnuHostGetPlaycount_TVEpisodes_Click
                     tMenu.DropDownItems.Add(mnuHostGetPlaycount_TVEpisodes)
                 End If
             End If
         ElseIf _SpecialSettings.Hosts IsNot Nothing AndAlso _SpecialSettings.Hosts.Count > 1 Then
             For Each kHost As Host In _SpecialSettings.Hosts
-                Dim mnuHost As New ToolStripMenuItem
-                mnuHost.Image = New Bitmap(My.Resources.icon)
-                mnuHost.Text = kHost.Label
-                Dim mnuHostScanVideoLibrary As New ToolStripMenuItem
-                mnuHostScanVideoLibrary.Image = New Bitmap(My.Resources.menuSync)
-                mnuHostScanVideoLibrary.Tag = kHost
-                mnuHostScanVideoLibrary.Text = Master.eLang.GetString(82, "Update Library")
+                Dim mnuHost As New ToolStripMenuItem With {
+                    .Image = New Bitmap(My.Resources.icon),
+                    .Text = kHost.Label
+                }
+                Dim mnuHostScanVideoLibrary As New ToolStripMenuItem With {
+                    .Image = New Bitmap(My.Resources.menuSync),
+                    .Tag = kHost,
+                    .Text = Master.eLang.GetString(82, "Update Library")
+                }
                 AddHandler mnuHostScanVideoLibrary.Click, AddressOf mnuHostScanVideoLibrary_Click
                 mnuHost.DropDownItems.Add(mnuHostScanVideoLibrary)
-                Dim mnuHostCleanVideoLibrary As New ToolStripMenuItem
-                mnuHostCleanVideoLibrary.Image = New Bitmap(My.Resources.menuClean)
-                mnuHostCleanVideoLibrary.Tag = kHost
-                mnuHostCleanVideoLibrary.Text = Master.eLang.GetString(709, "Clean Database")
+                Dim mnuHostCleanVideoLibrary As New ToolStripMenuItem With {
+                    .Image = New Bitmap(My.Resources.menuClean),
+                    .Tag = kHost,
+                    .Text = Master.eLang.GetString(709, "Clean Database")
+                }
                 AddHandler mnuHostCleanVideoLibrary.Click, AddressOf mnuHostCleanVideoLibrary_Click
                 mnuHost.DropDownItems.Add(mnuHostCleanVideoLibrary)
                 tMenu.DropDownItems.Add(mnuHost)
@@ -1279,31 +1296,34 @@ Public Class KodiInterface
                 If mHost IsNot Nothing Then
                     tMenu.DropDownItems.Add(New ToolStripSeparator)
 
-                    Dim mnuHostGetPlaycount_Movies As New ToolStripMenuItem
-                    mnuHostGetPlaycount_Movies.Image = New Bitmap(My.Resources.menuWatchedState)
-                    mnuHostGetPlaycount_Movies.Tag = mHost
-                    mnuHostGetPlaycount_Movies.Text = String.Format("{0} ({1}) - {2}",
+                    Dim mnuHostGetPlaycount_Movies As New ToolStripMenuItem With {
+                        .Image = New Bitmap(My.Resources.menuWatchedState),
+                        .Tag = mHost,
+                        .Text = String.Format("{0} ({1}) - {2}",
                                                                     Master.eLang.GetString(1070, "Get Watched State"),
                                                                     _SpecialSettings.GetWatchedStateHost,
                                                                     Master.eLang.GetString(36, "Movies"))
+                    }
                     AddHandler mnuHostGetPlaycount_Movies.Click, AddressOf mnuHostGetPlaycount_Movies_Click
                     tMenu.DropDownItems.Add(mnuHostGetPlaycount_Movies)
 
-                    Dim mnuHostGetPlaycount_TVEpisodes As New ToolStripMenuItem
-                    mnuHostGetPlaycount_TVEpisodes.Image = New Bitmap(My.Resources.menuWatchedState)
-                    mnuHostGetPlaycount_TVEpisodes.Tag = mHost
-                    mnuHostGetPlaycount_TVEpisodes.Text = String.Format("{0} ({1}) - {2}",
+                    Dim mnuHostGetPlaycount_TVEpisodes As New ToolStripMenuItem With {
+                        .Image = New Bitmap(My.Resources.menuWatchedState),
+                        .Tag = mHost,
+                        .Text = String.Format("{0} ({1}) - {2}",
                                                                     Master.eLang.GetString(1070, "Get Watched State"),
                                                                     _SpecialSettings.GetWatchedStateHost,
                                                                     Master.eLang.GetString(682, "Episodes"))
+                    }
                     AddHandler mnuHostGetPlaycount_TVEpisodes.Click, AddressOf mnuHostGetPlaycount_TVEpisodes_Click
                     tMenu.DropDownItems.Add(mnuHostGetPlaycount_TVEpisodes)
                 End If
             End If
         Else
-            Dim mnuDummy As New ToolStripMenuItem
-            mnuDummy.Enabled = False
-            mnuDummy.Text = Master.eLang.GetString(1447, "No Host Configured!")
+            Dim mnuDummy As New ToolStripMenuItem With {
+                .Enabled = False,
+                .Text = Master.eLang.GetString(1447, "No Host Configured!")
+            }
             tMenu.DropDownItems.Add(mnuDummy)
         End If
     End Sub

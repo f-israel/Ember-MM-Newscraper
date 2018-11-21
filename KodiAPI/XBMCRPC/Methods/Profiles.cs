@@ -1,9 +1,12 @@
-using System;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using XBMCRPC.List;
+using XBMCRPC.Profiles;
+using XBMCRPC.Profiles.Details;
+
 namespace XBMCRPC.Methods
 {
-   public partial class Profiles
+   public class Profiles
    {
         private readonly Client _client;
           public Profiles(Client client)
@@ -14,7 +17,7 @@ namespace XBMCRPC.Methods
                 /// <summary>
                 /// Retrieve the current profile
                 /// </summary>
-        public async Task<XBMCRPC.Profiles.Details.Profile> GetCurrentProfile(XBMCRPC.Profiles.Fields.Profile properties=null)
+        public async Task<Profile> GetCurrentProfile(XBMCRPC.Profiles.Fields.Profile properties=null)
         {
             var jArgs = new JObject();
              if (properties != null)
@@ -22,13 +25,13 @@ namespace XBMCRPC.Methods
                  var jpropproperties = JToken.FromObject(properties, _client.Serializer);
                  jArgs.Add(new JProperty("properties", jpropproperties));
              }
-            return await _client.GetData<XBMCRPC.Profiles.Details.Profile>("Profiles.GetCurrentProfile", jArgs);
+            return await _client.GetData<Profile>("Profiles.GetCurrentProfile", jArgs);
         }
 
                 /// <summary>
                 /// Retrieve all profiles
                 /// </summary>
-        public async Task<XBMCRPC.Profiles.GetProfilesResponse> GetProfiles(XBMCRPC.Profiles.Fields.Profile properties=null, XBMCRPC.List.Limits limits=null, XBMCRPC.List.Sort sort=null)
+        public async Task<GetProfilesResponse> GetProfiles(XBMCRPC.Profiles.Fields.Profile properties=null, Limits limits=null, Sort sort=null)
         {
             var jArgs = new JObject();
              if (properties != null)
@@ -46,13 +49,13 @@ namespace XBMCRPC.Methods
                  var jpropsort = JToken.FromObject(sort, _client.Serializer);
                  jArgs.Add(new JProperty("sort", jpropsort));
              }
-            return await _client.GetData<XBMCRPC.Profiles.GetProfilesResponse>("Profiles.GetProfiles", jArgs);
+            return await _client.GetData<GetProfilesResponse>("Profiles.GetProfiles", jArgs);
         }
 
                 /// <summary>
                 /// Load the specified profile
                 /// </summary>
-        public async Task<string> LoadProfile(string profile=null, bool prompt=false, XBMCRPC.Profiles.Password password=null)
+        public async Task<string> LoadProfile(string profile=null, bool prompt=false, Password password=null)
         {
             var jArgs = new JObject();
              if (profile != null)

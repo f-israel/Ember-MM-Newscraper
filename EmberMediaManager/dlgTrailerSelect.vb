@@ -180,9 +180,10 @@ Public Class dlgTrailerSelect
                 DialogResult = DialogResult.OK
             Else
                 If sFormat IsNot Nothing AndAlso Not String.IsNullOrEmpty(sFormat.VideoURL) Then
-                    bwDownloadTrailer = New System.ComponentModel.BackgroundWorker
-                    bwDownloadTrailer.WorkerReportsProgress = True
-                    bwDownloadTrailer.WorkerSupportsCancellation = True
+                    bwDownloadTrailer = New System.ComponentModel.BackgroundWorker With {
+                        .WorkerReportsProgress = True,
+                        .WorkerSupportsCancellation = True
+                    }
                     bwDownloadTrailer.RunWorkerAsync(New Arguments With {.Parameter = sFormat, .bType = CloseDialog})
                 Else
                     didCancel = True
@@ -205,9 +206,10 @@ Public Class dlgTrailerSelect
                 DialogResult = DialogResult.OK
             Else
                 Dim ManualTrailer As New TrailerLinksContainer With {.VideoURL = txtManualTrailerLink.Text}
-                bwDownloadTrailer = New System.ComponentModel.BackgroundWorker
-                bwDownloadTrailer.WorkerReportsProgress = True
-                bwDownloadTrailer.WorkerSupportsCancellation = True
+                bwDownloadTrailer = New System.ComponentModel.BackgroundWorker With {
+                    .WorkerReportsProgress = True,
+                    .WorkerSupportsCancellation = True
+                }
                 bwDownloadTrailer.RunWorkerAsync(New Arguments With {.Parameter = ManualTrailer, .bType = CloseDialog})
             End If
         Else
@@ -221,9 +223,10 @@ Public Class dlgTrailerSelect
                         sFormat = dFormats.ShowDialog(lvTrailers.SelectedItems(0).SubItems(2).Text.ToString)
                     End Using
                     If sFormat IsNot Nothing AndAlso Not String.IsNullOrEmpty(sFormat.VideoURL) Then
-                        bwDownloadTrailer = New System.ComponentModel.BackgroundWorker
-                        bwDownloadTrailer.WorkerReportsProgress = True
-                        bwDownloadTrailer.WorkerSupportsCancellation = True
+                        bwDownloadTrailer = New System.ComponentModel.BackgroundWorker With {
+                            .WorkerReportsProgress = True,
+                            .WorkerSupportsCancellation = True
+                        }
                         bwDownloadTrailer.RunWorkerAsync(New Arguments With {.Parameter = sFormat, .bType = CloseDialog})
                     Else
                         didCancel = True
@@ -239,9 +242,10 @@ Public Class dlgTrailerSelect
                     DialogResult = DialogResult.OK
                 Else
                     If sFormat IsNot Nothing AndAlso Not String.IsNullOrEmpty(sFormat.VideoURL) Then
-                        bwDownloadTrailer = New System.ComponentModel.BackgroundWorker
-                        bwDownloadTrailer.WorkerReportsProgress = True
-                        bwDownloadTrailer.WorkerSupportsCancellation = True
+                        bwDownloadTrailer = New System.ComponentModel.BackgroundWorker With {
+                            .WorkerReportsProgress = True,
+                            .WorkerSupportsCancellation = True
+                        }
                         bwDownloadTrailer.RunWorkerAsync(New Arguments With {.Parameter = sFormat, .bType = CloseDialog})
                     Else
                         didCancel = True
@@ -253,9 +257,10 @@ Public Class dlgTrailerSelect
                     DialogResult = DialogResult.OK
                 Else
                     Dim SelectedTrailer As New TrailerLinksContainer With {.VideoURL = lvTrailers.SelectedItems(0).SubItems(1).Text.ToString}
-                    bwDownloadTrailer = New System.ComponentModel.BackgroundWorker
-                    bwDownloadTrailer.WorkerReportsProgress = True
-                    bwDownloadTrailer.WorkerSupportsCancellation = True
+                    bwDownloadTrailer = New System.ComponentModel.BackgroundWorker With {
+                        .WorkerReportsProgress = True,
+                        .WorkerSupportsCancellation = True
+                    }
                     bwDownloadTrailer.RunWorkerAsync(New Arguments With {.Parameter = SelectedTrailer, .bType = CloseDialog})
                 End If
             End If
@@ -346,9 +351,10 @@ Public Class dlgTrailerSelect
 
         nList.Clear()
 
-        bwCompileList = New System.ComponentModel.BackgroundWorker
-        bwCompileList.WorkerReportsProgress = False
-        bwCompileList.WorkerSupportsCancellation = True
+        bwCompileList = New System.ComponentModel.BackgroundWorker With {
+            .WorkerReportsProgress = False,
+            .WorkerSupportsCancellation = True
+        }
         bwCompileList.RunWorkerAsync(New Arguments With {.bType = False})
     End Sub
 
